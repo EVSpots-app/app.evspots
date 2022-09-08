@@ -1,0 +1,15 @@
+{
+  "helloLabel" : "Hello",
+  "exit" : "Exit",
+  "changeLanguage": "Change Language",
+  "settings" : "Settings",
+  "logout" : "Logout",
+  "evspots" : "EVSpots",
+  "search" : "Search",
+  "home" : "Home",
+  "profile" : "Profile",
+  "motasemAltamimi" : "Motasem Altamimi",
+  "darkMode" : "Dark Mode",
+  "selectLanguage" : "Select Language",
+  "likes" : "Likes"
+}

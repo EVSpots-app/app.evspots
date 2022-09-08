@@ -1,0 +1,17 @@
+{
+  "helloLabel" : "مرحبا",
+  "exit" : "خروج",
+  "changeLanguage": "تغيير اللغة",
+  "settings" : "الاعدادات",
+  "logout": "تسجيل الخروج",
+  "evspots" : "مواقف شحن",
+  "search" : "بحث",
+  "home" : "الصفحة الرئيسية",
+  "profile" : "الملف الشخصي",
+  "motasemAltamimi" : "معتصم التميمي",
+  "darkMode" : "الوضع الليلي",
+  "selectLanguage" : "أختر الغة",
+  "likes" : "اعجاب"
+
+
+}
