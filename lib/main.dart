@@ -35,9 +35,9 @@ class App extends StatelessWidget {
                 home: const HomeScreen(),
                 // themeMode: ThemeMode.system,
 
-                theme:
-                ThemeData(fontFamily: 'Combo',),
-                //themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
+                 theme:
+                // ThemeData(fontFamily: 'Combo',),
+                themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
                 debugShowCheckedModeBanner: false,
                 locale: AppModel.shared.appLocale,
                 localizationsDelegates: const [
