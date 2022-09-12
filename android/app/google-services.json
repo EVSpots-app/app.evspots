@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1049520392597",
+    "project_id": "evspots-app",
+    "storage_bucket": "evspots-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049520392597:android:83bfb9c65692aba0054e9c",
+        "android_client_info": {
+          "package_name": "app.evspots.evspots"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049520392597-ublgnjear4eaaq03jkg0oq5t8p7ijggo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnT4iva6nwhpMH334T0wZM-1BpCakXMUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049520392597-ublgnjear4eaaq03jkg0oq5t8p7ijggo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

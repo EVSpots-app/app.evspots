@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log"
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "eventarc": {
+      "port": 9299
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

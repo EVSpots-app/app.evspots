@@ -27,11 +27,11 @@ class _MyDrawerState extends State<MyDrawer> {
         children: [
           Column(
             children: [
-               UserAccountsDrawerHeader(
+              UserAccountsDrawerHeader(
                 accountName: Text(S.of(context).motasemAltamimi),
-                accountEmail: Text("Motasem.sh@gmail.com"),
-                currentAccountPicture: Picture(),
-                decoration: BoxDecoration(
+                accountEmail: const Text("Motasem.sh@gmail.com"),
+                currentAccountPicture: const Picture(),
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                       "assets/n2.jpg",
@@ -39,21 +39,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                otherAccountsPictures: [
-                  // const CircleAvatar(
-                  //   backgroundColor: Colors.white,
-                  //   backgroundImage: NetworkImage(
-                  //       "https://randomuser.me/api/portraits/women/74.jpg"),
-                  // ),
-                  // const CircleAvatar(
-                  //   backgroundColor: Colors.white,
-                  //   backgroundImage: NetworkImage(
-                  //       "https://randomuser.me/api/portraits/men/47.jpg"),
-                  // ),
-                ],
               ),
               SizedBox(
-                height: height * 0.6,
+                height: height * 0.57,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -78,11 +66,11 @@ class _MyDrawerState extends State<MyDrawer> {
                   width: width,
                   height: height * 0.06,
                   color: Colors.transparent,
-                  child:  ListTile(
-                    trailing: Icon(Icons.logout),
+                  child: ListTile(
+                    trailing: const Icon(Icons.logout),
                     title: Text(S.of(context).logout,
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold, fontFamily: "Rock Salt")),
+                        style: const TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ),

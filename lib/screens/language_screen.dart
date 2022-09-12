@@ -27,16 +27,19 @@ class _LanguageScreenState extends State<LanguageScreen> {
           return Padding(
             padding: const EdgeInsets.all(25.0),
             child: Column(children: [
-               Text(S.of(context).selectLanguage,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              Text(S.of(context).selectLanguage,
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold)),
               SizedBox(height: height * 0.03),
               ListTile(
                   leading: SizedBox(
-                      height: height * 0.04,
-                      child: Image.asset('icons/flags/png/2.5x/us.png',
-                          package: 'country_icons')),
+                    height: height * 0.1,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('icons/flags/png/2.5x/us.png',
+                          package: 'country_icons'),
+                    ),
+                  ),
                   trailing: Radio(
-
                     value: 1,
                     groupValue: radioVal.val,
                     onChanged: (value) {
@@ -53,9 +56,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
               SizedBox(height: height * 0.02),
               ListTile(
                 leading: SizedBox(
-                    height: height * 0.04,
-                    child: Image.asset('icons/flags/png/2.5x/jo.png',
-                        package: 'country_icons')),
+                  height: height * 0.1,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('icons/flags/png/2.5x/jo.png',
+                        package: 'country_icons'),
+                  ),
+                ),
                 trailing: Radio(
                   value: 2,
                   groupValue: radioVal.val,

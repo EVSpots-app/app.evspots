@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
-        "evspots": MessageLookupByLibrary.simpleMessage("مواقف شحن"),
+        "evspots": MessageLookupByLibrary.simpleMessage("نقاط شحن"),
         "exit": MessageLookupByLibrary.simpleMessage("خروج"),
         "helloLabel": MessageLookupByLibrary.simpleMessage("مرحبا"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),

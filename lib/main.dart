@@ -1,16 +1,26 @@
 import 'package:evspots/screens/language_screen.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:evspots/widgets/BottomBar.dart';
+import 'package:evspots/screens/signin_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'localization/app_model.dart';
 import 'screens/home_screen.dart';
 import 'themes/theme_model.dart';
 
-void main() {
+void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(ScopedModel<AppModel>(model: AppModel.shared, child: App()));
 }
 
@@ -32,12 +42,11 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
-                home: const HomeScreen(),
+                home:  SignInScreen(),
                 // themeMode: ThemeMode.system,
+                  theme:themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
+                // theme : ThemeData(fontFamily: 'Pacifico'),
 
-                 theme:
-                // ThemeData(fontFamily: 'Combo',),
-                themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
                 debugShowCheckedModeBanner: false,
                 locale: AppModel.shared.appLocale,
                 localizationsDelegates: const [
@@ -55,3 +64,4 @@ class App extends StatelessWidget {
     );
   }
 }
+

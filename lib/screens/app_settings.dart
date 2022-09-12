@@ -40,7 +40,7 @@ class _AppSettingsState extends State<AppSettings> {
                   children:  [
                     // Icon(Icons.settings),
                     Text(S.of(context).settings,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -79,30 +79,10 @@ class _AppSettingsState extends State<AppSettings> {
                                     ? Colors.white
                                     : Colors.grey.shade900),
                         title:  Text(S.of(context).darkMode,
-                            // style: TextStyle(
-                            //     fontSize: 30, fontWeight: FontWeight.bold )
+                            style: const TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold )
                       ),
                       ),
-                      // child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       Row(
-                      //         children: [
-                      //           const Icon(Icons.dark_mode_outlined),
-                      //           SizedBox(width: width * 0.02),
-                      //           const Text("Dark Mode",
-                      //               style: TextStyle(
-                      //                   fontSize: 30, fontWeight: FontWeight.bold)),
-                      //         ],
-                      //       ),
-                      //       Icon(
-                      //           themeNotifier.isDark
-                      //               ? Icons.nightlight_round
-                      //               : Icons.wb_sunny,
-                      //           color: themeNotifier.isDark
-                      //               ? Colors.white
-                      //               : Colors.grey.shade900),
-                      //     ]),
                     ),
                   );
                 }),
@@ -126,10 +106,10 @@ class _AppSettingsState extends State<AppSettings> {
                     height: height * 0.06,
                     color: Colors.transparent,
                     child: ListTile(
-                      leading: Icon(Icons.language),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.language),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       title: Text(S.of(context).selectLanguage,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold)),
                     ),
