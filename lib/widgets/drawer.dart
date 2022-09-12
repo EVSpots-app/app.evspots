@@ -1,8 +1,10 @@
 import 'package:evspots/screens/app_settings.dart';
+import 'package:evspots/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../generated/l10n.dart';
 import '../screens/home_screen.dart';
+import '../screens/signin_screen.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class _MyDrawerState extends State<MyDrawer> {
     var width = MediaQuery.of(context).size.width;
 
     return Drawer(
+      width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,7 +33,14 @@ class _MyDrawerState extends State<MyDrawer> {
               UserAccountsDrawerHeader(
                 accountName: Text(S.of(context).motasemAltamimi),
                 accountEmail: const Text("Motasem.sh@gmail.com"),
-                currentAccountPicture: const Picture(),
+                currentAccountPicture: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfileScreen()),
+                      );
+                    },
+                    child: const Picture()),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
@@ -61,7 +71,10 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>  SignInScreen()));
+                },
                 child: Container(
                   width: width,
                   height: height * 0.06,
