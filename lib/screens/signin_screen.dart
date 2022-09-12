@@ -1,8 +1,10 @@
 import 'package:evspots/screens/home_screen.dart';
+import 'package:evspots/screens/signup_screen.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import '../themes/app_color.dart';
 import '../widgets/AppBar.dart';
-import '../widgets/country_picker.dart';
 import 'otp_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -17,33 +19,33 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: MyAppBar(),
-      drawer: MyDrawer(),
+      // drawer: MyDrawer(),
       body: Center(
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          height: height,
+          width: width,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset('assets/images/ev.jpeg'),
-                const SizedBox(
-                  height: 16,
+                 SizedBox(
+                  height: height*0.03,
                 ),
-                // Image.asset('assets/images/registration.png'),
-                // const SizedBox(
-                //   height: 16,
-                // ),
                 const Text(
                   'Sign in Now',
                   style: TextStyle(fontSize: 28,),
                 ),
-                const SizedBox(
-                  height: 16,
+                 SizedBox(
+                  height: height*0.02,
                 ),
                 const Text(
                   'Please Change your countrycode ',
@@ -53,70 +55,34 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
+                 SizedBox(
+                  height: height*0.04,
                 ),
                 Container(
-                  // margin: const EdgeInsets.symmetric(horizontal: 16),
                   padding: const EdgeInsets.all(20.0),
-                  // decoration: BoxDecoration(
-                  //     color: Colors.white,
-                  //     // ignore: prefer_const_literals_to_create_immutables
-                  //     boxShadow: [
-                  //       const BoxShadow(
-                  //         color: Colors.grey,
-                  //         offset: Offset(0.0, 1.0), //(x,y)
-                  //         blurRadius: 6.0,
-                  //       ),
-                  //     ],
-                  //     borderRadius: BorderRadius.circular(16.0)),
                   child: Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0
-                        ),
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.green,
+
+                      IntlPhoneField(
+                        decoration: InputDecoration(
+                          labelText: 'Phone Number',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(),
                           ),
-                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Row(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            SizedBox(
-                              width :100,
-                              child: CountryPicker(
-                                callBackFunction: _callBackFunction,
-                                headerText: 'Select Country',
-                                headerBackgroundColor: Theme.of(context).primaryColor,
-                                headerTextColor: Colors.white,
-                              ),
-                            ),
-                            const Expanded(
-                              child:  TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Contact Number',
-                                  border: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  contentPadding:  EdgeInsets.symmetric(vertical: 13.0),
-                                ),
-                                keyboardType: TextInputType.number,
-                              ),
-                            ),
-                          ],
-                        ),
+                        onChanged: (phone) {
+                          print(phone.completeNumber);
+                        },
+                        onCountryChanged: (country) {
+                          print('Country changed to: ' + country.name);
+                        },
                       ),
-                      const SizedBox(
-                        height: 8,
+
+                       SizedBox(
+                        height: height*0.02,
                       ),
                       GestureDetector(
                         onTap: (){
-
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -125,19 +91,46 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Container(
                           margin: const EdgeInsets.all(8),
-                          height: 45,
+                          height: height*0.07,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(36),
+                            color: AppColor.buttonBackgroundColor,
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
                           child: const Text(
-                            'Validate Mobile Number',
-                            style: TextStyle(color: Colors.black, fontSize: 16.0),
+                            'Continue',
+                            style: TextStyle( fontSize: 16.0),
                           ),
                         ),
                       ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>  SignUpScreen()));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          height: height*0.07,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColor.buttonBackgroundColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle( fontSize: 16.0),
+                          ),
+                        ),
+                      ),
+
+
+                      // FloatingActionButton(
+                      //     child: const Icon(Icons.arrow_back_ios),
+                      //     backgroundColor: AppColor.buttonBackgroundColor,
+                      //     onPressed: (){Navigator.of(context).push(MaterialPageRoute(
+                      //         builder: (context) =>  SignUpScreen()));}),
                     ],
                   ),
                 )

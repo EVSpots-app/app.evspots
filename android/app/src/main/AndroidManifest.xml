@@ -4,6 +4,15 @@
         android:label="evspots"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data
+           android:name="com.google.android.maps.v2.API_KEY"
+           android:value="AIzaSyAnT4iva6nwhpMH334T0wZM-1BpCakXMUk"/>
+
+       <uses-library
+           android:name="com.google.android.maps"
+           android:required="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -20,6 +29,7 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
