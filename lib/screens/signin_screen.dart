@@ -1,4 +1,5 @@
 import 'package:evspots/screens/home_screen.dart';
+import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/signup_screen.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     children: [
 
+
                       IntlPhoneField(
                         decoration: InputDecoration(
                           labelText: 'Phone Number',
@@ -86,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  HomeScreen()),
+                                builder: (context) =>  HomeScreen2()),
                           );
                         },
                         child: Container(

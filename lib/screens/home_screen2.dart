@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:evspots/widgets/drawer.dart';
 import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
@@ -5,29 +7,48 @@ import 'home_screen.dart';
 
 final GlobalKey<ScaffoldState> _key1 = GlobalKey();
 
-class GoogleMapsClonePage extends StatelessWidget {
+bool time1 = true;
+
+class HomeScreen2 extends StatefulWidget {
+  @override
+  State<HomeScreen2> createState() => _HomeScreen2State();
+}
+
+class _HomeScreen2State extends State<HomeScreen2> {
+  void initState() {
+    super.initState();
+    time();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key1,
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Stack(
         children: <Widget>[
           CustomGoogleMap(),
           CustomHeader(),
-          // DraggableScrollableSheet(
-          //   initialChildSize: 0.30,
-          //   minChildSize: 0.15,
-          //   builder: (BuildContext context, ScrollController scrollController) {
-          //     return SingleChildScrollView(
-          //       controller: scrollController,
-          //       child: CustomScrollViewContent(),
-          //     );
-          //   },
-          // ),
+          DraggableScrollableSheet(
+            initialChildSize: 0.30,
+            minChildSize: 0.15,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: CustomScrollViewContent(),
+              );
+            },
+          ),
         ],
       ),
     );
+  }
+
+  time() {
+    Timer(Duration(seconds: 3), () {
+      time1 = false;
+      setState(() {});
+    });
   }
 }
 
@@ -36,6 +57,7 @@ class CustomGoogleMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GMap();
+    // return GMap();
   }
 }
 
@@ -56,17 +78,25 @@ class CustomSearchContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 40, 16, 8), //adjust "40" according to the status bar size
+      padding: const EdgeInsets.fromLTRB(16, 40, 16, 8),
+      //adjust "40" according to the status bar size
       child: Container(
         height: 50,
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
-        child: Row(
-          children: <Widget>[
-            CustomTextField(),
-            CustomUserAvatar(),
-            SizedBox(width: 16),
-          ],
-        ),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(6)),
+        child: time1
+            ? Center(
+                child: Icon(
+                Icons.play_arrow_rounded,
+                size: 50,
+              ))
+            : Row(
+                children: <Widget>[
+                  CustomTextField(),
+                  CustomUserAvatar(),
+                  const SizedBox(width: 16),
+                ],
+              ),
       ),
     );
   }
@@ -77,12 +107,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextFormField(
-
         maxLines: 1,
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.location_pin, size: 25),
-          suffixIcon: const Icon(Icons.filter_alt_rounded, size: 25),
-          contentPadding: const EdgeInsets.all(16),
+        decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.location_pin, size: 25),
+          suffixIcon: Icon(Icons.filter_alt_rounded, size: 25),
+          contentPadding: EdgeInsets.all(16),
           hintText: "Search here",
           border: InputBorder.none,
         ),
@@ -111,17 +140,17 @@ class CustomSearchCategories extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           CustomCategoryChip(Icons.fastfood, "Takeout"),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           CustomCategoryChip(Icons.directions_bike, "Delivery"),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           CustomCategoryChip(Icons.local_gas_station, "Gas"),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           CustomCategoryChip(Icons.shopping_cart, "Groceries"),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           CustomCategoryChip(Icons.local_pharmacy, "Pharmacies"),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
         ],
       ),
     );
@@ -138,7 +167,11 @@ class CustomCategoryChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Row(
-        children: <Widget>[Icon(iconData, size: 16), SizedBox(width: 8), Text(title)],
+        children: <Widget>[
+          Icon(iconData, size: 16),
+          const SizedBox(width: 8),
+          Text(title)
+        ],
       ),
       backgroundColor: Colors.grey[50],
     );
@@ -168,23 +201,23 @@ class CustomInnerContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         CustomDraggingHandle(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomExploreBerlin(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomHorizontallyScrollingRestaurants(),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         CustomFeaturedListsText(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomFeaturedItemsGrid(),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         CustomRecentPhotosText(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomRecentPhotoLarge(),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         CustomRecentPhotosSmall(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }
@@ -196,7 +229,8 @@ class CustomDraggingHandle extends StatelessWidget {
     return Container(
       height: 5,
       width: 30,
-      decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(
+          color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
     );
   }
 }
@@ -207,13 +241,16 @@ class CustomExploreBerlin extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text("Explore Berlin", style: TextStyle(fontSize: 22, color: Colors.black45)),
-        SizedBox(width: 8),
+        const Text("Explore Berlin",
+            style: TextStyle(fontSize: 22, color: Colors.black45)),
+        const SizedBox(width: 8),
         Container(
           height: 24,
           width: 24,
-          child: Icon(Icons.arrow_forward_ios, size: 12, color: Colors.black54),
-          decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
+          child: const Icon(Icons.arrow_forward_ios,
+              size: 12, color: Colors.black54),
+          decoration: BoxDecoration(
+              color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
         ),
       ],
     );
@@ -231,13 +268,13 @@ class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CustomRestaurantCategory(),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             CustomRestaurantCategory(),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             CustomRestaurantCategory(),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             CustomRestaurantCategory(),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
           ],
         ),
       ),
@@ -252,7 +289,9 @@ class CustomFeaturedListsText extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16),
       //only to left align the text
       child: Row(
-        children: <Widget>[Text("Featured Lists", style: TextStyle(fontSize: 14))],
+        children: <Widget>[
+          const Text("Featured Lists", style: TextStyle(fontSize: 14))
+        ],
       ),
     );
   }
@@ -265,7 +304,7 @@ class CustomFeaturedItemsGrid extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GridView.count(
         //to avoid scrolling conflict with the dragging sheet
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(0),
         crossAxisCount: 2,
         mainAxisSpacing: 12,
@@ -289,7 +328,7 @@ class CustomRecentPhotosText extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16),
       child: Row(
         children: <Widget>[
-          Text("Recent Photos", style: TextStyle(fontSize: 14)),
+          const Text("Recent Photos", style: TextStyle(fontSize: 14)),
         ],
       ),
     );

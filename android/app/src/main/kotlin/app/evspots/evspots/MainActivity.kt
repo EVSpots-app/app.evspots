@@ -1,4 +1,4 @@
-package app.evspots.evspots
+package app.evspots
 
 import io.flutter.embedding.android.FlutterActivity
 

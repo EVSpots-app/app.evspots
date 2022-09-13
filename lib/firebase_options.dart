@@ -64,6 +64,6 @@ class DefaultFirebaseOptions {
     projectId: 'evspots-app',
     storageBucket: 'evspots-app.appspot.com',
     iosClientId: '1049520392597-6jjf2mh64gsors3djtubc83ru0liq3r6.apps.googleusercontent.com',
-    iosBundleId: 'app.evspots.evspots',
+    iosBundleId: 'app.evspots',
   );
 }

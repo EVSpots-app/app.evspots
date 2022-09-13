@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../generated/l10n.dart';
 import '../widgets/AppBar.dart';
 import '../widgets/BottomBar.dart';
@@ -14,10 +17,13 @@ class HomeScreen extends StatefulWidget {
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
 
     return Scaffold(
       key: _key,
@@ -60,11 +66,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 hintText: S.of(context).search,
               ),
             ),
+            SizedBox(
+              height: height * 0.02,
+            ),
           ],
         ),
       ),
     );
+
   }
+
 }
 
 // class Picture {
@@ -81,7 +92,7 @@ class Picture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CircleAvatar(
-      backgroundImage: AssetImage('assets/pic1.jpg'),
+      backgroundImage: AssetImage('assets/images/pic1.jpg'),
     );
   }
 }

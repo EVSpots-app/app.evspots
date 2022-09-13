@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       // backgroundColor: Colors.white,
-      appBar: MyAppBar(),
+      appBar: const MyAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -53,9 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: width*0.25,
                             height: height*0.15,
-                            child:const CircleAvatar(
-                              backgroundImage: AssetImage('assets/images/pic1.jpg'),
-                            ),
+                            child:const Picture(),
                           ),
                           Positioned(
                             top: MediaQuery.of(context).size.height * 0.1,
@@ -104,9 +102,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: height*0.02,
                   ),
-                  TextField(
+                  const TextField(
                     keyboardType:TextInputType.number,
                     decoration: InputDecoration(
+
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -123,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: height*0.02,
                   ),
-                  TextField(
+                   TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                     ),
@@ -141,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: height*0.02,
                   ),
-                  TextField(
+                  const TextField(
                     keyboardType:TextInputType.emailAddress,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),

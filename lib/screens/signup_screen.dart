@@ -1,4 +1,5 @@
 import 'package:evspots/screens/home_screen.dart';
+import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -15,7 +16,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _callBackFunction(String name, String dialCode, String flag) {
     // place your code
   }
-
+  TextEditingController _phone = TextEditingController();
+  TextEditingController fullName = TextEditingController();
+  TextEditingController _email = TextEditingController();
   @override
   Widget build(BuildContext context) {
 
@@ -68,6 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height*0.02,
                   ),
                   TextField(
+                    controller: _phone,
                     keyboardType:TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -87,6 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height*0.02,
                   ),
                   TextField(
+                    controller: fullName,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                     ),
@@ -105,6 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height*0.02,
                   ),
                   TextField(
+                    controller: _email,
                     keyboardType:TextInputType.emailAddress,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -120,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  HomeScreen()),
+                            builder: (context) =>  HomeScreen2()),
                       );
                     },
                     child: Container(

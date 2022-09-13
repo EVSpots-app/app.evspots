@@ -1,6 +1,7 @@
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/language_screen.dart';
 import 'package:evspots/screens/signup_screen.dart';
+import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:evspots/widgets/BottomBar.dart';
 import 'package:evspots/screens/signin_screen.dart';
@@ -44,7 +45,7 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
-                home:  GoogleMapsClonePage(),
+                home:  SplashScreen(),
                 // themeMode: ThemeMode.system,
                   theme:themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
                 // theme : ThemeData(fontFamily: 'Pacifico'),

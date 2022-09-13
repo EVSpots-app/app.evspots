@@ -37,7 +37,8 @@ class _MyDrawerState extends State<MyDrawer> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ProfileScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen()),
                       );
                     },
                     child: const Picture()),
@@ -57,7 +58,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     children: [
                       ListTile(
                         leading: const Icon(Icons.settings),
-                        title: Text(S.of(context).settings),
+                        title: Text(
+                          S.of(context).settings,
+                          style: TextStyle(fontSize: 30),
+                        ),
                         onTap: () {
                           Navigator.push(
                             context,
@@ -72,8 +76,8 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>  SignInScreen()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
                 child: Container(
                   width: width,
