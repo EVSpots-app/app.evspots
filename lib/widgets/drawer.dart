@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../generated/l10n.dart';
 import '../screens/home_screen.dart';
+import '../screens/home_screen2.dart';
 import '../screens/signin_screen.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -42,6 +43,11 @@ class _MyDrawerState extends State<MyDrawer> {
                       );
                     },
                     child: const Picture()),
+                otherAccountsPictures: [
+                  IconButton(onPressed: (){
+                    key1.currentState!.openEndDrawer();
+                  }, icon: Icon(Icons.close))
+                ],
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
@@ -93,34 +99,34 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ],
           ),
-          FutureBuilder<PackageInfo>(
-            future: _getPackageInfo(),
-            builder:
-                (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
-              if (snapshot.hasError) {
-                return const Text('ERROR');
-              } else if (!snapshot.hasData) {
-                return const Text('Loading...');
-              }
-
-              final data = snapshot.data!;
-
-              return Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('App Naconst me: ${data.appName}',
-                      style: const TextStyle(fontSize: 15)),
-                  Text('Packconst age Name: ${data.packageName}',
-                      style: const TextStyle(fontSize: 15)),
-                  Text('Verconst sion: ${data.version}',
-                      style: const TextStyle(fontSize: 15)),
-                  Text('Build Number: ${data.buildNumber}',
-                      style: const TextStyle(fontSize: 15)),
-                ],
-              );
-            },
-          ),
+          // FutureBuilder<PackageInfo>(
+          //   future: _getPackageInfo(),
+          //   builder:
+          //       (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
+          //     if (snapshot.hasError) {
+          //       return const Text('ERROR');
+          //     } else if (!snapshot.hasData) {
+          //       return const Text('Loading...');
+          //     }
+          //
+          //     final data = snapshot.data!;
+          //
+          //     return Column(
+          //       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Text('App Naconst me: ${data.appName}',
+          //             style: const TextStyle(fontSize: 15)),
+          //         Text('Packconst age Name: ${data.packageName}',
+          //             style: const TextStyle(fontSize: 15)),
+          //         Text('Verconst sion: ${data.version}',
+          //             style: const TextStyle(fontSize: 15)),
+          //         Text('Build Number: ${data.buildNumber}',
+          //             style: const TextStyle(fontSize: 15)),
+          //       ],
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

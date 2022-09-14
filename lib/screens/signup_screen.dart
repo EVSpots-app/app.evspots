@@ -16,12 +16,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _callBackFunction(String name, String dialCode, String flag) {
     // place your code
   }
+
   TextEditingController _phone = TextEditingController();
   TextEditingController fullName = TextEditingController();
   TextEditingController _email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -41,14 +42,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: height*0.02,
+                    height: height * 0.02,
                   ),
                   const Text(
                     'Sign up Now',
-                    style: TextStyle(fontSize: 28,),
+                    style: TextStyle(
+                      fontSize: 28,
+                    ),
                   ),
                   SizedBox(
-                    height: height*0.02,
+                    height: height * 0.02,
                   ),
                   const Text(
                     'Looks like you are not registered yet ',
@@ -58,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.06,
+                    height: height * 0.06,
                   ),
                   const Text(
                     'Phone Number ',
@@ -68,17 +71,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.02,
+                    height: height * 0.02,
                   ),
                   TextField(
                     controller: _phone,
-                    keyboardType:TextInputType.number,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                     ),
                   ),
                   SizedBox(
-                    height: height*0.04,
+                    height: height * 0.04,
                   ),
                   const Text(
                     'Full Name ',
@@ -88,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.02,
+                    height: height * 0.02,
                   ),
                   TextField(
                     controller: fullName,
@@ -97,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.04,
+                    height: height * 0.04,
                   ),
                   const Text(
                     'Email Address ',
@@ -107,31 +110,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height*0.02,
+                    height: height * 0.02,
                   ),
                   TextField(
                     controller: _email,
-                    keyboardType:TextInputType.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                     ),
                   ),
-
                   SizedBox(
-                    height: height*0.04,
+                    height: height * 0.04,
                   ),
                   GestureDetector(
-                    onTap: (){
-
+                    onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  HomeScreen2()),
+                        MaterialPageRoute(builder: (context) => HomeScreen2()),
                       );
                     },
                     child: Container(
                       margin: const EdgeInsets.all(8),
-                      height: height*0.07,
+                      height: height * 0.07,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: AppColor.buttonBackgroundColor,
@@ -140,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       alignment: Alignment.center,
                       child: const Text(
                         'Continue',
-                        style: TextStyle( fontSize: 16.0,color: Colors.white),
+                        style: TextStyle(fontSize: 16.0, color: Colors.white),
                       ),
                     ),
                   ),

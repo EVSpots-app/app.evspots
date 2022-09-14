@@ -6,6 +6,7 @@ import '../generated/l10n.dart';
 import '../widgets/AppBar.dart';
 import '../widgets/BottomBar.dart';
 import '../widgets/drawer.dart';
+import 'home_screen2.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-final GlobalKey<ScaffoldState> _key = GlobalKey();
+// final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeScreenState extends State<HomeScreen> {
 
@@ -26,10 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     return Scaffold(
-      key: _key,
+      key: key1,
       appBar: const MyAppBar(),
       drawer: const MyDrawer(),
-      bottomNavigationBar: const BottomBar(),
+      // bottomNavigationBar: const BottomBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.only(right: 10, left: 10),
                           child: Picture(),
                         ),
-                        onTap: () => _key.currentState!.openDrawer(),
+                        onTap: () => key1.currentState!.openDrawer(),
                       )
                     ],
                   ),

@@ -5,6 +5,8 @@ import 'package:evspots/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'main_page.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
             () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => HomeScreen2())));
+            context, MaterialPageRoute(builder: (_) => MainPage())));
   }
 
   Widget build(BuildContext context) {
@@ -26,9 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(
-          'assets/svgs/icon.svg',
-        ),
+        child: Image.asset('assets/images/icon_for_light_theme.png'),
       )),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/language_screen.dart';
+import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/signup_screen.dart';
 import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/themes/app_theme.dart';
-import 'package:evspots/widgets/BottomBar.dart';
 import 'package:evspots/screens/signin_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +16,7 @@ import 'localization/app_model.dart';
 import 'screens/home_screen.dart';
 import 'themes/theme_model.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -37,6 +36,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
         ChangeNotifierProvider<ChangeIndex1>(create: (_) => ChangeIndex1()),
         ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
+        ChangeNotifierProvider<ChangeTime>(create: (_) => ChangeTime()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),
@@ -45,9 +45,9 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
-                home:  SplashScreen(),
+                home: SplashScreen(),
                 // themeMode: ThemeMode.system,
-                  theme:themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
+                theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
                 // theme : ThemeData(fontFamily: 'Pacifico'),
 
                 debugShowCheckedModeBanner: false,
@@ -67,4 +67,3 @@ class App extends StatelessWidget {
     );
   }
 }
-

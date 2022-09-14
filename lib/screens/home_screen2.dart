@@ -1,13 +1,14 @@
 import 'dart:async';
-
+import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import '../widgets/BottomBar.dart';
 import 'home_screen.dart';
 
-final GlobalKey<ScaffoldState> _key1 = GlobalKey();
-
-bool time1 = true;
+final GlobalKey<ScaffoldState> key1 = GlobalKey();
 
 class HomeScreen2 extends StatefulWidget {
   @override
@@ -15,15 +16,10 @@ class HomeScreen2 extends StatefulWidget {
 }
 
 class _HomeScreen2State extends State<HomeScreen2> {
-  void initState() {
-    super.initState();
-    time();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key1,
+      key: key1,
       drawer: const MyDrawer(),
       body: Stack(
         children: <Widget>[
@@ -43,13 +39,6 @@ class _HomeScreen2State extends State<HomeScreen2> {
       ),
     );
   }
-
-  time() {
-    Timer(Duration(seconds: 3), () {
-      time1 = false;
-      setState(() {});
-    });
-  }
 }
 
 /// Google Map in the background
@@ -68,37 +57,57 @@ class CustomHeader extends StatelessWidget {
     return Column(
       children: <Widget>[
         CustomSearchContainer(),
-        // CustomSearchCategories(),
+        CustomSearchCategories(),
       ],
     );
   }
 }
 
-class CustomSearchContainer extends StatelessWidget {
+class CustomSearchContainer extends StatefulWidget {
+  @override
+  State<CustomSearchContainer> createState() => _CustomSearchContainerState();
+}
+
+class _CustomSearchContainerState extends State<CustomSearchContainer> {
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<ChangeTime>(context, listen: false).switchTime();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 40, 16, 8),
-      //adjust "40" according to the status bar size
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(6)),
-        child: time1
-            ? Center(
-                child: Icon(
-                Icons.play_arrow_rounded,
-                size: 50,
-              ))
-            : Row(
+    return Consumer<ChangeTime>(builder: (_, changeTime, __) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+        //adjust "40" according to the status bar size
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(25)),
+          child: Stack(
+            children: [
+              changeTime.time1
+                  ? Center(
+                      child: SizedBox(
+                        height: 35,
+                        child: Image.asset('assets/images/logo_for_light_theme.png'),
+                      ),
+                    )
+                  : SizedBox(),
+              Row(
                 children: <Widget>[
+                  CustomIconAvatar(),
                   CustomTextField(),
                   CustomUserAvatar(),
-                  const SizedBox(width: 16),
                 ],
               ),
-      ),
-    );
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -108,8 +117,8 @@ class CustomTextField extends StatelessWidget {
     return Expanded(
       child: TextFormField(
         maxLines: 1,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.location_pin, size: 25),
+        decoration:  const InputDecoration(
+          // prefixIcon: Icon(Icons.location_pin, size: 25),
           suffixIcon: Icon(Icons.filter_alt_rounded, size: 25),
           contentPadding: EdgeInsets.all(16),
           hintText: "Search here",
@@ -126,9 +135,28 @@ class CustomUserAvatar extends StatelessWidget {
     return GestureDetector(
       child: const Padding(
         padding: EdgeInsets.only(right: 10, left: 10),
-        child: Picture(),
+        child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Picture()),
       ),
-      onTap: () => _key1.currentState!.openDrawer(),
+      onTap: () => key1.currentState!.openDrawer(),
+    );
+  }
+}
+
+class CustomIconAvatar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child:  Padding(
+        padding: EdgeInsets.only(right: 10, left: 10),
+        child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Image.asset('assets/images/icon_for_dark.png'),),
+      ),
+      onTap: () => key1.currentState!.openDrawer(),
     );
   }
 }
@@ -173,7 +201,7 @@ class CustomCategoryChip extends StatelessWidget {
           Text(title)
         ],
       ),
-      backgroundColor: Colors.grey[50],
+      // backgroundColor: Colors.grey[50],
     );
   }
 }
@@ -376,5 +404,16 @@ class CustomFeaturedItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
     );
+  }
+}
+
+class ChangeTime extends ChangeNotifier {
+  bool time1 = true;
+
+  switchTime() {
+    Timer(const Duration(seconds: 5), () {
+      time1 = false;
+      notifyListeners();
+    });
   }
 }

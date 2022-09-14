@@ -1197,13 +1197,22 @@ class _GMapState extends State<GMap> {
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
-          target: LatLng(31.9500, 35.9333),
-          zoom: 14,
+          target: LatLng(31.965722612598267, 35.85564907640219),
+          zoom: 16,
         ),
         // polygons: _polygons,
         mapType: MapType.normal ,
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
+        markers: {
+          Marker(markerId: MarkerId("source"),
+            position: LatLng(31.965722612598267, 35.85564907640219),
+          )
+        },
+        onCameraMove: (position){
+          print(position.target.latitude);
+          print(position.target.longitude);
+        },
       ),
     );
   }
