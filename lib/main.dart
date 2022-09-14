@@ -1,10 +1,8 @@
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/language_screen.dart';
 import 'package:evspots/screens/main_page.dart';
-import 'package:evspots/screens/signup_screen.dart';
 import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/themes/app_theme.dart';
-import 'package:evspots/screens/signin_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +11,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'localization/app_model.dart';
-import 'screens/home_screen.dart';
 import 'themes/theme_model.dart';
 
 void main() async {
@@ -48,7 +45,6 @@ class App extends StatelessWidget {
                 home: SplashScreen(),
                 // themeMode: ThemeMode.system,
                 theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
-                // theme : ThemeData(fontFamily: 'Pacifico'),
 
                 debugShowCheckedModeBanner: false,
                 locale: AppModel.shared.appLocale,

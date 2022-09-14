@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../themes/app_color.dart';
 import '../widgets/AppBar.dart';
+import 'main_page.dart';
 import 'otp_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -126,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen2()),
+                        MaterialPageRoute(builder: (context) => MainPage()),
                       );
                     },
                     child: Container(

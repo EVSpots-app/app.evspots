@@ -104,7 +104,7 @@ flutter:
   fonts:
     - family: Tajawal
       fonts:
-        - asset: assets/fonts/Tajawal/Tajawal-Black.ttf
+        - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
 
 
   # For details regarding fontss from package dependencies,

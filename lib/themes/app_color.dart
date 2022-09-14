@@ -11,7 +11,7 @@ class AppColor {
   static Color secColor= const Color (0xffffffff);
 
   static Color bodyColor = const Color(0xffffffff);
-  static Color bodyColorDark = const Color(0xff0E0E0F);
+  static Color bodyColorDark = const Color(0xb82a2a2a);
 
   static Color buttonBackgroundColor = const Color(0xff1fd57e);
   static Color buttonBackgroundColorDark = const Color(0xff1fd57e);

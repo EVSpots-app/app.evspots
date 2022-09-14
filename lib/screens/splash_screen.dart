@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'package:evspots/screens/home_screen2.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:evspots/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../themes/theme_model.dart';
 import 'main_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,7 +26,15 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/images/icon_for_light_theme.png'),
+        child: Consumer<ThemeModel>(
+            builder: (context, ThemeModel themeNotifier, child) {
+              return Image.asset(
+                themeNotifier.isDark
+                    ?'assets/images/icon_for_dark_theme.png'
+                    :'assets/images/icon_for_light_theme.png'
+              );
+            }),
+
       )),
     );
   }

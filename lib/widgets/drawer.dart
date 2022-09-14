@@ -25,6 +25,7 @@ class _MyDrawerState extends State<MyDrawer> {
     var width = MediaQuery.of(context).size.width;
 
     return Drawer(
+      elevation: 0,
       width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

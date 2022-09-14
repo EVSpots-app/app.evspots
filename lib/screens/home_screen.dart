@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import '../generated/l10n.dart';
 import '../widgets/AppBar.dart';
-import '../widgets/BottomBar.dart';
+
 import '../widgets/drawer.dart';
 import 'home_screen2.dart';
 
@@ -18,13 +16,10 @@ class HomeScreen extends StatefulWidget {
 // final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
 
     return Scaffold(
       key: key1,
@@ -43,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
             TextFormField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 prefixIcon: const Icon(Icons.location_pin,
                     color: Colors.grey, size: 25),
                 suffixIcon: SizedBox(
@@ -74,9 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-
   }
-
 }
 
 // class Picture {

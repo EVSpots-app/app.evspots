@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:evspots/screens/profile_screen.dart';
+import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import '../generated/l10n.dart';
+import '../themes/theme_model.dart';
 import '../widgets/BottomBar.dart';
 import 'home_screen.dart';
 
@@ -79,34 +82,42 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ChangeTime>(builder: (_, changeTime, __) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
-        //adjust "40" according to the status bar size
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25)),
-          child: Stack(
-            children: [
-              changeTime.time1
-                  ? Center(
-                      child: SizedBox(
-                        height: 35,
-                        child: Image.asset('assets/images/logo_for_light_theme.png'),
-                      ),
-                    )
-                  : SizedBox(),
-              Row(
-                children: <Widget>[
-                  CustomIconAvatar(),
-                  CustomTextField(),
-                  CustomUserAvatar(),
-                ],
-              ),
-            ],
+      return Consumer<ThemeModel>(
+          builder: (context, ThemeModel themeNotifier, child) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 3),
+          //adjust "40" according to the status bar size
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+                color: themeNotifier.isDark
+                    ?Colors.grey[800]
+                    :Colors.white,
+                borderRadius: BorderRadius.circular(25)),
+            child: Stack(
+              children: [
+                changeTime.time1
+                    ? Center(
+                        child: SizedBox(
+                          height: 35,
+                          child: Image.asset(themeNotifier.isDark
+                              ? 'assets/images/logo_for_dark_theme.png'
+                              : 'assets/images/logo_for_light_theme.png'),
+                        ),
+                      )
+                    : SizedBox(),
+                Row(
+                  children: <Widget>[
+                    CustomIconAvatar(),
+                    CustomTextField(),
+                    CustomUserAvatar(),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      });
     });
   }
 }
@@ -117,11 +128,13 @@ class CustomTextField extends StatelessWidget {
     return Expanded(
       child: TextFormField(
         maxLines: 1,
-        decoration:  const InputDecoration(
+        decoration:  InputDecoration(
           // prefixIcon: Icon(Icons.location_pin, size: 25),
-          suffixIcon: Icon(Icons.filter_alt_rounded, size: 25),
-          contentPadding: EdgeInsets.all(16),
-          hintText: "Search here",
+          suffixIcon:
+              Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+          contentPadding: EdgeInsets.only(left: 16,top: 18,right: 16),
+          hintText: S.of(context).search,
+
           border: InputBorder.none,
         ),
       ),
@@ -135,10 +148,7 @@ class CustomUserAvatar extends StatelessWidget {
     return GestureDetector(
       child: const Padding(
         padding: EdgeInsets.only(right: 10, left: 10),
-        child: SizedBox(
-            width: 30,
-            height: 30,
-            child: Picture()),
+        child: SizedBox(width: 30, height: 30, child: Picture()),
       ),
       onTap: () => key1.currentState!.openDrawer(),
     );
@@ -148,16 +158,18 @@ class CustomUserAvatar extends StatelessWidget {
 class CustomIconAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child:  Padding(
-        padding: EdgeInsets.only(right: 10, left: 10),
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Padding(
+        padding: EdgeInsets.only(right: 10, left: 13),
         child: SizedBox(
             width: 30,
             height: 30,
-            child: Image.asset('assets/images/icon_for_dark.png'),),
-      ),
-      onTap: () => key1.currentState!.openDrawer(),
-    );
+            child: Image.asset(themeNotifier.isDark
+                ? 'assets/images/icon_for_light.png'
+                : 'assets/images/icon_for_dark.png')),
+      );
+    });
   }
 }
 

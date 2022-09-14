@@ -33,14 +33,14 @@ class _MainPageState extends State<MainPage> {
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: Text(S.of(context).home),
-              selectedColor: Colors.purple,
+              selectedColor: Colors.yellow,
             ),
 
             /// location
             SalomonBottomBarItem(
               icon: const Icon(Icons.location_pin),
               title: Text("Location"),
-              selectedColor: Colors.pink,
+              selectedColor: Colors.yellowAccent,
             ),
 
             /// Search
