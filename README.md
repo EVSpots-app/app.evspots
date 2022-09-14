@@ -4,6 +4,8 @@ A new Flutter project.
 
 https://graphicriver.net/item/ev-charging-station-finder-app-ui-psd-ev-spot/37484525
 
+\build\app\outputs\flutter-apk
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
