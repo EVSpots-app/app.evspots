@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../generated/l10n.dart';
+import '../themes/app_color.dart';
+import '../themes/theme_model.dart';
 import '../widgets/AppBar.dart';
 
 import '../widgets/drawer.dart';
@@ -22,52 +25,40 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      key: key1,
+      // key: key1,
       appBar: const MyAppBar(),
-      drawer: const MyDrawer(),
+      // drawer: const MyDrawer(),
       // bottomNavigationBar: const BottomBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: height * 0.02,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                prefixIcon: const Icon(Icons.location_pin,
-                    color: Colors.grey, size: 25),
-                suffixIcon: SizedBox(
-                  width: width * 0.23,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Icon(Icons.filter_alt_rounded,
-                          color: Colors.grey, size: 25),
-                      GestureDetector(
-                        child: const Padding(
-                          padding: EdgeInsets.only(right: 10, left: 10),
-                          child: Picture(),
-                        ),
-                        onTap: () => key1.currentState!.openDrawer(),
-                      )
-                    ],
-                  ),
-                ),
-                hintText: S.of(context).search,
-              ),
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-          ],
-        ),
-      ),
+      backgroundColor: Colors.grey,
+      body: CustomSearchContainer(),
+      // TextFormField(
+      //   decoration: InputDecoration(
+      //     border: OutlineInputBorder(
+      //       borderRadius: BorderRadius.circular(15),
+      //     ),
+      //     prefixIcon: const Icon(Icons.location_pin,
+      //         color: Colors.grey, size: 25),
+      //     suffixIcon: SizedBox(
+      //       width: width * 0.23,
+      //       child: Row(
+      //         mainAxisAlignment: MainAxisAlignment.end,
+      //         children: [
+      //           const Icon(Icons.filter_alt_rounded,
+      //               color: Colors.grey, size: 25),
+      //           GestureDetector(
+      //             child: const Padding(
+      //               padding: EdgeInsets.only(right: 10, left: 10),
+      //               child: Picture(),
+      //             ),
+      //             onTap: () => Drawerkey.currentState!.openDrawer(),
+      //           )
+      //         ],
+      //       ),
+      //     ),
+      //     hintText: S.of(context).search,
+      //     hintStyle: TextStyle(fontSize: 16, color: Colors.white)
+      //   ),
+      // ),
     );
   }
 }

@@ -19,7 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -32,37 +31,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Container(
             height: height,
             width: width,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Profile',
-                        style: TextStyle(fontSize: 28,),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Profile',
+                      style: TextStyle(
+                        fontSize: 28,
                       ),
-                      SizedBox(
-                        width: width*0.3,
-                        height:height*0.2,
-                        child: Stack(
-                          children: [
+                    ),
+                    SizedBox(
+                      width: width * 0.3,
+                      height: height * 0.2,
+                      child: Stack(
+                        children: [
                           SizedBox(
-                            width: width*0.25,
-                            height: height*0.15,
-                            child:const Picture(),
+                            width: width * 0.25,
+                            height: height * 0.15,
+                            child: const Picture(),
                           ),
                           Positioned(
                             top: MediaQuery.of(context).size.height * 0.1,
                             right: MediaQuery.of(context).size.width * 0.03,
                             child: SizedBox(
-                              width: width*0.1,
-                              height: height*0.05,
+                              width: width * 0.1,
+                              height: height * 0.05,
                               child: FloatingActionButton(
-                                child: const Icon(Icons.camera_alt,),
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                ),
                                 backgroundColor: AppColor.buttonBackgroundColor,
                                 // backgroundColor: const Color(0xFFF65F5B),
                                 onPressed: () {
@@ -73,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     actions: <BottomSheetAction>[
                                       BottomSheetAction(
                                           title: const Text('Camera'),
-                                      onPressed: (_){}),
+                                          onPressed: (_) {}),
                                       BottomSheetAction(
                                           title: const Text('Gallery'),
                                           onPressed: (_) {}),
@@ -86,89 +87,111 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           ),
-                        ],),
-                      )
-
+                        ],
+                      ),
+                    )
                   ],
-                  ),
-
-                  const Text(
-                    'Phone Number ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
+                ),
+                SizedBox(
+                  height: height * 0.55,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Phone Number ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        const TextField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.04,
+                        ),
+                        const Text(
+                          'First Name ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.04,
+                        ),
+                        const Text(
+                          'Last Name ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.04,
+                        ),
+                        const Text(
+                          'Email Address ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        const TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: height*0.02,
-                  ),
-                  const TextField(
-                    keyboardType:TextInputType.number,
-                    decoration: InputDecoration(
-
-                      border: OutlineInputBorder(),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    height: height * 0.07,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColor.buttonBackgroundColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Update',
+                      style: TextStyle(fontSize: 16.0, color: Colors.white),
                     ),
                   ),
-                  SizedBox(
-                    height: height*0.04,
-                  ),
-                  const Text(
-                    'Full Name ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(
-                    height: height*0.02,
-                  ),
-                   TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height*0.04,
-                  ),
-                  const Text(
-                    'Email Address ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(
-                    height: height*0.02,
-                  ),
-                  const TextField(
-                    keyboardType:TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: height*0.1,
-                  ),
-                  GestureDetector(
-                    onTap: (){},
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      height: height*0.07,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColor.buttonBackgroundColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Update',
-                        style: TextStyle( fontSize: 16.0,color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -176,5 +199,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-

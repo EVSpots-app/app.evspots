@@ -48,6 +48,7 @@ dependencies:
   google_maps_flutter: ^2.2.0
   location: ^4.4.0
   flutter_svg: ^1.1.5
+
 #  firebase_phone_auth_handler: ^1.0.6
 #  country_picker: ^2.0.16
 
@@ -105,6 +106,7 @@ flutter:
     - family: Tajawal
       fonts:
         - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
+        - asset: assets/fonts/Tajawal/Tajawal-Black.ttf
 
 
   # For details regarding fontss from package dependencies,

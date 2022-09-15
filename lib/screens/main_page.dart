@@ -1,11 +1,13 @@
 import 'package:evspots/screens/home_screen.dart';
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/profile_screen.dart';
+import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../generated/l10n.dart';
+import '../widgets/drawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -20,6 +22,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Drawerkey,
+      drawer: MyDrawer(),
       bottomNavigationBar:
           Consumer<ChangeIndex1>(builder: (_, changeIndex, __) {
         return SalomonBottomBar(
@@ -33,14 +37,14 @@ class _MainPageState extends State<MainPage> {
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: Text(S.of(context).home),
-              selectedColor: Colors.yellow,
+              selectedColor: AppColor.mainColor,
             ),
 
             /// location
             SalomonBottomBarItem(
               icon: const Icon(Icons.location_pin),
               title: Text("Location"),
-              selectedColor: Colors.yellowAccent,
+               selectedColor: AppColor.mainColor,
             ),
 
             /// Search

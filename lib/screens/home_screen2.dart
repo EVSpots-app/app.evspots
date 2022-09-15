@@ -11,7 +11,7 @@ import '../themes/theme_model.dart';
 import '../widgets/BottomBar.dart';
 import 'home_screen.dart';
 
-final GlobalKey<ScaffoldState> key1 = GlobalKey();
+final GlobalKey<ScaffoldState> Drawerkey = GlobalKey();
 
 class HomeScreen2 extends StatefulWidget {
   @override
@@ -22,8 +22,8 @@ class _HomeScreen2State extends State<HomeScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key1,
-      drawer: const MyDrawer(),
+      // key: key1,
+      // drawer: const MyDrawer(),
       body: Stack(
         children: <Widget>[
           CustomGoogleMap(),
@@ -91,8 +91,8 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
             height: 50,
             decoration: BoxDecoration(
                 color: themeNotifier.isDark
-                    ?Colors.grey[800]
-                    :Colors.white,
+                    ? AppColor.bodyColorDark
+                    : AppColor.bodyColor,
                 borderRadius: BorderRadius.circular(25)),
             child: Stack(
               children: [
@@ -125,20 +125,27 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
 class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TextFormField(
-        maxLines: 1,
-        decoration:  InputDecoration(
-          // prefixIcon: Icon(Icons.location_pin, size: 25),
-          suffixIcon:
-              Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
-          contentPadding: EdgeInsets.only(left: 16,top: 18,right: 16),
-          hintText: S.of(context).search,
-
-          border: InputBorder.none,
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Expanded(
+        child: TextFormField(
+          maxLines: 1,
+          decoration: InputDecoration(
+            // prefixIcon: Icon(Icons.location_pin, size: 25),
+            suffixIcon:
+                Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+            contentPadding: EdgeInsets.only(left: 16, top: 18, right: 16),
+            hintText: S.of(context).search,
+            hintStyle: TextStyle(
+              color: themeNotifier.isDark
+                  ? AppColor.bodyColor
+                  : AppColor.bodyColorDark,
+            ),
+            border: InputBorder.none,
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -150,7 +157,7 @@ class CustomUserAvatar extends StatelessWidget {
         padding: EdgeInsets.only(right: 10, left: 10),
         child: SizedBox(width: 30, height: 30, child: Picture()),
       ),
-      onTap: () => key1.currentState!.openDrawer(),
+      onTap: () => Drawerkey.currentState!.openDrawer(),
     );
   }
 }

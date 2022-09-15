@@ -18,5 +18,5 @@ ThemeData darkTheme = ThemeData(
   buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
     buttonColor: Colors.white
-  )
+  ),
 );
