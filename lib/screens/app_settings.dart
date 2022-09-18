@@ -40,14 +40,10 @@ class _AppSettingsState extends State<AppSettings> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      // Icon(Icons.settings),
-                      Text(S.of(context).settings,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
+
+                  Text(S.of(context).settings,
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold)),
                   SizedBox(height: height * 0.01),
                   const Text("set your preferences",
                       style: TextStyle(
@@ -86,7 +82,7 @@ class _AppSettingsState extends State<AppSettings> {
                                 : Colors.grey.shade900),
                         title: Text(S.of(context).darkMode,
                             style: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
+                                fontSize: 22, fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),
@@ -128,31 +124,32 @@ class _AppSettingsState extends State<AppSettings> {
                         ),
                         title: Text(S.of(context).selectLanguage,
                             style: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
+                                fontSize: 22, fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),
-                  SizedBox(height: height * 0.05),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SignInScreen()));
-                    },
-                    child: Container(
-                      width: width,
-                      height: height * 0.06,
-                      color: Colors.transparent,
-                      child: ListTile(
-                        trailing: const Icon(Icons.logout),
-                        title: Text(S.of(context).logout,
-                            style: const TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: height * 0.25),
+
                 ],
               ),
               // SizedBox(height: height*0.4,),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SignInScreen()));
+                },
+                child: Container(
+                  width: width,
+                  height: height * 0.06,
+                  color: Colors.transparent,
+                  child: ListTile(
+                    trailing: const Icon(Icons.logout),
+                    title: Text(S.of(context).logout,
+                        style: const TextStyle(
+                            fontSize: 27, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ),
               FutureBuilder<PackageInfo>(
                 future: _getPackageInfo(),
                 builder: (BuildContext context,

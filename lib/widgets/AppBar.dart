@@ -25,14 +25,14 @@ class _MyAppBarState extends State<MyAppBar> {
             ? AppColor.bodyColor
             : AppColor.secColor,),
         backgroundColor:
-            themeNotifier.isDark ? AppColor.bodyColorDark : AppColor.bodyColor,
+        themeNotifier.isDark ? AppColor.bodyColorDark : AppColor.bodyColor,
         title: Text(
           S.of(context).evspots,
           style: TextStyle(
-            color: themeNotifier.isDark
-                ? AppColor.bodyColor
-                : AppColor.secColor,
-            fontFamily: 'Tajawal-Black'
+              color: themeNotifier.isDark
+                  ? AppColor.bodyColor
+                  : AppColor.secColor,
+              fontFamily: 'Tajawal-Black'
           ),
         ),
       );

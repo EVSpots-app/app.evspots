@@ -59,7 +59,10 @@ class CustomHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        CustomSearchContainer(),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 3),
+          child: CustomSearchContainer(),
+        ),
         CustomSearchCategories(),
       ],
     );
@@ -84,37 +87,33 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
     return Consumer<ChangeTime>(builder: (_, changeTime, __) {
       return Consumer<ThemeModel>(
           builder: (context, ThemeModel themeNotifier, child) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 3),
-          //adjust "40" according to the status bar size
-          child: Container(
-            height: 50,
-            decoration: BoxDecoration(
-                color: themeNotifier.isDark
-                    ? AppColor.bodyColorDark
-                    : AppColor.bodyColor,
-                borderRadius: BorderRadius.circular(25)),
-            child: Stack(
-              children: [
-                changeTime.time1
-                    ? Center(
-                        child: SizedBox(
-                          height: 35,
-                          child: Image.asset(themeNotifier.isDark
-                              ? 'assets/images/logo_for_dark_theme.png'
-                              : 'assets/images/logo_for_light_theme.png'),
-                        ),
-                      )
-                    : SizedBox(),
-                Row(
-                  children: <Widget>[
-                    CustomIconAvatar(),
-                    CustomTextField(),
-                    CustomUserAvatar(),
-                  ],
-                ),
-              ],
-            ),
+        return Container(
+          height: 50,
+          decoration: BoxDecoration(
+              color: themeNotifier.isDark
+                  ? AppColor.bodyColorDark
+                  : AppColor.bodyColor,
+              borderRadius: BorderRadius.circular(25)),
+          child: Stack(
+            children: [
+              changeTime.time1
+                  ? Center(
+                      child: SizedBox(
+                        height: 35,
+                        child: Image.asset(themeNotifier.isDark
+                            ? 'assets/images/logo_for_dark_theme.png'
+                            : 'assets/images/logo_for_light_theme.png'),
+                      ),
+                    )
+                  : SizedBox(),
+              Row(
+                children: <Widget>[
+                  CustomIconAvatar(),
+                  CustomTextField(),
+                  CustomUserAvatar(),
+                ],
+              ),
+            ],
           ),
         );
       });
@@ -153,9 +152,9 @@ class CustomUserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: const Padding(
+      child:  Padding(
         padding: EdgeInsets.only(right: 10, left: 10),
-        child: SizedBox(width: 30, height: 30, child: Picture()),
+        child: SizedBox(width: 30, height: 30, child: Picker()),
       ),
       onTap: () => Drawerkey.currentState!.openDrawer(),
     );

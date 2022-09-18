@@ -8,10 +8,12 @@ import 'package:evspots/themes/theme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../generated/l10n.dart';
 import '../screens/home_screen.dart';
 import '../screens/home_screen2.dart';
 import '../screens/signin_screen.dart';
+import '../screens/vehicles.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -24,11 +26,15 @@ class _MyDrawerState extends State<MyDrawer> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
+  Future<void>? _launched;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+    final Uri toLaunch =
+    Uri(scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -73,19 +79,19 @@ class _MyDrawerState extends State<MyDrawer> {
                               SizedBox(
                                 width: width * 0.3,
                               ),
-                              SizedBox(
+                               SizedBox(
                                   width: 80,
                                   height: 80,
-                                  child: const Picture()),
+                                  child: Picker()),
                             ],
                           ),
                         )),
                   ),
                   SizedBox(
-                    height: height * 0.57,
+                    height: height * 0.65,
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Column(
                           children: [
                             ListTile(
@@ -97,10 +103,33 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: Text(
                                 S.of(context).home,
-                                style: TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 Drawerkey.currentState!.openEndDrawer();
+                              },
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            ListTile(
+                              leading: Icon(
+                                Icons.car_crash,
+                                color: themeNotifier.isDark
+                                    ? AppColor.mainColor
+                                    : AppColor.secColor,
+                              ),
+                              title: const Text(
+                                'Vehicles',
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //       const Vehicles()),
+                                // );
                               },
                             ),
                             SizedBox(
@@ -113,12 +142,13 @@ class _MyDrawerState extends State<MyDrawer> {
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
+                              title: const Text(
                                 'Favorite',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
+                            const Divider(),
                             SizedBox(
                               height: height * 0.01,
                             ),
@@ -129,9 +159,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
+                              title: const Text(
                                 'Terms & Condition',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -145,11 +175,13 @@ class _MyDrawerState extends State<MyDrawer> {
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
-                                'Praivace & police',
-                                style: TextStyle(fontSize: 20),
+                              title: const Text(
+                                'Praivace & Police',
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                _launched = _launchInBrowser(toLaunch);
+                              },
                             ),
                             SizedBox(
                               height: height * 0.01,
@@ -161,9 +193,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
+                              title: const Text(
                                 'FAQs',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -177,9 +209,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
+                              title: const Text(
                                 'Contact Us',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -195,7 +227,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: Text(
                                 S.of(context).settings,
-                                style: TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 Navigator.push(
@@ -234,6 +266,14 @@ class _MyDrawerState extends State<MyDrawer> {
         );
       }),
     );
+  }
+}
+Future<void> _launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
   }
 }
 // Column(

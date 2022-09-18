@@ -97,13 +97,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: height*0.07,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColor.buttonBackgroundColor,
+                            color: AppColor.mainColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             'Continue',
-                            style: TextStyle( fontSize: 16.0),
+                            style: TextStyle( fontSize: 16.0,color: Colors.black),
                           ),
                         ),
                       ),
@@ -117,13 +117,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: height*0.07,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColor.buttonBackgroundColor,
+                            color: AppColor.mainColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             'Sign Up',
-                            style: TextStyle( fontSize: 16.0),
+                            style: TextStyle( fontSize: 16.0,color: Colors.black),
                           ),
                         ),
                       ),

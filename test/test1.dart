@@ -1,218 +1,226 @@
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
+// ignore_for_file: public_member_api_docs
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-// This widget is the root
-// of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "ListView.builder",
-        theme: ThemeData(primarySwatch: Colors.green),
-        debugShowCheckedModeBanner: false,
-        // home : new ListViewBuilder(), NO Need To Use Unnecessary New Keyword
-        home: const ListViewBuilder());
-  }
-}
-
-class ListViewBuilder extends StatelessWidget {
-  const ListViewBuilder({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("ListView.builder")),
-      body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-                leading: const Icon(Icons.list),
-                trailing: const Text(
-                  "GFG",
-                  style: TextStyle(color: Colors.green, fontSize: 15),
-                ),
-                title: Text("List item $index"));
-          }),
+      title: 'URL Launcher',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'URL Launcher'),
     );
   }
 }
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  bool _hasCallSupport = false;
+  Future<void>? _launched;
+  String _phone = '';
 
+  @override
+  void initState() {
+    super.initState();
+    // Check for phone call support.
+    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
+      setState(() {
+        _hasCallSupport = result;
+      });
+    });
+  }
 
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 
+  Future<void> _launchInWebViewOrVC(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(
+          headers: <String, String>{'my_header_key': 'my_header_value'}),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 
+  Future<void> _launchInWebViewWithoutJavaScript(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 
+  Future<void> _launchInWebViewWithoutDomStorage(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration: const WebViewConfiguration(enableDomStorage: false),
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 
+  Future<void> _launchUniversalLinkIos(Uri url) async {
+    final bool nativeAppLaunchSucceeded = await launchUrl(
+      url,
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+    if (!nativeAppLaunchSucceeded) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    }
+  }
 
+  Widget _launchStatus(BuildContext context, AsyncSnapshot<void> snapshot) {
+    if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else {
+      return const Text('');
+    }
+  }
 
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
 
-
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-//
-// void main() {
-//   runApp(MyApp());
-// }
-//
-// class MyApp extends StatefulWidget {
-//   static final title = 'salomon_bottom_bar';
-//
-//   @override
-//   _MyAppState createState() => _MyAppState();
-// }
-//
-// class _MyAppState extends State<MyApp> {
-//   var _currentIndex = 0;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: MyApp.title,
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text(MyApp.title),
-//         ),
-//         bottomNavigationBar: SalomonBottomBar(
-//           currentIndex: _currentIndex,
-//           onTap: (i) => setState(() => _currentIndex = i),
-//           items: [
-//             /// Home
-//             SalomonBottomBarItem(
-//               icon: Icon(Icons.home),
-//               title: Text("Home"),
-//               selectedColor: Colors.purple,
-//             ),
-//
-//             /// Likes
-//             SalomonBottomBarItem(
-//               icon: Icon(Icons.favorite_border),
-//               title: Text("Likes"),
-//               selectedColor: Colors.pink,
-//             ),
-//
-//             /// Search
-//             SalomonBottomBarItem(
-//               icon: Icon(Icons.search),
-//               title: Text("Search"),
-//               selectedColor: Colors.orange,
-//             ),
-//
-//             /// Profile
-//             SalomonBottomBarItem(
-//               icon: Icon(Icons.person),
-//               title: Text("Profile"),
-//               selectedColor: Colors.teal,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-//
-//
-//
-//
-// // // Copyright 2017 The Chromium Authors. All rights reserved.
-// // // Use of this source code is governed by a BSD-style license that can be
-// // // found in the LICENSE file.
-// //
-// // // ignore_for_file: public_member_api_docs
-// //
-// // import 'dart:async';
-// //
-// // import 'package:flutter/material.dart';
-// // import 'package:package_info_plus/package_info_plus.dart';
-// //
-// // void main() {
-// //   runApp(const MyApp());
-// // }
-// //
-// // class MyApp extends StatelessWidget {
-// //   const MyApp({Key? key}) : super(key: key);
-// //
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return MaterialApp(
-// //       title: 'PackageInfo Demo',
-// //       theme: ThemeData(primarySwatch: Colors.blue),
-// //       home: const MyHomePage(title: 'PackageInfo example app'),
-// //     );
-// //   }
-// // }
-// //
-// // class MyHomePage extends StatefulWidget {
-// //   const MyHomePage({Key? key, this.title}) : super(key: key);
-// //
-// //   final String? title;
-// //
-// //   @override
-// //   _MyHomePageState createState() => _MyHomePageState();
-// // }
-// //
-// // class _MyHomePageState extends State<MyHomePage> {
-// //   PackageInfo _packageInfo = PackageInfo(
-// //     appName: 'Unknown',
-// //     packageName: 'Unknown',
-// //     version: 'Unknown',
-// //     buildNumber: 'Unknown',
-// //     buildSignature: 'Unknown',
-// //   );
-// //
-// //   @override
-// //   void initState() {
-// //     super.initState();
-// //     _initPackageInfo();
-// //   }
-// //
-// //   Future<void> _initPackageInfo() async {
-// //     final info = await PackageInfo.fromPlatform();
-// //     setState(() {
-// //       _packageInfo = info;
-// //     });
-// //   }
-// //
-// //   Widget _infoTile(String title, String subtitle) {
-// //     return ListTile(
-// //       title: Text(title),
-// //       subtitle: Text(subtitle.isEmpty ? 'Not set' : subtitle),
-// //     );
-// //   }
-// //
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       appBar: AppBar(
-// //         title: Text(widget.title!),
-// //       ),
-// //       body: Column(
-// //         mainAxisAlignment: MainAxisAlignment.center,
-// //         children: <Widget>[
-// //           _infoTile('App name', _packageInfo.appName),
-// //           _infoTile('Package name', _packageInfo.packageName),
-// //           _infoTile('App version', _packageInfo.version),
-// //           _infoTile('Build number', _packageInfo.buildNumber),
-// //           _infoTile('Build signature', _packageInfo.buildSignature),
-// //         ],
-// //       ),
-// //     );
-// //   }
-// // }
+  @override
+  Widget build(BuildContext context) {
+    // onPressed calls using this URL are not gated on a 'canLaunch' check
+    // because the assumption is that every device can launch a web URL.
+    final Uri toLaunch =
+    Uri(scheme: 'https', host: 'www.cylog.org', path: 'headers/');
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                    onChanged: (String text) => _phone = text,
+                    decoration: const InputDecoration(
+                        hintText: 'Input the phone number to launch')),
+              ),
+              ElevatedButton(
+                onPressed: _hasCallSupport
+                    ? () => setState(() {
+                  _launched = _makePhoneCall(_phone);
+                })
+                    : null,
+                child: _hasCallSupport
+                    ? const Text('Make phone call')
+                    : const Text('Calling not supported'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(toLaunch.toString()),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('Launch in browser'),
+              ),
+              const Padding(padding: EdgeInsets.all(16.0)),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInWebViewOrVC(toLaunch);
+                }),
+                child: const Text('Launch in app'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInWebViewWithoutJavaScript(toLaunch);
+                }),
+                child: const Text('Launch in app (JavaScript OFF)'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInWebViewWithoutDomStorage(toLaunch);
+                }),
+                child: const Text('Launch in app (DOM storage OFF)'),
+              ),
+              const Padding(padding: EdgeInsets.all(16.0)),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchUniversalLinkIos(toLaunch);
+                }),
+                child: const Text(
+                    'Launch a universal link in a native app, fallback to Safari.(Youtube)'),
+              ),
+              const Padding(padding: EdgeInsets.all(16.0)),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInWebViewOrVC(toLaunch);
+                  Timer(const Duration(seconds: 5), () {
+                    print('Closing WebView after 5 seconds...');
+                    closeInAppWebView();
+                  });
+                }),
+                child: const Text('Launch in app + close after 5 seconds'),
+              ),
+              const Padding(padding: EdgeInsets.all(16.0)),
+              Link(
+                uri: Uri.parse(
+                    'https://pub.dev/documentation/url_launcher/latest/link/link-library.html'),
+                target: LinkTarget.blank,
+                builder: (BuildContext ctx, FollowLink? openLink) {
+                  return TextButton.icon(
+                    onPressed: openLink,
+                    label: const Text('Link Widget documentation'),
+                    icon: const Icon(Icons.read_more),
+                  );
+                },
+              ),
+              const Padding(padding: EdgeInsets.all(16.0)),
+              FutureBuilder<void>(future: _launched, builder: _launchStatus),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

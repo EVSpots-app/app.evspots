@@ -29,7 +29,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             child: Column(children: [
               Text(S.of(context).selectLanguage,
                   style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold)),
+                      fontSize: 22, fontWeight: FontWeight.bold)),
               SizedBox(height: height * 0.03),
               ListTile(
                   leading: SizedBox(
@@ -52,7 +52,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   ),
                   title: const Text("English",
                       style: TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold))),
+                          fontSize: 25, fontWeight: FontWeight.bold))),
               SizedBox(height: height * 0.02),
               ListTile(
                 leading: SizedBox(
@@ -74,7 +74,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 title: const Text("عربي",
                     style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
               ),
             ]),
           );
