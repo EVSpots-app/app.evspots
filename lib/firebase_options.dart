@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAnT4iva6nwhpMH334T0wZM-1BpCakXMUk',
-    appId: '1:1049520392597:android:83bfb9c65692aba0054e9c',
+    appId: '1:1049520392597:android:4ff2fa7c10575afd054e9c',
     messagingSenderId: '1049520392597',
     projectId: 'evspots-app',
     storageBucket: 'evspots-app.appspot.com',
@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDppZdHFghfNJqTEHYDs7WpjDgI-w8eS3Y',
-    appId: '1:1049520392597:ios:aeb93d05e2d55519054e9c',
+    appId: '1:1049520392597:ios:9ba65a7d9fc558dc054e9c',
     messagingSenderId: '1049520392597',
     projectId: 'evspots-app',
     storageBucket: 'evspots-app.appspot.com',
-    iosClientId: '1049520392597-6jjf2mh64gsors3djtubc83ru0liq3r6.apps.googleusercontent.com',
+    iosClientId: '1049520392597-9538o7glkskk9ch6kgtha4q288nlvn7e.apps.googleusercontent.com',
     iosBundleId: 'app.evspots',
   );
 }

@@ -1,7 +1,9 @@
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/language_screen.dart';
 import 'package:evspots/screens/main_page.dart';
+import 'package:evspots/screens/signin_screen.dart';
 import 'package:evspots/screens/splash_screen.dart';
+import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<ChangeIndex1>(create: (_) => ChangeIndex1()),
         ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
         ChangeNotifierProvider<ChangeTime>(create: (_) => ChangeTime()),
+        ChangeNotifierProvider<ChangeDropdownValue>(create: (_) => ChangeDropdownValue()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),
@@ -42,7 +45,7 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
-                home: SplashScreen(),
+                home: SignInScreen(),
                 // themeMode: ThemeMode.system,
                 theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
 

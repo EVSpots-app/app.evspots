@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1049520392597:android:83bfb9c65692aba0054e9c",
+        "mobilesdk_app_id": "1:1049520392597:android:4ff2fa7c10575afd054e9c",
         "android_client_info": {
           "package_name": "app.evspots"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1049520392597-ru2om2pii9ni26o4j0rotlm69q5jrvo7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.evspots",
+            "certificate_hash": "a5fef72acf5ef66701b8f95c25a9436d80372ada"
+          }
+        },
         {
           "client_id": "1049520392597-ublgnjear4eaaq03jkg0oq5t8p7ijggo.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +37,13 @@
             {
               "client_id": "1049520392597-ublgnjear4eaaq03jkg0oq5t8p7ijggo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1049520392597-6jjf2mh64gsors3djtubc83ru0liq3r6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.evspots.evspots"
+              }
             }
           ]
         }

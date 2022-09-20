@@ -1,15 +1,16 @@
-import 'package:evspots/screens/home_screen.dart';
-import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/signup_screen.dart';
-import 'package:evspots/widgets/drawer.dart';
+import 'package:evspots/screens/verify_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../themes/app_color.dart';
 import '../widgets/AppBar.dart';
-import 'main_page.dart';
-import 'otp_screen.dart';
+
 
 class SignInScreen extends StatefulWidget {
+
+  static String verify ="";
+
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
@@ -17,6 +18,15 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   void _callBackFunction(String name, String dialCode, String flag) {
     // place your code
+  }
+
+  TextEditingController countryController = TextEditingController();
+  var phone = "";
+
+  @override
+  void initState() {
+    // countryController.text = "+962";
+    super.initState();
   }
 
   @override
@@ -50,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: height*0.02,
                 ),
                 const Text(
-                  'Please Change your countrycode ',
+                  'Please Change your countryCode ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
@@ -64,33 +74,50 @@ class _SignInScreenState extends State<SignInScreen> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-
-
                       IntlPhoneField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Phone Number',
                           border: OutlineInputBorder(
                             borderSide: BorderSide(),
                           ),
                         ),
-                        onChanged: (phone) {
-                          print(phone.completeNumber);
+                        onChanged: (value){
+                          phone =value.completeNumber ;
                         },
+                        // onChanged: (phone) {
+                        //   print(phone.completeNumber);
+                        // },
                         onCountryChanged: (country) {
-                          print('Country changed to: ' + country.name);
+                          phone=country.name;
                         },
                       ),
-
                        SizedBox(
                         height: height*0.02,
                       ),
+
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>  MainPage()),
+                        onTap: () async{
+                          print(countryController.text+phone);
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                            phoneNumber: countryController.text+phone,
+                            verificationCompleted: (PhoneAuthCredential credential) {},
+                            verificationFailed: (FirebaseAuthException e) {
+                              print(e.toString());
+                            },
+
+                            codeSent: (String verificationId, int? resendToken) {
+                              SignInScreen.verify =verificationId;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const VerifyScreen()),
+                              );
+                              print(verificationId);
+                            },
+                            codeAutoRetrievalTimeout: (String verificationId) {
+                              print('time out');
+                            },
                           );
+
                         },
                         child: Container(
                           margin: const EdgeInsets.all(8),
@@ -102,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           alignment: Alignment.center,
                           child: const Text(
-                            'Continue',
+                            'Send the code',
                             style: TextStyle( fontSize: 16.0,color: Colors.black),
                           ),
                         ),

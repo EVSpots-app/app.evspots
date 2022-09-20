@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:evspots/screens/app_settings.dart';
-import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
@@ -10,9 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../generated/l10n.dart';
-import '../screens/home_screen.dart';
 import '../screens/home_screen2.dart';
-import '../screens/signin_screen.dart';
 import '../screens/vehicles.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -77,7 +73,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                         : AppColor.textColor),
                               ),
                               SizedBox(
-                                width: width * 0.3,
+                                width: width * 0.25,
                               ),
                                SizedBox(
                                   width: 80,
@@ -124,12 +120,12 @@ class _MyDrawerState extends State<MyDrawer> {
                                 style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) =>
-                                //       const Vehicles()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const Vehicles()),
+                                );
                               },
                             ),
                             SizedBox(
@@ -245,6 +241,14 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ],
               ),
+
+              SizedBox(
+                height: height*0.06,
+                child: Image.asset(themeNotifier.isDark
+                    ? 'assets/images/logo_for_dark_theme.png'
+                    : 'assets/images/logo_for_light_theme.png'),
+              ),
+
               FutureBuilder<PackageInfo>(
                 future: _getPackageInfo(),
                 builder: (BuildContext context,

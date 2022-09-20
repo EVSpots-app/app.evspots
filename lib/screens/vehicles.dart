@@ -1,89 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:dropdown_textfield/dropdown_textfield.dart';
+import '../themes/app_color.dart';
+import '../themes/theme_model.dart';
 
 class Vehicles extends StatefulWidget {
   const Vehicles({Key? key}) : super(key: key);
 
   @override
-  State<Vehicles> createState() => _VehiclesState();
+  _VehiclesState createState() => _VehiclesState();
 }
 
 class _VehiclesState extends State<Vehicles> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  FocusNode searchFocusNode = FocusNode();
-  FocusNode textFieldFocusNode = FocusNode();
-  SingleValueDropDownController ? _cnt;
-  MultiValueDropDownController ? _cntMulti;
-
-  @override
-  void initState() {
-    _cnt = SingleValueDropDownController();
-    _cntMulti = MultiValueDropDownController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _cnt!.dispose();
-    _cntMulti!.dispose();
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          const Text(
-            "Single selection dropdown with search option",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize:20),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          DropDownTextField(
-            // initialValue: "name4",
-            controller: _cnt,
-            clearOption: false,
-            enableSearch: true,
-            searchDecoration: const InputDecoration(
-                hintText: "enter your custom hint text here"),
-            validator: (value) {
-              if (value == null) {
-                return "Required field";
-              } else {
-                return null;
-              }
-            },
-            dropDownItemCount: 6,
-            dropDownList: const [
-              DropDownValueModel(name: 'name1', value: "value1"),
-              DropDownValueModel(
-                  name: 'name2',
-                  value: "value2",
-                  toolTipMsg:
-                  "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-              DropDownValueModel(name: 'name3', value: "value3"),
-              DropDownValueModel(
-                  name: 'name4',
-                  value: "value4",
-                  toolTipMsg:
-                  "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-              DropDownValueModel(name: 'name5', value: "value5"),
-              DropDownValueModel(name: 'name6', value: "value6"),
-              DropDownValueModel(name: 'name7', value: "value7"),
-              DropDownValueModel(name: 'name8', value: "value8"),
-            ],
-            onChanged: (val) {},
-          ),
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Consumer<ChangeDropdownValue>(
+          builder: (_, changeDropdownValue, __) {
+        return Scaffold(
+            appBar: AppBar(
+              iconTheme: IconThemeData(
+                color: themeNotifier.isDark
+                    ? AppColor.bodyColor
+                    : AppColor.secColor,
+              ),
+              backgroundColor: themeNotifier.isDark
+                  ? AppColor.bodyColorDark
+                  : AppColor.bodyColor,
+              title: Text(
+                'Vehicles',
+                style: TextStyle(
+                    color: themeNotifier.isDark
+                        ? AppColor.bodyColor
+                        : AppColor.secColor,
+                    fontFamily: 'Tajawal-Black'),
+              ),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: DropdownButtonFormField(
+                icon: const Icon(Icons.arrow_downward),
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      // borderSide: BorderSide( width: 2),
+                      ),
+                  focusedBorder: OutlineInputBorder(),
+                  // filled: true,
+                ),
+                value: changeDropdownValue.dropdownValue,
+                onChanged: (String? newValue) {
+                  changeDropdownValue.switchDropdownValue(newValue);
+                },
+                items: <String>['Bmw', 'Mercedes', 'Tesla', 'Toyota']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ));
+      });
+    });
+  }
+}
 
-        ],
-      ),
-    );
+class ChangeDropdownValue extends ChangeNotifier {
+  String dropdownValue = 'Bmw';
+
+  switchDropdownValue(String? newValue) {
+    dropdownValue = newValue!;
+    notifyListeners();
   }
 }

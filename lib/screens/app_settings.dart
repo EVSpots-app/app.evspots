@@ -4,6 +4,7 @@ import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
@@ -41,9 +42,18 @@ class _AppSettingsState extends State<AppSettings> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  Text(S.of(context).settings,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(S.of(context).settings,
+                          style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+
+                      IconButton(onPressed: (){
+                        _onShare(context);
+                      }, icon: Icon(Icons.share)),
+                    ],
+                  ),
                   SizedBox(height: height * 0.01),
                   const Text("set your preferences",
                       style: TextStyle(
@@ -128,7 +138,7 @@ class _AppSettingsState extends State<AppSettings> {
                       ),
                     ),
                   ),
-                  SizedBox(height: height * 0.25),
+                  SizedBox(height: height * 0.2),
 
                 ],
               ),
@@ -183,5 +193,21 @@ class _AppSettingsState extends State<AppSettings> {
         ),
       );
     });
+  }
+  void _onShare(BuildContext context) async {
+    // A builder is used to retrieve the context immediately
+    // surrounding the ElevatedButton.
+    //
+    // The context's `findRenderObject` returns the first
+    // RenderObject in its descendent tree when it's not
+    // a RenderObjectWidget. The ElevatedButton's RenderObject
+    // has its position and size after it's built.
+    final box = context.findRenderObject() as RenderBox?;
+
+    await Share.share(
+      'EVSpots App',
+      subject: "Link App",
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
   }
 }
