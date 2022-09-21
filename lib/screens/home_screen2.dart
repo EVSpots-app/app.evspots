@@ -193,6 +193,8 @@ class CustomSearchCategories extends StatelessWidget {
           const SizedBox(width: 12),
           CustomCategoryChip(Icons.tire_repair, "Tire"),
           const SizedBox(width: 12),
+          CustomCategoryChip(Icons.key, "Key"),
+          const SizedBox(width: 12),
         ],
       ),
     );

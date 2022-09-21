@@ -41,17 +41,17 @@ class _AppSettingsState extends State<AppSettings> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(S.of(context).settings,
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold)),
-
-                      IconButton(onPressed: (){
-                        _onShare(context);
-                      }, icon: Icon(Icons.share)),
+                      IconButton(
+                          onPressed: () {
+                            _onShare(context);
+                          },
+                          icon: Icon(Icons.share)),
                     ],
                   ),
                   SizedBox(height: height * 0.01),
@@ -128,10 +128,8 @@ class _AppSettingsState extends State<AppSettings> {
                               ? AppColor.mainColor
                               : AppColor.secColor,
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey
-                        ),
+                        trailing:
+                            Icon(Icons.arrow_forward_ios, color: Colors.grey),
                         title: Text(S.of(context).selectLanguage,
                             style: const TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
@@ -139,14 +137,13 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   ),
                   SizedBox(height: height * 0.2),
-
                 ],
               ),
               // SizedBox(height: height*0.4,),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SignInScreen()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
                 child: Container(
                   width: width,
@@ -180,7 +177,7 @@ class _AppSettingsState extends State<AppSettings> {
                           style: const TextStyle(fontSize: 15)),
                       Text('Packconst age Name: ${data.packageName}',
                           style: const TextStyle(fontSize: 15)),
-                      Text('Verconst sion: ${data.version}',
+                      Text('Version ${data.version}',
                           style: const TextStyle(fontSize: 15)),
                       Text('Build Number: ${data.buildNumber}',
                           style: const TextStyle(fontSize: 15)),
@@ -194,6 +191,7 @@ class _AppSettingsState extends State<AppSettings> {
       );
     });
   }
+
   void _onShare(BuildContext context) async {
     // A builder is used to retrieve the context immediately
     // surrounding the ElevatedButton.

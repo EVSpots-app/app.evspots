@@ -269,7 +269,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                   final data = snapshot.data!;
 
-                  return Text('Verconst sion: ${data.version}',
+                  return Text('Version ${data.version}',
                       style: const TextStyle(fontSize: 15));
                 },
               ),
