@@ -45,7 +45,7 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
-                home: SignInScreen(),
+                home: SplashScreen(),
                 // themeMode: ThemeMode.system,
                 theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
 

@@ -138,6 +138,19 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      CarouselSlider(
+        items: imageSliders,
+        carouselController: _controller,
+        options: CarouselOptions(
+            autoPlay: true,
+            enlargeCenterPage: true,
+            aspectRatio: 2.0,
+            onPageChanged: (index, reason) {
+              setState(() {
+                _current = index;
+              });
+            }),
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: imgList.asMap().entries.map((entry) {
@@ -156,19 +169,6 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
             ),
           );
         }).toList(),
-      ),
-      CarouselSlider(
-        items: imageSliders,
-        carouselController: _controller,
-        options: CarouselOptions(
-            autoPlay: true,
-            enlargeCenterPage: true,
-            aspectRatio: 2.0,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
-            }),
       ),
     ]);
   }

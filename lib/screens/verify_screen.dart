@@ -1,10 +1,13 @@
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/signin_screen.dart';
-
+import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/widgets/AppBar.dart';
+import 'package:evspots/constans/shared_pref_keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class VerifyScreen extends StatefulWidget {
@@ -13,6 +16,8 @@ class VerifyScreen extends StatefulWidget {
   @override
   State<VerifyScreen> createState() => _VerifyScreenState();
 }
+
+
 
 class _VerifyScreenState extends State<VerifyScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -27,7 +32,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+        border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(20),
       ),
     );
@@ -47,19 +52,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.black,
-          ),
-        ),
-        elevation: 0,
-      ),
+      appBar: const MyAppBar(),
       body: Container(
         margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
@@ -94,13 +87,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
               ),
               Pinput(
                 length: 6,
-
                 onChanged: (value) {
                   code = value;
                 },
-                // defaultPinTheme: defaultPinTheme,
-                // focusedPinTheme: focusedPinTheme,
-                // submittedPinTheme: submittedPinTheme,
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                submittedPinTheme: submittedPinTheme,
                 showCursor: true,
                 onCompleted: (pin) => print(pin),
               ),
@@ -112,7 +104,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 height: 45,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.green.shade600,
+                        backgroundColor: AppColor.mainColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () async {
@@ -123,7 +115,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
                         // Sign the user in (or link) with the credential
                         await auth.signInWithCredential(credential);
-                        Navigator.push(
+                        SharedPreference().setLoggedin();
+                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const MainPage()),
@@ -132,7 +125,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         print("wrong otp");
                       }
                     },
-                    child: const Text("Verify Phone Number")),
+                    child: const Text("Verify Phone Number",style: TextStyle(
+                        fontSize: 16.0, color: Colors.black),)),
               ),
               Row(
                 children: [
@@ -146,7 +140,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       },
                       child: const Text(
                         "Edit Phone Number ?",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.grey,fontSize: 16),
                       ))
                 ],
               )
@@ -156,4 +150,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
       ),
     );
   }
+  // setLogin(bool value) async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   sharedPreferences.setBool(PREF_key, value);
+  // }
 }

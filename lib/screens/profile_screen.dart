@@ -10,7 +10,7 @@ import '../generated/l10n.dart';
 import '../themes/app_color.dart';
 import '../themes/theme_model.dart';
 import '../widgets/AppBar.dart';
-import '../widgets/open_camera/AlertDialog.dart';
+import '../widgets/AlertDialog.dart';
 import 'package:http/http.dart' as http;
 
 File? _image;
@@ -53,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,7 +208,8 @@ class _Picture1State extends State<Picture1> {
       showAlertDialog(
           context: context,
           title: "Error Uploading!",
-          content: "No Image was selected.");
+          content: "No Image was selected.",
+      );
       return;
     }
     final File fileImage = File(pickedImage.path);

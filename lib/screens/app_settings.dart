@@ -1,11 +1,11 @@
-import 'package:evspots/screens/home_screen.dart';
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:evspots/screens/signin_screen.dart';
 import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
 import '../widgets/AppBar.dart';
@@ -41,17 +41,17 @@ class _AppSettingsState extends State<AppSettings> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(S.of(context).settings,
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold)),
-
-                      IconButton(onPressed: (){
-                        _onShare(context);
-                      }, icon: Icon(Icons.share)),
+                      IconButton(
+                          onPressed: () {
+                            _onShare(context);
+                          },
+                          icon: const Icon(Icons.share)),
                     ],
                   ),
                   SizedBox(height: height * 0.01),
@@ -128,10 +128,8 @@ class _AppSettingsState extends State<AppSettings> {
                               ? AppColor.mainColor
                               : AppColor.secColor,
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey
-                        ),
+                        trailing:
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey),
                         title: Text(S.of(context).selectLanguage,
                             style: const TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
@@ -139,14 +137,38 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                   ),
                   SizedBox(height: height * 0.2),
-
                 ],
               ),
               // SizedBox(height: height*0.4,),
               GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SignInScreen()));
+                onTap: () async {
+                  await showAlertDialog(
+                      context: context,
+                      title: 'LogOut',
+                      content: 'Are you sure',
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          SharedPreference().deletePrefs();
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => SignInScreen()));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Continue'),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Cancel'),
+                        ),
+                      ),
+                    ]
+                  );
                 },
                 child: Container(
                   width: width,
@@ -194,6 +216,7 @@ class _AppSettingsState extends State<AppSettings> {
       );
     });
   }
+
   void _onShare(BuildContext context) async {
     // A builder is used to retrieve the context immediately
     // surrounding the ElevatedButton.

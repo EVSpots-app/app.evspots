@@ -1,14 +1,14 @@
-import 'package:evspots/themes/theme_preference.dart';
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class ThemeModel extends ChangeNotifier {
   late bool _isDark;
-  late ThemePreferences _preferences;
+  late SharedPreference _preferences;
   bool get isDark => _isDark;
 
   ThemeModel() {
     _isDark = false;
-    _preferences = ThemePreferences();
+    _preferences = SharedPreference();
     getPreferences();
   }
 

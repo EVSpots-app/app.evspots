@@ -68,6 +68,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   onChanged: (value) {
                     AppModel.shared.changeLanguage('ar');
                     radioVal.switchValue(value);
+
                     // radioVal.switchValue(value);
                   },
                   activeColor: Colors.green,

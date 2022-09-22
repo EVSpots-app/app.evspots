@@ -60,7 +60,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             );
                           },
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
@@ -72,9 +72,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                         ? AppColor.textColorDark
                                         : AppColor.textColor),
                               ),
-                              SizedBox(
-                                width: width * 0.25,
-                              ),
+                              // SizedBox(
+                              //   width: width * 0.25,
+                              // ),
                                SizedBox(
                                   width: 80,
                                   height: 80,
@@ -86,6 +86,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   SizedBox(
                     height: height * 0.65,
                     child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Column(
