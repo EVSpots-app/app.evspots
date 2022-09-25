@@ -5,8 +5,8 @@ showAlertDialog({required BuildContext context, required String title, required 
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(title ?? ""),
-          content: Text(content ?? ""),
+          title: Text(title ?? "",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          content: Text(content ?? "",style: TextStyle(fontWeight: FontWeight.bold),),
           actions: (actions ?? [
             TextButton(
               onPressed: () {

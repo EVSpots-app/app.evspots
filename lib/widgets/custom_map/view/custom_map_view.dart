@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:typed_data';
-import 'package:courier/constants/app_colors.dart';
-import 'package:courier/constants/app_dimensions.dart';
-import 'package:courier/constants/app_fonts.dart';
-import 'package:courier/constants/keys.dart';
-import 'package:courier/src/custom_map/optional_functions.dart';
 import 'package:custom_info_window/custom_info_window.dart';
+import 'package:evspots/widgets/custom_map/optional_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -39,9 +35,9 @@ class CustomMapViewState extends State<CustomMapView> {
   static const double zoom = 16.5;
 
   List<String> images = [
-    'assets/images/home/car.png',
-    'assets/images/home/scooter.png',
-    'assets/images/home/car.png',
+    'assets/images/car.jpg',
+    'assets/images/scooter.jpg',
+    'assets/images/car.jpg',
   ];
 
   final List<LatLng> _latLang = [
@@ -95,32 +91,32 @@ class CustomMapViewState extends State<CustomMapView> {
         title: GestureDetector(
           child: TextField(
             controller: _searchController,
-            cursorHeight: Dimensions.h25,
+            cursorHeight: 25,
             autofocus: false,
             enabled: false,
             textAlign: TextAlign.start,
-            cursorColor: AppColors.green,
-            style: AppFont.style(
-              color: AppColors.offBlack,
-              fontFamily: 'PoppinsRegular',
-              fontSize: Dimensions.w14,
+            cursorColor: Colors.green,
+            style: TextStyle(
+              color: Colors.black,
+              //fontFamily: 'PoppinsRegular',
+              fontSize: 14,
             ),
             decoration: InputDecoration(
               hintText: 'Tap to search',
-              hintStyle: AppFont.style(
-                color: AppColors.grey,
-                fontFamily: 'PoppinsRegular',
-                fontSize: Dimensions.w14,
+              hintStyle: TextStyle(
+                color: Colors.grey,
+                // fontFamily: 'PoppinsRegular',
+                fontSize: 14,
               ),
               contentPadding: EdgeInsets.only(
-                  left: Dimensions.w10,
-                  top: Dimensions.h10,
-                  bottom: Dimensions.h10),
+                  left: 10,
+                  top: 10,
+                  bottom: 10),
               fillColor: Colors.white,
               filled: true,
               prefixIcon: IconButton(
                 icon: const Icon(Icons.search_rounded),
-                color: AppColors.grey,
+                color: Colors.grey,
                 onPressed: () {},
               ),
               border: const OutlineInputBorder(
@@ -232,31 +228,31 @@ class CustomMapViewState extends State<CustomMapView> {
           ),
           CustomInfoWindow(
             controller: _customInfoWindowController,
-            height: Dimensions.h200,
-            width: Dimensions.w250,
-            offset: Dimensions.h35,
+            height: 200,
+            width: 250,
+            offset: 35,
           ),
           const MapCenterMarker(),
           Positioned(
-            top: Dimensions.h200,
-            right: Dimensions.w15,
+            top: 200,
+            right: 15,
             // add your floating action button
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
               opacity: _currentMapType == MapType.normal ? 1 : 0,
               child: SizedBox(
-                height: Dimensions.h40,
-                width: Dimensions.w40,
+                height: 40,
+                width: 40,
                 child: FloatingActionButton(
                   heroTag: 'theme',
                   backgroundColor: mapStyle.isEmpty
-                      ? AppColors.greyBackground
-                      : AppColors.grey,
+                      ? Colors.blueGrey
+                      : Colors.grey,
                   foregroundColor:
-                      mapStyle.isEmpty ? AppColors.black : AppColors.white,
+                      mapStyle.isEmpty ? Colors.black : Colors.white,
                   child: Icon(
                     Icons.dark_mode_outlined,
-                    size: Dimensions.w20,
+                    size: 20,
                   ),
                   onPressed: () {
                     _completer.future.then((value) {
@@ -297,21 +293,21 @@ class CustomMapViewState extends State<CustomMapView> {
                 ),
               ),
             ),
-          ),
+          ), //DarkMode
           Positioned(
-            top: Dimensions.h250,
-            right: Dimensions.w15,
+            top: 250,
+            right: 15,
             // add your floating action button
             child: SizedBox(
-              height: Dimensions.h40,
-              width: Dimensions.w40,
+              height: 40,
+              width: 40,
               child: FloatingActionButton(
                 heroTag: 'layers',
-                backgroundColor: AppColors.white,
-                foregroundColor: AppColors.black,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
                 child: Icon(
                   Icons.layers_outlined,
-                  size: Dimensions.w20,
+                  size: 20,
                 ),
                 onPressed: () {
                   if (_currentMapType == MapType.normal) {
@@ -325,18 +321,18 @@ class CustomMapViewState extends State<CustomMapView> {
                 },
               ),
             ),
-          ),
+          ), //MapType
           Positioned(
-            bottom: Dimensions.h80,
-            right: Dimensions.w15,
+            bottom: 80,
+            right: 15,
             child: FloatingActionButton(
               heroTag: 'myLocation',
-              foregroundColor: AppColors.white,
+              foregroundColor: Colors.white,
               child: Icon(
                 _currentCameraPosition!.tilt == 0.0
                     ? Icons.location_searching_outlined
                     : CupertinoIcons.compass,
-                size: Dimensions.w25,
+                size: 25,
               ),
               onPressed: () {
                 setUserCurrentLocationMarker();
@@ -346,29 +342,29 @@ class CustomMapViewState extends State<CustomMapView> {
 
           ///
           Positioned(
-            bottom: Dimensions.h20,
+            bottom: 20,
             right: 0,
             left: 0,
             child: Container(
               alignment: Alignment.center,
               height: 40,
               padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.w20, vertical: Dimensions.h5),
-              margin: EdgeInsets.symmetric(horizontal: Dimensions.w40),
+                  horizontal: 20, vertical: 5),
+              margin: EdgeInsets.symmetric(horizontal:40),
               decoration: BoxDecoration(
-                color: AppColors.greyBackground,
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(40),
                 border: Border.all(
-                  color: AppColors.offGrey,
+                  color: Colors.blueGrey,
                 ),
               ),
               child: Text(
                 formatDistance(distance),
                 softWrap: true,
-                style: AppFont.style(
-                  color: AppColors.green,
-                  fontSize: Dimensions.w16,
-                  fontFamily: 'PoppinsRegular',
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  // fontFamily: 'PoppinsRegular',
                 ),
               ),
             ),
@@ -408,7 +404,7 @@ class CustomMapViewState extends State<CustomMapView> {
         debugPrint(value.longitude.toString());
 
         // final Uint8List markerIcon =
-        //     await getBytesFromAssets('assets/images/basket/Courier.png', 100);
+        //     await getBytesFromAssets('assets/images/no-image.jpg', 100);
         // _marker.add(
         //   Marker(
         //     icon: BitmapDescriptor.fromBytes(markerIcon),
@@ -496,7 +492,7 @@ class CustomMapViewState extends State<CustomMapView> {
 
   void setPolyLines() async {
     PolylineResult firstLine = await polylinePoints!.getRouteBetweenCoordinates(
-      APIKeys.polyLinesApiKey,
+      'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o',
       PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
       PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
     );
@@ -504,7 +500,7 @@ class CustomMapViewState extends State<CustomMapView> {
     ///-------------------------------------------------------------------------
     PolylineResult secondLine =
         await polylinePoints!.getRouteBetweenCoordinates(
-      APIKeys.polyLinesApiKey,
+      'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o',
       PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
       PointLatLng(lastLocation.latitude, lastLocation.longitude),
     );
@@ -517,8 +513,8 @@ class CustomMapViewState extends State<CustomMapView> {
       _polyLines.add(
         Polyline(
           polylineId: const PolylineId('route'),
-          width: Dimensions.w5.toInt(),
-          color: AppColors.green,
+          width: 5.toInt(),
+          color: Colors.green,
           points: firstPolylineCoordinates,
         ),
       );
@@ -530,8 +526,8 @@ class CustomMapViewState extends State<CustomMapView> {
       _polyLines.add(
         Polyline(
           polylineId: const PolylineId('route2'),
-          width: Dimensions.w5.toInt(),
-          color: AppColors.red,
+          width: 5.toInt(),
+          color: Colors.red,
           points: secondPolylineCoordinates,
         ),
       );

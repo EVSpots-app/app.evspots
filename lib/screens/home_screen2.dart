@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +50,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
 class CustomGoogleMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GMap();
+    return CustomMapView();
     // return GMap();
   }
 }
@@ -131,8 +133,14 @@ class CustomTextField extends StatelessWidget {
           maxLines: 1,
           decoration: InputDecoration(
             // prefixIcon: Icon(Icons.location_pin, size: 25),
-            suffixIcon:
-                Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+            suffixIcon: IconButton(
+              icon:
+                  Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => FilterScreen()));
+              },
+            ),
             contentPadding: EdgeInsets.only(left: 16, top: 18, right: 16),
             hintText: S.of(context).search,
             hintStyle: TextStyle(

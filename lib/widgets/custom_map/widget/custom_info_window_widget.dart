@@ -1,6 +1,4 @@
-import 'package:courier/constants/app_colors.dart';
-import 'package:courier/constants/app_dimensions.dart';
-import 'package:courier/constants/app_fonts.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomInfoWindowWidget extends StatelessWidget {
@@ -12,13 +10,13 @@ class CustomInfoWindowWidget extends StatelessWidget {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       padding: EdgeInsets.symmetric(
-          horizontal: Dimensions.w10, vertical: Dimensions.h10),
-      margin: EdgeInsets.only(top: Dimensions.w80),
+          horizontal: 10, vertical: 10),
+      margin: EdgeInsets.only(top: 80),
       decoration: BoxDecoration(
-        color: AppColors.offBlack.withOpacity(0.95),
+        color: Colors.black,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: AppColors.white,
+          color: Colors.white
         ),
       ),
       child: Column(
@@ -37,25 +35,25 @@ class CustomInfoWindowWidget extends StatelessWidget {
                       Card(
                         margin: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: AppColors.offGrey,
+                          side:  BorderSide(
+                            color: Colors.grey,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(Dimensions.w5),
+                          padding: EdgeInsets.all(5),
                           child: Text(
                             '99-11255',
-                            style: AppFont.style(
-                              fontFamily: 'PoppinsBold',
-                              fontSize: Dimensions.w16,
+                            style: TextStyle(
+                             // fontFamily: 'PoppinsBold',
+                              fontSize: 16,
                             ),
                           ),
                         ),
                       ),
                       // Spacer(),
-                      SizedBox(width: Dimensions.w10),
+                      SizedBox(width: 10),
                       Expanded(
                         child: Image.asset(
                           'assets/images/home/car2.png',
@@ -66,27 +64,27 @@ class CustomInfoWindowWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 2, top: Dimensions.h5),
+                  padding: EdgeInsets.only(left: 2, top: 5),
                   child: Text(
                     'e-tron GT quattro.',
                     maxLines: 1,
-                    style: AppFont.style(
-                      color: AppColors.offGrey,
-                      fontSize: Dimensions.w12,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: Dimensions.h5),
+          SizedBox(height: 5),
           Expanded(
             flex: 1,
             child: Row(
               children: [
                 const CircleAvatar(
                   backgroundImage:
-                      AssetImage('assets/images/basket/Courier.png'),
+                      AssetImage('assets/images/no-image.jpg'),
                 ),
                 Expanded(
                   child: Text(
@@ -94,10 +92,10 @@ class CustomInfoWindowWidget extends StatelessWidget {
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: AppFont.style(
-                      color: AppColors.offWhite,
-                      fontFamily: 'PoppinsMedium',
-                      fontSize: Dimensions.w15,
+                    style: TextStyle(
+                      color: Colors.white,
+                     // fontFamily: 'PoppinsMedium',
+                      fontSize:15,
                     ),
                   ),
                 ),

@@ -29,8 +29,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Scaffold(
       // backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
       appBar: MyAppBar(),
       // drawer: MyDrawer(),
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => MainPage()),
+          );
+        },
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          height: height * 0.07,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: AppColor.mainColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          child: const Text(
+            'Continue',
+            style: TextStyle(fontSize: 16.0, color: Colors.black),
+          ),
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -118,31 +141,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.04,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      height: height * 0.07,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColor.mainColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Continue',
-                        style: TextStyle(fontSize: 16.0, color: Colors.black),
-                      ),
                     ),
                   ),
                 ],

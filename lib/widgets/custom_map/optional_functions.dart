@@ -6,16 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 
-import '../../constants/app_colors.dart';
-import '../../constants/app_dimensions.dart';
-import '../../constants/app_fonts.dart';
-import '../../constants/keys.dart';
 
 ///-----------------------------------NetWork IMage Custom Marker-----------------------------
 // Future<Uint8List?> _loadNetworkImage(String path) async {
@@ -98,7 +92,7 @@ Future<void> mapSearch({
 }) async {
   Prediction? p = await PlacesAutocomplete.show(
     context: context,
-    apiKey: APIKeys.polyLinesApiKey,
+    apiKey: 'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o',
     mode: Mode.fullscreen,
     language: 'en',
     strictbounds: false,
@@ -110,10 +104,10 @@ Future<void> mapSearch({
     ],
     decoration: InputDecoration(
       hintText: 'Tap to search',
-      hintStyle: AppFont.style(
-        color: AppColors.grey,
-        fontFamily: 'PoppinsRegular',
-        fontSize: Dimensions.w14,
+      hintStyle: TextStyle(
+        color: Colors.grey,
+        //fontFamily: 'PoppinsRegular',
+        fontSize: 14,
       ),
       focusedBorder: InputBorder.none,
       enabledBorder: InputBorder.none,
@@ -133,11 +127,11 @@ Future<void> mapSearch({
     // overlayBorderRadius: BorderRadius.circular(20),
     onError: (PlacesAutocompleteResponse response) {
       print(response.errorMessage);
-      Get.snackbar('Error', response.errorMessage.toString(),
-          snackPosition: SnackPosition.TOP);
+      // Get.snackbar('Error', response.errorMessage.toString(),
+      //     snackPosition: SnackPosition.TOP);
     },
   );
-  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: APIKeys.polyLinesApiKey);
+  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey:'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o');
   PlacesDetailsResponse detail = await _places.getDetailsByPlaceId(p!.placeId!);
 
   double lat = detail.result.geometry!.location.lat;

@@ -114,6 +114,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               IntlPhoneField(
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
+                  labelStyle: TextStyle(
+                    color: Colors.grey
+                  ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(),
                   ),

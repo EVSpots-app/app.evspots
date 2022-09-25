@@ -1,6 +1,4 @@
-import 'package:courier/constants/app_colors.dart';
-import 'package:courier/constants/app_dimensions.dart';
-import 'package:courier/constants/app_fonts.dart';
+
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -21,19 +19,19 @@ class MapLocationBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: Dimensions.h110,
+      top: 110,
       left: 0,
       right: 0,
       child: GestureDetector(
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.w5, vertical: Dimensions.h5),
-          margin: EdgeInsets.symmetric(horizontal: Dimensions.w40),
+              horizontal: 5, vertical: 5),
+          margin: EdgeInsets.symmetric(horizontal: 40),
           decoration: BoxDecoration(
-            color: AppColors.greyBackground,
+            color: Colors.grey,
             borderRadius: BorderRadius.circular(40),
             border: Border.all(
-              color: AppColors.offGrey,
+              color: Colors.greenAccent,
             ),
           ),
           child: Row(
@@ -41,9 +39,9 @@ class MapLocationBadge extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/basket/Courier.png'),
+                backgroundImage: AssetImage('assets/images/no-image.jpg'),
               ),
-              SizedBox(width: Dimensions.w10),
+              SizedBox(width: 10),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -51,9 +49,9 @@ class MapLocationBadge extends StatelessWidget {
                   children: [
                     Text(
                       'Khaled Waled',
-                      style: AppFont.style(
-                        fontSize: Dimensions.w14,
-                        fontFamily: 'PoppinsMedium',
+                      style: TextStyle(
+                        fontSize: 14,
+                        // fontFamily: 'PoppinsMedium',
                       ),
                     ),
                     // Text(
@@ -67,17 +65,17 @@ class MapLocationBadge extends StatelessWidget {
                       address,
                       softWrap: true,
                       maxLines: 10,
-                      style: AppFont.style(
-                        color: AppColors.green,
-                        fontSize: Dimensions.w12,
-                        fontFamily: 'PoppinsRegular',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 12,
+                        //fontFamily: 'PoppinsRegular',
                       ),
                     ),
                   ],
                 ),
               ),
               const Icon(Icons.location_pin),
-              SizedBox(width: Dimensions.w10),
+              SizedBox(width: 10),
             ],
           ),
         ),

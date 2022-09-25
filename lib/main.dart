@@ -1,9 +1,11 @@
+import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/screens/language_screen.dart';
 import 'package:evspots/screens/main_page.dart';
-import 'package:evspots/screens/signin_screen.dart';
+import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_theme.dart';
+import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

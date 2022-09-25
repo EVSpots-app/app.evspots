@@ -1,5 +1,4 @@
-import 'package:courier/constants/app_colors.dart';
-import 'package:courier/constants/app_dimensions.dart';
+
 import 'package:flutter/material.dart';
 
 class MapCenterMarker extends StatelessWidget {
@@ -20,11 +19,11 @@ class MapCenterMarker extends StatelessWidget {
       //   },
       // ),
       child: Padding(
-        padding: EdgeInsets.only(bottom: Dimensions.h45),
+        padding: EdgeInsets.only(bottom: 45),
         child: Icon(
           Icons.location_pin,
-          size: Dimensions.w50,
-          color: AppColors.green,
+          size: 50,
+          color: Colors.green,
         ),
       ),
     );

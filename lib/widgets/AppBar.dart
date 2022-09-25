@@ -1,3 +1,4 @@
+import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,16 @@ class _MyAppBarState extends State<MyAppBar> {
               fontFamily: 'Tajawal-Black'
           ),
         ),
+        actions: [
+          IconButton(
+            icon:
+            Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => FilterScreen()));
+            },
+          ),
+        ],
       );
     });
   }
