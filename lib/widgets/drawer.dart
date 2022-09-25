@@ -22,6 +22,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
+
   Future<void>? _launched;
 
   @override
@@ -29,8 +30,8 @@ class _MyDrawerState extends State<MyDrawer> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    final Uri toLaunch =
-    Uri(scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
+    final Uri toLaunch = Uri(
+        scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -47,7 +48,8 @@ class _MyDrawerState extends State<MyDrawer> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 25, top: 30,right: 25),
+                    padding:
+                        const EdgeInsets.only(left: 25, top: 30, right: 25),
                     child: Container(
                         width: width,
                         height: height * 0.18,
@@ -72,13 +74,18 @@ class _MyDrawerState extends State<MyDrawer> {
                                         ? AppColor.textColorDark
                                         : AppColor.textColor),
                               ),
+
                               // SizedBox(
                               //   width: width * 0.25,
                               // ),
-                               SizedBox(
-                                  width: 80,
-                                  height: 80,
-                                  child: Picker()),
+                              SizedBox(
+                                width: width * 0.25,
+                              ),
+                              SizedBox(
+                                width: 80,
+                                height: 80,
+                                child: Picker(),
+                              ),
                             ],
                           ),
                         )),
@@ -100,7 +107,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: Text(
                                 S.of(context).home,
-                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 Drawerkey.currentState!.openEndDrawer();
@@ -118,14 +126,14 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: const Text(
                                 'Vehicles',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                      const Vehicles()),
+                                      builder: (context) => const Vehicles()),
                                 );
                               },
                             ),
@@ -141,7 +149,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: const Text(
                                 'Favorite',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -158,7 +167,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: const Text(
                                 'Terms & Condition',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -174,7 +184,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: const Text(
                                 'Praivace & Police',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 _launched = _launchInBrowser(toLaunch);
@@ -191,8 +202,9 @@ class _MyDrawerState extends State<MyDrawer> {
                                     : AppColor.secColor,
                               ),
                               title: const Text(
-                                'FAQs',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                'Help & FAQs',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -208,7 +220,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: const Text(
                                 'Contact Us',
-                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {},
                             ),
@@ -224,7 +237,8 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                               title: Text(
                                 S.of(context).settings,
-                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {
                                 Navigator.push(
@@ -242,14 +256,12 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ],
               ),
-
               SizedBox(
-                height: height*0.06,
+                height: height * 0.06,
                 child: Image.asset(themeNotifier.isDark
                     ? 'assets/images/logo_for_dark_theme.png'
                     : 'assets/images/logo_for_light_theme.png'),
               ),
-
               FutureBuilder<PackageInfo>(
                 future: _getPackageInfo(),
                 builder: (BuildContext context,
@@ -262,7 +274,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                   final data = snapshot.data!;
 
-                  return Text('Verconst sion: ${data.version}',
+                  return Text('Version ${data.version}',
                       style: const TextStyle(fontSize: 15));
                 },
               ),
@@ -273,6 +285,7 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 }
+
 Future<void> _launchInBrowser(Uri url) async {
   if (!await launchUrl(
     url,

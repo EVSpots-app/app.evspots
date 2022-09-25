@@ -152,7 +152,7 @@ class CustomUserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child:  Padding(
+      child: Padding(
         padding: EdgeInsets.only(right: 10, left: 10),
         child: SizedBox(width: 30, height: 30, child: Picker()),
       ),
@@ -186,16 +186,14 @@ class CustomSearchCategories extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          const SizedBox(width: 16),
-          CustomCategoryChip(Icons.fastfood, "Takeout"),
           const SizedBox(width: 12),
-          CustomCategoryChip(Icons.directions_bike, "Delivery"),
+          CustomCategoryChip(Icons.local_gas_station, "Charging"),
           const SizedBox(width: 12),
-          CustomCategoryChip(Icons.local_gas_station, "Gas"),
+          CustomCategoryChip(Icons.car_repair, "Repair"),
           const SizedBox(width: 12),
-          CustomCategoryChip(Icons.shopping_cart, "Groceries"),
+          CustomCategoryChip(Icons.tire_repair, "Tire"),
           const SizedBox(width: 12),
-          CustomCategoryChip(Icons.local_pharmacy, "Pharmacies"),
+          CustomCategoryChip(Icons.key, "Key"),
           const SizedBox(width: 12),
         ],
       ),
