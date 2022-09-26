@@ -92,7 +92,7 @@ Future<void> mapSearch({
 }) async {
   Prediction? p = await PlacesAutocomplete.show(
     context: context,
-    apiKey: 'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o',
+    apiKey: 'AIzaSyDGEXblK5IibwvcJZkYZDRaLkirBCx7Js0',
     mode: Mode.fullscreen,
     language: 'en',
     strictbounds: false,
@@ -131,7 +131,7 @@ Future<void> mapSearch({
       //     snackPosition: SnackPosition.TOP);
     },
   );
-  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey:'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o');
+  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey:'AIzaSyDGEXblK5IibwvcJZkYZDRaLkirBCx7Js0');
   PlacesDetailsResponse detail = await _places.getDetailsByPlaceId(p!.placeId!);
 
   double lat = detail.result.geometry!.location.lat;

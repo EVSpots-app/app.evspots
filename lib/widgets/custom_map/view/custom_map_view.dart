@@ -88,66 +88,66 @@ class CustomMapViewState extends State<CustomMapView> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: GestureDetector(
-          child: TextField(
-            controller: _searchController,
-            cursorHeight: 25,
-            autofocus: false,
-            enabled: false,
-            textAlign: TextAlign.start,
-            cursorColor: Colors.green,
-            style: TextStyle(
-              color: Colors.black,
-              //fontFamily: 'PoppinsRegular',
-              fontSize: 14,
-            ),
-            decoration: InputDecoration(
-              hintText: 'Tap to search',
-              hintStyle: TextStyle(
-                color: Colors.grey,
-                // fontFamily: 'PoppinsRegular',
-                fontSize: 14,
-              ),
-              contentPadding: EdgeInsets.only(
-                  left: 10,
-                  top: 10,
-                  bottom: 10),
-              fillColor: Colors.white,
-              filled: true,
-              prefixIcon: IconButton(
-                icon: const Icon(Icons.search_rounded),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(25)),
-                borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
-              ),
-              suffixIcon: AnimatedSwitcher(
-                duration: const Duration(microseconds: 300),
-                child: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                        },
-                      )
-                    : const SizedBox(),
-              ),
-            ),
-            onTap: () {},
-          ),
-          onTap: () {
-            mapSearch(
-              context: context,
-              searchController: _searchController,
-              completer: _completer,
-            );
-          },
-        ),
+        // title: GestureDetector(
+        //   child: TextField(
+        //     controller: _searchController,
+        //     cursorHeight: 25,
+        //     autofocus: false,
+        //     enabled: false,
+        //     textAlign: TextAlign.start,
+        //     cursorColor: Colors.green,
+        //     style: TextStyle(
+        //       color: Colors.black,
+        //       //fontFamily: 'PoppinsRegular',
+        //       fontSize: 14,
+        //     ),
+        //     decoration: InputDecoration(
+        //       hintText: 'Tap to search',
+        //       hintStyle: TextStyle(
+        //         color: Colors.grey,
+        //         // fontFamily: 'PoppinsRegular',
+        //         fontSize: 14,
+        //       ),
+        //       contentPadding: EdgeInsets.only(
+        //           left: 10,
+        //           top: 10,
+        //           bottom: 10),
+        //       fillColor: Colors.white,
+        //       filled: true,
+        //       prefixIcon: IconButton(
+        //         icon: const Icon(Icons.search_rounded),
+        //         color: Colors.grey,
+        //         onPressed: () {},
+        //       ),
+        //       border: const OutlineInputBorder(
+        //         borderRadius: BorderRadius.all(Radius.circular(25)),
+        //         borderSide: BorderSide(
+        //           width: 0,
+        //           style: BorderStyle.none,
+        //         ),
+        //       ),
+        //       suffixIcon: AnimatedSwitcher(
+        //         duration: const Duration(microseconds: 300),
+        //         child: _searchController.text.isNotEmpty
+        //             ? IconButton(
+        //                 icon: const Icon(Icons.clear),
+        //                 onPressed: () {
+        //                   _searchController.clear();
+        //                 },
+        //               )
+        //             : const SizedBox(),
+        //       ),
+        //     ),
+        //     onTap: () {},
+        //   ),
+        //   onTap: () {
+        //     mapSearch(
+        //       context: context,
+        //       searchController: _searchController,
+        //       completer: _completer,
+        //     );
+        //   },
+        // ),
       ),
       body: Stack(
         alignment: const Alignment(0.0, 0.0),
@@ -220,12 +220,12 @@ class CustomMapViewState extends State<CustomMapView> {
               },
             ),
           ),
-          MapLocationBadge(
-            address: address,
-            latLang: _latLangCenterMarker!,
-            onTap: () {},
-            // onTap: () => setUserCurrentLocationMarker(),
-          ),
+          // MapLocationBadge(
+          //   address: address,
+          //   latLang: _latLangCenterMarker!,
+          //   onTap: () {},
+          //   // onTap: () => setUserCurrentLocationMarker(),
+          // ),
           CustomInfoWindow(
             controller: _customInfoWindowController,
             height: 200,
@@ -233,9 +233,10 @@ class CustomMapViewState extends State<CustomMapView> {
             offset: 35,
           ),
           const MapCenterMarker(),
+
           Positioned(
-            top: 200,
-            right: 15,
+            bottom: 240,
+            right: 20,
             // add your floating action button
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
@@ -295,8 +296,8 @@ class CustomMapViewState extends State<CustomMapView> {
             ),
           ), //DarkMode
           Positioned(
-            top: 250,
-            right: 15,
+            bottom: 190,
+            right: 20,
             // add your floating action button
             child: SizedBox(
               height: 40,
@@ -323,7 +324,7 @@ class CustomMapViewState extends State<CustomMapView> {
             ),
           ), //MapType
           Positioned(
-            bottom: 80,
+            bottom: 120,
             right: 15,
             child: FloatingActionButton(
               heroTag: 'myLocation',
@@ -338,37 +339,37 @@ class CustomMapViewState extends State<CustomMapView> {
                 setUserCurrentLocationMarker();
               },
             ),
-          ),
+          ), //currentLocation
 
           ///
-          Positioned(
-            bottom: 20,
-            right: 0,
-            left: 0,
-            child: Container(
-              alignment: Alignment.center,
-              height: 40,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 5),
-              margin: EdgeInsets.symmetric(horizontal:40),
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(
-                  color: Colors.blueGrey,
-                ),
-              ),
-              child: Text(
-                formatDistance(distance),
-                softWrap: true,
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 16,
-                  // fontFamily: 'PoppinsRegular',
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 20,
+          //   right: 0,
+          //   left: 0,
+          //   child: Container(
+          //     alignment: Alignment.center,
+          //     height: 40,
+          //     padding: EdgeInsets.symmetric(
+          //         horizontal: 20, vertical: 5),
+          //     margin: EdgeInsets.symmetric(horizontal:40),
+          //     decoration: BoxDecoration(
+          //       color: Colors.black87,
+          //       borderRadius: BorderRadius.circular(40),
+          //       border: Border.all(
+          //         color: Colors.blueGrey,
+          //       ),
+          //     ),
+          //     child: Text(
+          //       formatDistance(distance),
+          //       softWrap: true,
+          //       style: TextStyle(
+          //         color: Colors.green,
+          //         fontSize: 16,
+          //         // fontFamily: 'PoppinsRegular',
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

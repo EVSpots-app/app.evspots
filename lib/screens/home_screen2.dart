@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/widgets/custom_map/optional_functions.dart';
 import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
 import 'package:evspots/widgets/drawer.dart';
 import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
@@ -19,6 +21,8 @@ class HomeScreen2 extends StatefulWidget {
   @override
   State<HomeScreen2> createState() => _HomeScreen2State();
 }
+final TextEditingController _searchController = TextEditingController();
+final Completer<GoogleMapController> _completer = Completer();
 
 class _HomeScreen2State extends State<HomeScreen2> {
   @override
@@ -29,7 +33,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
       body: Stack(
         children: <Widget>[
           CustomGoogleMap(),
-          CustomHeader(),
+         CustomHeader(),
           DraggableScrollableSheet(
             initialChildSize: 0.30,
             minChildSize: 0.15,
@@ -129,27 +133,66 @@ class CustomTextField extends StatelessWidget {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Expanded(
-        child: TextFormField(
-          maxLines: 1,
-          decoration: InputDecoration(
-            // prefixIcon: Icon(Icons.location_pin, size: 25),
-            suffixIcon: IconButton(
-              icon:
-                  Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => FilterScreen()));
-              },
+        child: GestureDetector(
+          child: TextField(
+            controller: _searchController,
+            cursorHeight: 25,
+            autofocus: false,
+            enabled: false,
+            textAlign: TextAlign.start,
+            cursorColor: Colors.green,
+            style: const TextStyle(
+              // color: Colors.black,
+              //fontFamily: 'PoppinsRegular',
+              fontSize: 14,
             ),
-            contentPadding: EdgeInsets.only(left: 16, top: 18, right: 16),
-            hintText: S.of(context).search,
-            hintStyle: TextStyle(
-              color: themeNotifier.isDark
-                  ? AppColor.bodyColor
-                  : AppColor.bodyColorDark,
+            decoration: InputDecoration(
+              hintText: S.of(context).search,
+              hintStyle:  TextStyle(
+                color: themeNotifier.isDark
+                    ? AppColor.bodyColor
+                    : AppColor.bodyColorDark,
+              ),
+              contentPadding: const EdgeInsets.only(
+                  left: 10,
+                  top: 10,
+                  bottom: 10),
+              fillColor: Colors.white,
+              // filled: true,
+              // prefixIcon: IconButton(
+              //   icon: const Icon(Icons.search_rounded),
+              //   color: Colors.grey,
+              //   onPressed: () {},
+              // ),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25)),
+                borderSide: BorderSide(
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
+              // suffixIcon: AnimatedSwitcher(
+              //   duration: const Duration(microseconds: 300),
+              //   child: _searchController.text.isNotEmpty
+              //       ? IconButton(
+              //     icon: const Icon(Icons.clear,size: 50,color: Colors.black,),
+              //     onPressed: () {
+              //       _searchController.clear();
+              //     },
+              //   )
+              //       : const SizedBox(),
+              // ),
             ),
-            border: InputBorder.none,
+
+            onTap: () {},
           ),
+          onTap: () {
+            mapSearch(
+              context: context,
+              searchController: _searchController,
+              completer: _completer,
+            );
+          },
         ),
       );
     });
@@ -160,9 +203,21 @@ class CustomUserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Padding(
-        padding: EdgeInsets.only(right: 10, left: 10),
-        child: SizedBox(width: 30, height: 30, child: Picker()),
+      child: Row(
+        children: [
+      IconButton(
+            icon:
+            Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => FilterScreen()));
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: SizedBox(width: 30, height: 30, child: Picker()),
+          ),
+        ],
       ),
       onTap: () => Drawerkey.currentState!.openDrawer(),
     );
@@ -407,13 +462,17 @@ class CustomRecentPhotosSmall extends StatelessWidget {
 class CustomRestaurantCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 100,
-      decoration: BoxDecoration(
-        color: Colors.grey[500],
-        borderRadius: BorderRadius.circular(8),
+    return InkWell(
+      child: Container(
+        height: 100,
+        width: 100,
+        decoration: BoxDecoration(
+          color: Colors.grey[500],
+          borderRadius: BorderRadius.circular(8),
+        ),
       ),
+      onTap: (){},
+
     );
   }
 }

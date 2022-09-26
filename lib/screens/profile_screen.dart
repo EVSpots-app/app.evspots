@@ -36,21 +36,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
+          elevation: 0,
           iconTheme: IconThemeData(
             color:
                 themeNotifier.isDark ? AppColor.bodyColor : AppColor.secColor,
           ),
-          backgroundColor: themeNotifier.isDark
-              ? AppColor.bodyColorDark
-              : AppColor.bodyColor,
-          title: Text(
-            S.of(context).profile,
-            style: TextStyle(
-                color: themeNotifier.isDark
-                    ? AppColor.bodyColor
-                    : AppColor.secColor,
-                fontFamily: 'Tajawal-Black'),
-          ),
+          backgroundColor: Colors.transparent,
+          // backgroundColor: themeNotifier.isDark
+          //     ? AppColor.bodyColorDark
+          //     : AppColor.bodyColor,
+          // title: Text(
+          //   S.of(context).profile,
+          //   style: TextStyle(
+          //       color: themeNotifier.isDark
+          //           ? AppColor.bodyColor
+          //           : AppColor.secColor,
+          //       fontFamily: 'Tajawal-Black'),
+          // ),
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -59,8 +61,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(
-                child: Picture1(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    S.of(context).profile,
+                    style: TextStyle(
+                      fontSize: 40,
+                        color: themeNotifier.isDark
+                            ? AppColor.bodyColor
+                            : AppColor.secColor,
+                        fontFamily: 'Tajawal-Black'),
+                  ),
+                  Picture1(),
+                ],
               ),
               SizedBox(
                 height: height * 0.04,
@@ -293,7 +308,7 @@ class Picker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  CircleAvatar(
-      radius: MediaQuery.of(context).size.width / 6,
+      radius: MediaQuery.of(context).size.width / 7,
       backgroundColor: Colors.grey,
       backgroundImage: _image != null
           ? FileImage(_image!) as ImageProvider

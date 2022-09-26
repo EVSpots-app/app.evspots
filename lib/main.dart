@@ -1,6 +1,7 @@
+import 'package:evspots/screens/ev_station.dart';
 import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/screens/home_screen2.dart';
-import 'package:evspots/screens/language_screen.dart';
+import 'package:evspots/widgets/languages.dart';
 import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/screens/vehicles.dart';

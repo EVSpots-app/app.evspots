@@ -72,10 +72,24 @@ class _VehiclesState extends State<Vehicles> {
 class ChangeDropdownValue extends ChangeNotifier {
   String dropdownValue = 'Bmw';
   String dropdownValue2 = 'Km (Kilometer)';
+  String dropdownValue3 = 'English';
+  String dropdownValue4 = 'Dark Mode';
 
   switchDropdownValue(String? newValue) {
     dropdownValue = newValue!;
-    dropdownValue2 = newValue;
+
+    notifyListeners();
+  }
+  switchDropdownValue2(String? newValue1) {
+    dropdownValue2 = newValue1!;
+    notifyListeners();
+  }
+  switchDropdownValue3(String? newValue2) {
+    dropdownValue3 = newValue2!;
+    notifyListeners();
+  }
+  switchDropdownValue4(String? newValue3) {
+    dropdownValue4 = newValue3!;
     notifyListeners();
   }
 }

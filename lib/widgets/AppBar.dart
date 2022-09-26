@@ -36,16 +36,16 @@ class _MyAppBarState extends State<MyAppBar> {
               fontFamily: 'Tajawal-Black'
           ),
         ),
-        actions: [
-          IconButton(
-            icon:
-            Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => FilterScreen()));
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon:
+        //     Icon(Icons.filter_alt_rounded, size: 25, color: Colors.grey),
+        //     onPressed: () {
+        //       Navigator.push(
+        //           context, MaterialPageRoute(builder: (_) => FilterScreen()));
+        //     },
+        //   ),
+        // ],
       );
     });
   }
