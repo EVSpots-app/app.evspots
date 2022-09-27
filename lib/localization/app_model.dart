@@ -22,4 +22,20 @@ class AppModel extends Model {
     return _appLocale.languageCode.contains('ar');
   }
 
+  void changeLanguageToEn(String language) { // ar
+    // ar  '
+      _appLocale=Locale('en');
+
+    notifyListeners();
+
+  }
+
+  void changeLanguageToAr(String language) { // ar
+    // ar  '
+    _appLocale=Locale('ar');
+
+    notifyListeners();
+
+  }
+
 }

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'app_color.dart';
 
 ThemeData lightTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: AppColor.bodyColor,
+        statusBarIconBrightness:Brightness.dark
+      // For Android (dark icons)
+      // statusBarBrightness: Brightness.light, // For iOS (dark icons)
+    ),
+  ),
     fontFamily: 'Tajawal',
   brightness: Brightness.light,
   backgroundColor: AppColor.bodyColor,

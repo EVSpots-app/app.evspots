@@ -1,6 +1,7 @@
-import 'package:evspots/screens/filter_screen.dart';
+
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
@@ -22,6 +23,7 @@ class _MyAppBarState extends State<MyAppBar> {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return AppBar(
+
         iconTheme:IconThemeData(color: themeNotifier.isDark
             ? AppColor.bodyColor
             : AppColor.secColor,),

@@ -1,14 +1,13 @@
-import 'package:evspots/screens/ev_station.dart';
-import 'package:evspots/screens/filter_screen.dart';
+
 import 'package:evspots/screens/home_screen2.dart';
 import 'package:evspots/widgets/languages.dart';
 import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/splash_screen.dart';
 import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_theme.dart';
-import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -24,7 +23,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(ScopedModel<AppModel>(model: AppModel.shared, child: App()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight,DeviceOrientation.landscapeLeft, DeviceOrientation.portraitDown,DeviceOrientation.portraitUp])
+      .then((_) {
+    return runApp(ScopedModel<AppModel>(model: AppModel.shared, child: App()));
+  });
+
 }
 
 class App extends StatelessWidget {
@@ -48,6 +51,7 @@ class App extends StatelessWidget {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
               return MaterialApp(
+
                 home: SplashScreen(),
                 // themeMode: ThemeMode.system,
                 theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,

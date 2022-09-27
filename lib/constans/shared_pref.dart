@@ -23,6 +23,16 @@ class SharedPreference {
     return sharedPreferences.getBool(SharedPrefKeys.isLoggedIn) ?? false;
   }
 
+  setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(SharedPrefKeys.isEnglish, true);
+  }
+
+  getLanguage() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool(SharedPrefKeys.isEnglish) ?? false;
+  }
+
   deletePrefs() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();

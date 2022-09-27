@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:evspots/screens/ev_station.dart';
 import 'package:evspots/screens/filter_screen.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
@@ -471,7 +472,12 @@ class CustomRestaurantCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      onTap: (){},
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const EvStationInfo()),
+        );
+      },
 
     );
   }

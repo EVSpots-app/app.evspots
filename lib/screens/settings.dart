@@ -12,14 +12,14 @@ import '../themes/theme_model.dart';
 import '../widgets/AppBar.dart';
 import '../widgets/languages.dart';
 
-class AppSettings extends StatefulWidget {
-  const AppSettings({Key? key}) : super(key: key);
+class AppSettings2 extends StatefulWidget {
+  const AppSettings2({Key? key}) : super(key: key);
 
   @override
-  State<AppSettings> createState() => _AppSettingsState();
+  State<AppSettings2> createState() => _AppSettings2State();
 }
 
-class _AppSettingsState extends State<AppSettings> {
+class _AppSettings2State extends State<AppSettings2> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
@@ -126,6 +126,7 @@ class _AppSettingsState extends State<AppSettings> {
                                     Languages(),
                                     TextButton(
                                       onPressed: () {
+                                        SharedPreference().setLanguage();
                                         Navigator.pop(context);
                                       },
                                       child: const Padding(

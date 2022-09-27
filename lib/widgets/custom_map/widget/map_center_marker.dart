@@ -21,7 +21,7 @@ class MapCenterMarker extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: 45),
         child: Icon(
-          Icons.location_pin,
+          Icons.assistant_navigation,
           size: 50,
           color: Colors.green,
         ),

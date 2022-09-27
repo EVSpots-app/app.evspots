@@ -3,6 +3,7 @@ import 'package:evspots/localization/app_model.dart';
 import 'package:evspots/screens/signin_screen.dart';
 import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/themes/app_theme.dart';
 import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -83,15 +84,18 @@ class _AppSettingsState extends State<AppSettings> {
                       icon: const Icon(Icons.expand_more,),
                       value: changeDropdownValue.dropdownValue3,
                       onChanged: (String? newValue2) {
+                        // newValue2 == changeDropdownValue.dropdownValue3
+                        //     ? AppModel.shared.changeLanguage('en')
+                        //     : AppModel.shared.changeLanguage('ar');
                         changeDropdownValue.switchDropdownValue3(newValue2);
                       },
                       items:   <String>['English', 'عربي']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           onTap: (){
-                            value == changeDropdownValue.dropdownValue3
-                                ? AppModel.shared.changeLanguage('en')
-                                : AppModel.shared.changeLanguage('ar');
+                            value == 'English'
+                                ? AppModel.shared.changeLanguageToEn('en')
+                                : AppModel.shared.changeLanguageToAr('ar');
                           },
                          value: value,
                           child: Text(
@@ -118,10 +122,9 @@ class _AppSettingsState extends State<AppSettings> {
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           onTap: (){
-                            themeNotifier.isDark
-                                ? themeNotifier.isDark = false
-                                : themeNotifier.isDark = true;
-
+                            value == 'Dark Mode'
+                                ? themeNotifier.isDark=true
+                                : themeNotifier.isDark=false;
                           },
                           value: value,
                           child: Text(
@@ -166,6 +169,28 @@ class _AppSettingsState extends State<AppSettings> {
                       '-------------------------------------------------------------------------------------------',
                       style: TextStyle(color: Colors.grey),
                     ),
+                    // DropdownButton(
+                    //   dropdownColor: Colors.white,
+                    //   style: const TextStyle(
+                    //     color: Colors.black,
+                    //     backgroundColor: Colors.white,
+                    //   ),
+                    //   value: changeDropdownValue.dropdownValue3,
+                    //   items: [
+                    //     DropdownMenuItem(child: Text('English'), value: 'en',
+                    //       onTap: ()=> AppModel.shared.changeLanguageToEn('en'),
+                    //     ),
+                    //     DropdownMenuItem(child: Text('العربية'), value: 'ar',
+                    //       onTap: ()=> AppModel.shared.changeLanguageToAr('ar'),
+                    //     ),
+                    //   ],
+                    //   onChanged: (String? newValue2) {
+                    //     // newValue2 == changeDropdownValue.dropdownValue3
+                    //     //     ? AppModel.shared.changeLanguage('en')
+                    //     //     : AppModel.shared.changeLanguage('ar');
+                    //     changeDropdownValue.switchDropdownValue3(newValue2);
+                    //   },
+                    // ),
                     SizedBox(height: height * 0.015),
                     GestureDetector(
                       onTap: () async {

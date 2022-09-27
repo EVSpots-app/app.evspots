@@ -1,3 +1,4 @@
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,6 @@ class _LanguagesState extends State<Languages> {
                   onChanged: (value) {
                     AppModel.shared.changeLanguage('en');
                     radioVal.switchValue(value);
-
                     // radioVal.switchValue(value);
                   },
                   activeColor: Colors.green,

@@ -87,12 +87,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+              // SizedBox(
+              //   height: height * 0.02,
+              // ),
+              const Padding(
+                padding:  EdgeInsets.all(8.0),
+                child:  TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
               SizedBox(
@@ -105,12 +108,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+              // SizedBox(
+              //   height: height * 0.02,
+              // ),
+              const Padding(
+                padding:  EdgeInsets.all(8.0),
+                child:  TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
               SizedBox(
@@ -123,25 +129,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              IntlPhoneField(
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  labelStyle: TextStyle(
-                    color: Colors.grey
+              // SizedBox(
+              //   height: height * 0.02,
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IntlPhoneField(
+                  decoration: const InputDecoration(
+                    labelText: 'Phone Number',
+                    labelStyle: TextStyle(
+                      color: Colors.grey
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                    ),
                   ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                  ),
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                  onCountryChanged: (country) {
+                    print('Country changed to: ' + country.name);
+                  },
                 ),
-                onChanged: (phone) {
-                  print(phone.completeNumber);
-                },
-                onCountryChanged: (country) {
-                  print('Country changed to: ' + country.name);
-                },
               ),
               SizedBox(
                 height: height * 0.02,
@@ -153,13 +162,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontSize: 18,
                 ),
               ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              const TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+              // SizedBox(
+              //   height: height * 0.02,
+              // ),
+              const Padding(
+                padding:  EdgeInsets.all(8.0),
+                child:  TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
             ],
@@ -308,6 +320,7 @@ class Picker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  CircleAvatar(
+
       radius: MediaQuery.of(context).size.width / 7,
       backgroundColor: Colors.grey,
       backgroundImage: _image != null

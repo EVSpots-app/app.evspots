@@ -77,7 +77,6 @@ class ChangeDropdownValue extends ChangeNotifier {
 
   switchDropdownValue(String? newValue) {
     dropdownValue = newValue!;
-
     notifyListeners();
   }
   switchDropdownValue2(String? newValue1) {
@@ -85,7 +84,7 @@ class ChangeDropdownValue extends ChangeNotifier {
     notifyListeners();
   }
   switchDropdownValue3(String? newValue2) {
-    dropdownValue3 = newValue2!;
+    dropdownValue3 =  newValue2!;
     notifyListeners();
   }
   switchDropdownValue4(String? newValue3) {
