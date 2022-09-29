@@ -24,7 +24,9 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   TextEditingController countryController = TextEditingController();
-  var phone = "";
+  String _emailErrorMsg = '';
+  var _phone = "";
+
 
   @override
   void initState() {
@@ -81,7 +83,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Column(
                       children: [
                         IntlPhoneField(
+
                           decoration: InputDecoration(
+                            errorText: _emailErrorMsg,
                             labelText: 'Phone Number',
                             labelStyle: TextStyle(
                               color: themeNotifier.isDark
@@ -93,13 +97,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           onChanged: (value) {
-                            phone = value.completeNumber;
+                            _phone = value.completeNumber;
                           },
                           // onChanged: (phone) {
                           //   print(phone.completeNumber);
                           // },
                           onCountryChanged: (country) {
-                            phone = country.name;
+                            _phone = country.name;
                           },
                         ),
                         SizedBox(
@@ -107,32 +111,36 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
 
                         GestureDetector(
-                          onTap: () async {
-                            print(countryController.text + phone);
-                            await FirebaseAuth.instance.verifyPhoneNumber(
-                              phoneNumber: countryController.text + phone,
-                              verificationCompleted:
-                                  (PhoneAuthCredential credential) {},
-                              verificationFailed: (FirebaseAuthException e) {
-                                print(e.toString());
-                              },
-                              codeSent:
-                                  (String verificationId, int? resendToken) async{
-                                SignInScreen.verify = verificationId;
+                          onTap: ()
+                          async {
+                            if (_isValid()){
+                              print(countryController.text + _phone);
+                              await FirebaseAuth.instance.verifyPhoneNumber(
+                                phoneNumber: countryController.text + _phone,
+                                verificationCompleted:
+                                    (PhoneAuthCredential credential) {},
+                                verificationFailed: (FirebaseAuthException e) {
+                                  print(e.toString());
+                                },
+                                codeSent:
+                                    (String verificationId, int? resendToken) async{
+                                  SignInScreen.verify = verificationId;
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VerifyScreen()),
-                                );
-                                print(verificationId);
-                              },
-                              codeAutoRetrievalTimeout:
-                                  (String verificationId) {
-                                print('time out');
-                              },
-                            );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const VerifyScreen()),
+                                  );
+                                  print(verificationId);
+                                },
+                                codeAutoRetrievalTimeout:
+                                    (String verificationId) {
+                                  print('time out');
+                                },
+                              );
+                            }
+
                           },
                           child: Container(
                             margin: const EdgeInsets.all(8),
@@ -146,13 +154,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: const Text(
                               'Send the code',
                               style: TextStyle(
-                                  fontSize: 16.0, color: Colors.black),
+                                  fontSize: 16.0, color: Colors.black,fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushReplacement(
+                            Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => SignUpScreen()));
                           },
@@ -168,7 +176,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: const Text(
                               'Sign Up',
                               style: TextStyle(
-                                  fontSize: 16.0, color: Colors.black),
+                                  fontSize: 16.0, color: Colors.black,fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -189,4 +197,21 @@ class _SignInScreenState extends State<SignInScreen> {
       );
     });
   }
+  bool _isValid() {
+    setState(() {
+      _emailErrorMsg = '';
+    });
+    if (_phone.isEmpty) {
+      setState(() {
+        _emailErrorMsg = 'Enter your number' ;
+      });
+      return false;
+    }
+    setState(() {
+      _emailErrorMsg = '';
+    });
+    return true;
+  }
 }
+
+

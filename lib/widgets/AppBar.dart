@@ -23,12 +23,6 @@ class _MyAppBarState extends State<MyAppBar> {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return AppBar(
-
-        iconTheme:IconThemeData(color: themeNotifier.isDark
-            ? AppColor.bodyColor
-            : AppColor.secColor,),
-        backgroundColor:
-        themeNotifier.isDark ? AppColor.bodyColorDark : AppColor.bodyColor,
         title: Text(
           S.of(context).evspots,
           style: TextStyle(
@@ -36,6 +30,7 @@ class _MyAppBarState extends State<MyAppBar> {
                   ? AppColor.bodyColor
                   : AppColor.secColor,
               fontFamily: 'Tajawal-Black'
+
           ),
         ),
         // actions: [

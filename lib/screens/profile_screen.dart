@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:evspots/widgets/languages.dart';
 import 'package:evspots/widgets/open_camera/bottompicker_sheet.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gender_picker/source/enums.dart';
+import 'package:gender_picker/source/gender_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import '../themes/app_color.dart';
 import '../themes/theme_model.dart';
-import '../widgets/AppBar.dart';
 import '../widgets/AlertDialog.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,6 +27,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _callBackFunction(String name, String dialCode, String flag) {
     // place your code
   }
+
+  TextEditingController myBirthDate = TextEditingController();
+
+  String initValue="Select your Birth Date";
+  bool isDateSelected= false;
+  DateTime? birthDate; // instance of DateTime
+  String? birthDateInString ='Write your birth date';
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +100,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // SizedBox(
               //   height: height * 0.02,
               // ),
-              const Padding(
+               Padding(
                 padding:  EdgeInsets.all(8.0),
                 child:  TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
                   ),
                 ),
               ),
@@ -174,6 +184,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              const Text(
+                'Birth Date ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.0),
+                  side:  BorderSide(color: Colors.grey.shade400, width: 1.5),
+                ),
+                title: Text("${birthDateInString}",style: TextStyle(fontSize: 20,),),
+                trailing: Icon(Icons.calendar_today),
+                  onTap: ()async{
+                    final datePick= await showDatePicker(
+                        context: context,
+                        initialDate: new DateTime.now(),
+                        firstDate: new DateTime(1900),
+                        lastDate: new DateTime(2100)
+                    );
+                    if(datePick!=null && datePick!=birthDate){
+                      setState(() {
+                        birthDate=datePick;
+                        isDateSelected=true;
+                        birthDateInString = "${birthDate!.month}/${birthDate!.day}/${birthDate!.year}";
+                      });
+                    }
+                  }
+              ),
+            ),
+          ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Center(child: Text('Gender*',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),),
+               getWidget(true, true),
+
             ],
           ),
         ),
@@ -190,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             alignment: Alignment.center,
             child: const Text(
               'Update',
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
+              style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -210,6 +265,7 @@ class _Picture1State extends State<Picture1> {
   final ImagePicker _picker = ImagePicker();
 
 
+  TextEditingController _imageController = TextEditingController();
 
   bool uploadStatus = false;
 
@@ -217,6 +273,14 @@ class _Picture1State extends State<Picture1> {
     final PickedFile? pickedImage =
     await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
     if (pickedImage == null) {
+      /**/
+      Uint8List imageBytes = await pickedImage!.readAsBytes(); //convert to bytes
+      String base64string =
+      base64.encode(imageBytes); //convert bytes to base64 constants
+      _imageController.text = base64string.toString();
+      _imageController.text = base64.encode(imageBytes).toString();
+      debugPrint(base64string);
+      /**/
       showAlertDialog(
           context: context,
           title: "Error Uploading!",
@@ -235,6 +299,14 @@ class _Picture1State extends State<Picture1> {
     final PickedFile? pickedImage =
     await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
     if (pickedImage == null) {
+      /**/
+      Uint8List imageBytes = await pickedImage!.readAsBytes(); //convert to bytes
+      String base64string =
+      base64.encode(imageBytes); //convert bytes to base64 constants
+      _imageController.text = base64string.toString();
+      _imageController.text = base64.encode(imageBytes).toString();
+      debugPrint(base64string);
+      /**/
       showAlertDialog(
           context: context,
           title: "Error Uploading!",
@@ -329,5 +401,51 @@ class Picker extends StatelessWidget {
     );
   }
 }
+
+Widget getWidget(bool showOtherGender, bool alignVertical) {
+  return GenderPickerWithImage(
+    showOtherGender: showOtherGender,
+    verticalAlignedText: alignVertical,
+
+    // to show what's selected on app opens, but by default it's Male
+    selectedGender: Gender.Male,
+    selectedGenderTextStyle: TextStyle(
+        color: Color(0xFF8b32a8), fontWeight: FontWeight.bold,fontSize: 20),
+    unSelectedGenderTextStyle: TextStyle(
+        color: Colors.black, fontWeight: FontWeight.normal,),
+    onChanged: (Gender? gender) {
+      print(gender);
+    },
+    //Alignment between icons
+    equallyAligned: true,
+    animationDuration: Duration(milliseconds: 300),
+    isCircular: true,
+    // default : true,
+    opacityOfGradient: 0.4,
+    padding: const EdgeInsets.all(3),
+    size: 50, //default : 40
+  );
+}
+
+
+
+// Row add_radio_button(int btnValue, String title) {
+//   return Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: <Widget>[
+//
+//       Radio(
+//         activeColor: Colors.green,
+//         value: btnValue,
+//         groupValue: -1,
+//         onChanged: (int? value) {  },
+//
+//       ),
+//       Text(title)
+//     ],
+//   );
+// }
+
+
 
 

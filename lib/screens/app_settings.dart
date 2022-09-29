@@ -14,8 +14,6 @@ import '../themes/theme_model.dart';
 import '../widgets/AppBar.dart';
 import '../widgets/languages.dart';
 
-
-
 class AppSettings extends StatefulWidget {
   const AppSettings({Key? key}) : super(key: key);
 
@@ -27,7 +25,12 @@ class _AppSettingsState extends State<AppSettings> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
-
+  //   getDropDownValue(String firstValue,String secondValue)async{
+  //   String value  = 'English';
+  //   value = await SharedPreference().getLanguage()?  firstValue : secondValue;
+  //  dropdownValue = value;
+  // }
+  // String dropdownValue = '';
   TextEditingController _deleteAccount = TextEditingController();
 
   @override
@@ -39,6 +42,7 @@ class _AppSettingsState extends State<AppSettings> {
         builder: (context, ThemeModel themeNotifier, child) {
       return Consumer<ChangeDropdownValue>(
           builder: (_, changeDropdownValue, __) {
+            // getDropDownValue(changeDropdownValue.dropdownValueEN,  changeDropdownValue.dropdownValueAR);
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -79,29 +83,49 @@ class _AppSettingsState extends State<AppSettings> {
                         style: const TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold)),
                     DropdownButton(
-                     // hint: Text('Distance Unity'),
+                      // hint: Text('Distance Unity'),
                       isExpanded: true,
-                      icon: const Icon(Icons.expand_more,),
-                      value: changeDropdownValue.dropdownValue3,
-                      onChanged: (String? newValue2) {
-                        // newValue2 == changeDropdownValue.dropdownValue3
-                        //     ? AppModel.shared.changeLanguage('en')
-                        //     : AppModel.shared.changeLanguage('ar');
-                        changeDropdownValue.switchDropdownValue3(newValue2);
+                      icon: const Icon(
+                        Icons.expand_more,
+                      ),
+                      value:changeDropdownValue.dropdownValueEN,
+                      onChanged: (String? newValue2) async{
+                        // print(newValue2);
+                         changeDropdownValue.switchDropdownValue3(newValue2);
+
+                         await SharedPreference().setLanguage();
                       },
-                      items:   <String>['English', 'عربي']
+                      items: <String>['English','عربي']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
-                          onTap: (){
+                          onTap: () async {
                             value == 'English'
                                 ? AppModel.shared.changeLanguageToEn('en')
                                 : AppModel.shared.changeLanguageToAr('ar');
+                            print(value);
+                            await SharedPreference().getLanguage();
+                           // await SharedPreference().setLanguage();
                           },
-                         value: value,
-                          child: Text(
-                            value,
-                            style: const TextStyle(fontSize: 20),
+                          value: value,
+                          child: ListTile(
+                            trailing:
+                                value == changeDropdownValue.dropdownValueEN
+                                    ?  Icon(
+                                        Icons.check,
+                                        color: AppColor.mainColor,
+                                      )
+                                    : null,
+                            leading: const Icon(Icons.language, color: Colors.grey),
+                            title: Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Text(value,
+                                  style: const TextStyle(fontSize: 20)),
+                            ),
                           ),
+                          // child: Text(
+                          //   value,
+                          //   style: const TextStyle(fontSize: 20),
+                          // ),
                         );
                       }).toList(),
                     ),
@@ -112,19 +136,20 @@ class _AppSettingsState extends State<AppSettings> {
                     DropdownButton(
                       // hint: Text('Distance Unity'),
                       isExpanded: true,
-                      icon: const Icon(Icons.expand_more,),
+                      icon: const Icon(
+                        Icons.expand_more,
+                      ),
                       value: changeDropdownValue.dropdownValue4,
                       onChanged: (String? newValue3) {
                         changeDropdownValue.switchDropdownValue4(newValue3);
-
                       },
-                      items:   <String>['Dark Mode', 'Light Mode']
+                      items: <String>['Dark Mode', 'Light Mode']
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
-                          onTap: (){
+                          onTap: () {
                             value == 'Dark Mode'
-                                ? themeNotifier.isDark=true
-                                : themeNotifier.isDark=false;
+                                ? themeNotifier.isDark = true
+                                : themeNotifier.isDark = false;
                           },
                           value: value,
                           child: Text(
@@ -144,17 +169,15 @@ class _AppSettingsState extends State<AppSettings> {
                     DropdownButton(
                       hint: const Text('Distance Unity'),
                       isExpanded: true,
-                      icon: const Icon(Icons.expand_more,),
+                      icon: const Icon(
+                        Icons.expand_more,
+                      ),
                       value: changeDropdownValue.dropdownValue2,
                       onChanged: (String? newValue1) {
                         changeDropdownValue.switchDropdownValue2(newValue1);
                       },
-                      items: <String>[
-                        'Km (Kilometer)',
-                        'Mm (Millimeters)',
-                        'Cm (Centimeters)',
-                        'M (Meters)'
-                      ].map<DropdownMenuItem<String>>((String value) {
+                      items: <String>['Km (Kilometer)', 'Mi (miles)']
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(
@@ -202,10 +225,13 @@ class _AppSettingsState extends State<AppSettings> {
                               TextButton(
                                 onPressed: () {
                                   SharedPreference().deletePrefs();
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignInScreen()));
+                                  Navigator.pushAndRemoveUntil<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            SignInScreen()),
+                                    ModalRoute.withName('/'),
+                                  );
                                 },
                                 child: const Padding(
                                   padding: EdgeInsets.all(8.0),
@@ -228,12 +254,20 @@ class _AppSettingsState extends State<AppSettings> {
                         height: height * 0.06,
                         color: Colors.transparent,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(S.of(context).logout,
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold)),
+                            Icon(Icons.logout),
+                            SizedBox(
+                              width: width * 0.03,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Text(S.of(context).logout,
+                                  style: const TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold)),
+                            ),
+
                             // const Icon(Icons.logout),
                           ],
                         ),
@@ -254,10 +288,13 @@ class _AppSettingsState extends State<AppSettings> {
                               TextButton(
                                 onPressed: () {
                                   _deleteAccount.text.toLowerCase() == 'delete'
-                                      ? Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SignInScreen()))
+                                      ? Navigator.pushAndRemoveUntil<void>(
+                                          context,
+                                          MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>
+                                                  SignInScreen()),
+                                          ModalRoute.withName('/'),
+                                        )
                                       : Navigator.pop(context);
                                 },
                                 child: const Padding(
@@ -281,13 +318,20 @@ class _AppSettingsState extends State<AppSettings> {
                         height: height * 0.06,
                         color: Colors.transparent,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Delete Account',
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold)),
-                            // const Icon(Icons.remove_circle),
+                            const Icon(
+                              Icons.remove_circle,
+                              color: Colors.redAccent,
+                            ),
+                            SizedBox(width: width * 0.03),
+                            Padding(
+                              padding: const EdgeInsets.all(2.5),
+                              child: const Text('Delete Account',
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.bold)),
+                            ),
                           ],
                         ),
                       ),
@@ -347,3 +391,11 @@ class _AppSettingsState extends State<AppSettings> {
     );
   }
 }
+
+// Future<bool> _getValue()async*{
+//   Consumer<ChangeDropdownValue>(
+//       builder: (_, changeDropdownValue, __) {
+//         await  SharedPreference().getLanguage()?  changeDropdownValue.dropdownValueEN :  changeDropdownValue.dropdownValueAR;
+//         return null;
+//       });
+// }

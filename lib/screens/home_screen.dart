@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
         // key: key1,
-        appBar: const MyAppBar(),
+        //appBar: const MyAppBar(),
         // drawer: const MyDrawer(),
         // bottomNavigationBar: const BottomBar(),
         backgroundColor: Colors.grey,
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(4, 10, 4, 3),
+                padding: const EdgeInsets.fromLTRB(8, 40, 8, 3),
                 child: CustomSearchContainer(),
               ),
               SizedBox(height: height * 0.005),

@@ -4,6 +4,10 @@ import 'app_color.dart';
 
 ThemeData lightTheme = ThemeData(
   appBarTheme: AppBarTheme(
+    backgroundColor: AppColor.bodyColor,
+    iconTheme: IconThemeData(
+      color: AppColor.secColor,
+    ),
     systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: AppColor.bodyColor,
         statusBarIconBrightness:Brightness.dark

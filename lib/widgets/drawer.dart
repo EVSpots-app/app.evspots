@@ -3,6 +3,7 @@ import 'package:evspots/screens/app_settings.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
+import 'package:evspots/widgets/ListTileWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 25, top: 30, right: 25),
+                        const EdgeInsets.only(left: 25, top: 30, right: 25,),
                     child: Container(
                         width: width,
                         height: height * 0.18,
@@ -82,8 +83,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                 width: width * 0.25,
                               ),
                               SizedBox(
-                                width: 80,
-                                height: 80,
+                                width: width*0.2,
+                                height: height*0.10,
                                 child: Picker(),
                               ),
                             ],
@@ -98,156 +99,125 @@ class _MyDrawerState extends State<MyDrawer> {
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Column(
                           children: [
-                            ListTile(
-                              leading: Icon(
+                            ListTileWidgets(
+                              icon: Icon(
                                 Icons.home,
                                 color: themeNotifier.isDark
                                     ? AppColor.mainColor
                                     : AppColor.secColor,
                               ),
-                              title: Text(
-                                S.of(context).home,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {
+                              title: S.of(context).home,
+                              onTap: (){
                                 Drawerkey.currentState!.openEndDrawer();
-                              },
+                              }
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.car_crash,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Vehicles',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Vehicles()),
-                                );
-                              },
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.car_crash,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Vehicles',
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Vehicles()),
+                                  );
+                                }
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.favorite,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Favorite',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {},
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Favorite',
+                                onTap: (){
+
+                                }
                             ),
+
                             const Divider(),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.text_snippet_outlined,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Terms & Condition',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {},
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.text_snippet,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Terms & Condition',
+                                onTap: (){}
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.privacy_tip,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Praivace & Police',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {
-                                _launched = _launchInBrowser(toLaunch);
-                              },
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.privacy_tip,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Privacy & Police',
+                                onTap: (){_launched = _launchInBrowser(toLaunch);}
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.question_mark,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Help & FAQs',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {},
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.question_mark,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Help & FAQs',
+                                onTap: (){}
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.message,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: const Text(
-                                'Contact Us',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {},
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.message_rounded,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:'Contact Us',
+                                onTap: (){}
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.settings,
-                                color: themeNotifier.isDark
-                                    ? AppColor.mainColor
-                                    : AppColor.secColor,
-                              ),
-                              title: Text(
-                                S.of(context).settings,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AppSettings()),
-                                );
-                              },
+                            ListTileWidgets(
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: themeNotifier.isDark
+                                      ? AppColor.mainColor
+                                      : AppColor.secColor,
+                                ),
+                                title:S.of(context).settings,
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const AppSettings()),
+                                  );
+                                }
                             ),
                           ],
                         ),
@@ -256,11 +226,15 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: height * 0.06,
-                child: Image.asset(themeNotifier.isDark
-                    ? 'assets/images/logo_for_dark_theme.png'
-                    : 'assets/images/logo_for_light_theme.png'),
+              InkWell(
+                child: SizedBox(
+                  height: height * 0.06,
+                  width: width*0.4,
+                  child: Image.asset(themeNotifier.isDark
+                      ? 'assets/images/logo_for_dark_theme.png'
+                      : 'assets/images/logo_for_light_theme.png'),
+                ),
+                  onTap: (){_launched = _launchInBrowser(toLaunch);}
               ),
               FutureBuilder<PackageInfo>(
                 future: _getPackageInfo(),
@@ -294,47 +268,3 @@ Future<void> _launchInBrowser(Uri url) async {
     throw 'Could not launch $url';
   }
 }
-// Column(
-// mainAxisAlignment: MainAxisAlignment.start,
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Padding(
-// padding: const EdgeInsets.only(left: 250),
-// child: InkWell(
-// onTap: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(
-// builder: (context) => ProfileScreen()),
-// );
-// },
-// child: SizedBox(
-// width: 80,
-// height: 80,
-// child: const Picture())),
-// ),
-// SizedBox(
-// height: height * 0.03,
-// ),
-// GestureDetector(
-// onTap: () {
-// Navigator.of(context).push(MaterialPageRoute(
-// builder: (context) => SignInScreen()));
-// },
-// child: Container(
-// width: width,
-// height: height * 0.06,
-// color: Colors.transparent,
-// child: ListTile(
-// trailing: const Icon(Icons.arrow_forward_ios),
-// title: Text(
-// S.of(context).motasemAltamimi,
-// style: themeNotifier.isDark
-// ? AppFont.boldDark
-//     : AppFont.bold,
-// ),
-// ),
-// ),
-// ),
-// ]
-// ),

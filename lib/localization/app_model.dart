@@ -1,11 +1,14 @@
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class AppModel extends Model {
-  static AppModel shared = AppModel(); // instance shared singelton
+class AppModel extends Model  {
+
+  static AppModel shared = AppModel();// instance shared singelton
   Locale _appLocale = Locale('en'); //  datatype
 
-  Locale get appLocale => _appLocale; // getter
+  Locale get appLocale => _appLocale;// getter
+
 
   void changeLanguage(String language) { // ar
     // ar  ''
@@ -18,6 +21,7 @@ class AppModel extends Model {
     notifyListeners();
 
   }
+
   bool isArabic(){
     return _appLocale.languageCode.contains('ar');
   }

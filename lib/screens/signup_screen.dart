@@ -34,9 +34,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // drawer: MyDrawer(),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil<void>(
             context,
-            MaterialPageRoute(builder: (context) => MainPage()),
+            MaterialPageRoute<void>(builder: (BuildContext context) => const MainPage()),
+            ModalRoute.withName('/'),
           );
         },
         child: Container(
@@ -50,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           alignment: Alignment.center,
           child: const Text(
             'Continue',
-            style: TextStyle(fontSize: 16.0, color: Colors.black),
+            style: TextStyle(fontSize: 16.0, color: Colors.black,fontWeight: FontWeight.bold),
           ),
         ),
       ),

@@ -10,8 +10,8 @@
 
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:label="evspots">
+        android:icon="@mipmap/launcher_icon"
+        android:label="EVSpots">
 
         <!--       <meta-data-->
         <!--           android:name="com.google.android.maps.v2.API_KEY"-->

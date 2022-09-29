@@ -25,7 +25,9 @@ void main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight,DeviceOrientation.landscapeLeft, DeviceOrientation.portraitDown,DeviceOrientation.portraitUp])
       .then((_) {
-    return runApp(ScopedModel<AppModel>(model: AppModel.shared, child: App()));
+    return runApp(ScopedModel<AppModel>(
+
+        model: AppModel.shared, child: App()));
   });
 
 }
@@ -73,3 +75,5 @@ class App extends StatelessWidget {
     );
   }
 }
+
+

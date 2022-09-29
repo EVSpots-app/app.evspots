@@ -26,10 +26,10 @@ class _LanguagesState extends State<Languages> {
         return Padding(
           padding: const EdgeInsets.all(25.0),
           child: Column(children: [
-            // Text(S.of(context).selectLanguage,
-            //     style: const TextStyle(
-            //         fontSize: 22, fontWeight: FontWeight.bold)),
-            //SizedBox(height: height * 0.03),
+            Text(S.of(context).selectLanguage,
+                style: const TextStyle(
+                    fontSize: 22, fontWeight: FontWeight.bold)),
+            SizedBox(height: height * 0.03),
             ListTile(
                 leading: SizedBox(
                   height: height * 0.1,
@@ -75,6 +75,48 @@ class _LanguagesState extends State<Languages> {
                   style:
                   TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             ),
+            //SizedBox(height: height * 0.02),
+            // Row(children: [
+            //   ListTile(
+            //     leading:Icon(Icons.male) ,
+            //     trailing: Radio(
+            //       value: 3,
+            //       groupValue: radioVal.val,
+            //
+            //       activeColor: Colors.green,
+            //       onChanged: (int? value) {},
+            //     ),
+            //     title: const Text("Male",
+            //         style:
+            //         TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            //   ),
+            //   ListTile(
+            //     leading:Icon(Icons.female) ,
+            //     trailing: Radio(
+            //       value: 4,
+            //       groupValue: radioVal.val,
+            //
+            //       activeColor: Colors.green,
+            //       onChanged: (int? value) {},
+            //     ),
+            //     title: const Text("Female",
+            //         style:
+            //         TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            //   ),
+            //   ListTile(
+            //     leading:Icon(Icons.transgender) ,
+            //     trailing: Radio(
+            //       value: 5,
+            //       groupValue: radioVal.val,
+            //
+            //       activeColor: Colors.green,
+            //       onChanged: (int? value) {},
+            //     ),
+            //     title: const Text("Others",
+            //         style:
+            //         TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            //   ),
+            // ],),
           ]),
         );
       },

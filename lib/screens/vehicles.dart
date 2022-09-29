@@ -1,3 +1,4 @@
+import 'package:evspots/constans/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +73,8 @@ class _VehiclesState extends State<Vehicles> {
 class ChangeDropdownValue extends ChangeNotifier {
   String dropdownValue = 'Bmw';
   String dropdownValue2 = 'Km (Kilometer)';
-  String dropdownValue3 = 'English';
+  String dropdownValueEN = 'English';
+  String dropdownValueAR = 'عربي';
   String dropdownValue4 = 'Dark Mode';
 
   switchDropdownValue(String? newValue) {
@@ -84,7 +86,8 @@ class ChangeDropdownValue extends ChangeNotifier {
     notifyListeners();
   }
   switchDropdownValue3(String? newValue2) {
-    dropdownValue3 =  newValue2!;
+    // await SharedPreference().getLanguage();
+    dropdownValueEN =  newValue2!;
     notifyListeners();
   }
   switchDropdownValue4(String? newValue3) {
