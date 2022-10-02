@@ -1,9 +1,5 @@
-
-import 'package:evspots/screens/home_screen2.dart';
-import 'package:evspots/widgets/languages.dart';
-import 'package:evspots/screens/main_page.dart';
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:evspots/screens/splash_screen.dart';
-import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +19,19 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight,DeviceOrientation.landscapeLeft, DeviceOrientation.portraitDown,DeviceOrientation.portraitUp])
-      .then((_) {
-    return runApp(ScopedModel<AppModel>(
-
-        model: AppModel.shared, child: App()));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp
+  ]).then((_) {
+    return runApp(
+      ScopedModel<AppModel>(
+        model: AppModel.shared,
+        child: App(),
+      ),
+    );
   });
-
 }
 
 class App extends StatelessWidget {
@@ -40,8 +42,8 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
-        ChangeNotifierProvider<ChangeIndex1>(create: (_) => ChangeIndex1()),
-        ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
+        ChangeNotifierProvider<ChangeRoutingPage>(create: (_) => ChangeRoutingPage()),
+       // ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
         ChangeNotifierProvider<ChangeTime>(create: (_) => ChangeTime()),
         ChangeNotifierProvider<ChangeDropdownValue>(
             create: (_) => ChangeDropdownValue()),
@@ -52,8 +54,8 @@ class App extends StatelessWidget {
           builder: (context, ThemeModel themeNotifier, child) {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
+                  AppModel.shared.setInitialLanguageValue();
               return MaterialApp(
-
                 home: SplashScreen(),
                 // themeMode: ThemeMode.system,
                 theme: themeNotifier.isDark ? AppTheme.dark : AppTheme.light,
@@ -75,5 +77,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-

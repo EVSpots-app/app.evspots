@@ -1,6 +1,6 @@
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:evspots/screens/home_screen.dart';
 import 'package:evspots/screens/home_screen2.dart';
-import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
       key: Drawerkey,
       drawer: MyDrawer(),
       bottomNavigationBar:
-          Consumer<ChangeIndex1>(builder: (_, changeIndex, __) {
+          Consumer<ChangeRoutingPage>(builder: (_, changeIndex, __) {
         return SalomonBottomBar(
           currentIndex: changeIndex.currentIndex,
           //onTap: (i) => setState(() => _currentIndex = i),
@@ -63,18 +63,11 @@ class _MainPageState extends State<MainPage> {
           ],
         );
       }),
-      body: Consumer<ChangeIndex1>(builder: (_, changeIndex, __) {
+      body: Consumer<ChangeRoutingPage>(builder: (_, changeIndex, __) {
         return screen[changeIndex.currentIndex];
       }),
     );
   }
 }
 
-class ChangeIndex1 extends ChangeNotifier {
-  int currentIndex = 0;
 
-  switchIndex(int i) {
-    currentIndex = i;
-    notifyListeners();
-  }
-}

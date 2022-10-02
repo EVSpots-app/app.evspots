@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:evspots/screens/app_settings.dart';
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
@@ -218,6 +219,12 @@ class _MyDrawerState extends State<MyDrawer> {
                                         const AppSettings()),
                                   );
                                 }
+                            ),
+                            Consumer<ChangeDropdownValue>(
+                            builder: (_, changeDropdownValue, __) {
+                              changeDropdownValue.setInitialLanguageValue();
+                              return SizedBox();
+                            }
                             ),
                           ],
                         ),

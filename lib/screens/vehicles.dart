@@ -1,4 +1,4 @@
-import 'package:evspots/constans/shared_pref.dart';
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,28 +70,3 @@ class _VehiclesState extends State<Vehicles> {
   }
 }
 
-class ChangeDropdownValue extends ChangeNotifier {
-  String dropdownValue = 'Bmw';
-  String dropdownValue2 = 'Km (Kilometer)';
-  String dropdownValueEN = 'English';
-  String dropdownValueAR = 'عربي';
-  String dropdownValue4 = 'Dark Mode';
-
-  switchDropdownValue(String? newValue) {
-    dropdownValue = newValue!;
-    notifyListeners();
-  }
-  switchDropdownValue2(String? newValue1) {
-    dropdownValue2 = newValue1!;
-    notifyListeners();
-  }
-  switchDropdownValue3(String? newValue2) {
-    // await SharedPreference().getLanguage();
-    dropdownValueEN =  newValue2!;
-    notifyListeners();
-  }
-  switchDropdownValue4(String? newValue3) {
-    dropdownValue4 = newValue3!;
-    notifyListeners();
-  }
-}

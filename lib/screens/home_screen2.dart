@@ -1,20 +1,16 @@
 import 'dart:async';
 import 'package:evspots/screens/ev_station.dart';
 import 'package:evspots/screens/filter_screen.dart';
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:evspots/screens/profile_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/widgets/custom_map/optional_functions.dart';
 import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
-import 'package:evspots/widgets/drawer.dart';
-import 'package:evspots/widgets/maps.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
-import '../widgets/BottomBar.dart';
-import 'home_screen.dart';
 
 final GlobalKey<ScaffoldState> Drawerkey = GlobalKey();
 
@@ -215,7 +211,7 @@ class CustomUserAvatar extends StatelessWidget {
             },
           ),
           Padding(
-            padding: EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10,left: 10),
             child: SizedBox(width: 30, height: 30, child: Picker()),
           ),
         ],
@@ -496,13 +492,4 @@ class CustomFeaturedItem extends StatelessWidget {
   }
 }
 
-class ChangeTime extends ChangeNotifier {
-  bool time1 = true;
 
-  switchTime() {
-    Timer(const Duration(seconds: 5), () {
-      time1 = false;
-      notifyListeners();
-    });
-  }
-}

@@ -1,9 +1,8 @@
 import 'package:evspots/constans/shared_pref.dart';
 import 'package:evspots/localization/app_model.dart';
+import 'package:evspots/screens/home/consumer/all_consumer.dart';
 import 'package:evspots/screens/signin_screen.dart';
-import 'package:evspots/screens/vehicles.dart';
 import 'package:evspots/themes/app_color.dart';
-import 'package:evspots/themes/app_theme.dart';
 import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -11,8 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
-import '../widgets/AppBar.dart';
-import '../widgets/languages.dart';
 
 class AppSettings extends StatefulWidget {
   const AppSettings({Key? key}) : super(key: key);
@@ -25,24 +22,23 @@ class _AppSettingsState extends State<AppSettings> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
-  //   getDropDownValue(String firstValue,String secondValue)async{
-  //   String value  = 'English';
-  //   value = await SharedPreference().getLanguage()?  firstValue : secondValue;
-  //  dropdownValue = value;
-  // }
-  // String dropdownValue = '';
+
   TextEditingController _deleteAccount = TextEditingController();
+
+ @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Consumer<ChangeDropdownValue>(
           builder: (_, changeDropdownValue, __) {
-            // getDropDownValue(changeDropdownValue.dropdownValueEN,  changeDropdownValue.dropdownValueAR);
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -88,44 +84,36 @@ class _AppSettingsState extends State<AppSettings> {
                       icon: const Icon(
                         Icons.expand_more,
                       ),
-                      value:changeDropdownValue.dropdownValueEN,
-                      onChanged: (String? newValue2) async{
-                        // print(newValue2);
-                         changeDropdownValue.switchDropdownValue3(newValue2);
-
-                         await SharedPreference().setLanguage();
+                      value: changeDropdownValue.initialLanguageValue,
+                      onChanged: (String? newValue2) async {
+                        changeDropdownValue.switchDropdownLanguage(
+                            language: newValue2!);
                       },
-                      items: <String>['English','عربي']
+                      items: ChangeDropdownValue.languages
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
-                          onTap: () async {
-                            value == 'English'
-                                ? AppModel.shared.changeLanguageToEn('en')
-                                : AppModel.shared.changeLanguageToAr('ar');
-                            print(value);
-                            await SharedPreference().getLanguage();
-                           // await SharedPreference().setLanguage();
-                          },
                           value: value,
                           child: ListTile(
                             trailing:
-                                value == changeDropdownValue.dropdownValueEN
-                                    ?  Icon(
+                                value == changeDropdownValue.initialLanguageValue
+                                    ? Icon(
                                         Icons.check,
                                         color: AppColor.mainColor,
                                       )
                                     : null,
-                            leading: const Icon(Icons.language, color: Colors.grey),
+                            leading:
+                                const Icon(Icons.language, color: Colors.grey),
                             title: Padding(
                               padding: const EdgeInsets.only(top: 5.0),
                               child: Text(value,
                                   style: const TextStyle(fontSize: 20)),
                             ),
                           ),
-                          // child: Text(
-                          //   value,
-                          //   style: const TextStyle(fontSize: 20),
-                          // ),
+                          onTap: () async {
+                            value == ChangeDropdownValue.dropdownValueEN
+                                ? AppModel.shared.changeLanguageToEn('en')
+                                : AppModel.shared.changeLanguageToAr('ar');
+                          },
                         );
                       }).toList(),
                     ),
@@ -265,7 +253,8 @@ class _AppSettingsState extends State<AppSettings> {
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(S.of(context).logout,
                                   style: const TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold)),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold)),
                             ),
 
                             // const Icon(Icons.logout),
@@ -330,7 +319,8 @@ class _AppSettingsState extends State<AppSettings> {
                               padding: const EdgeInsets.all(2.5),
                               child: const Text('Delete Account',
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.bold)),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),
