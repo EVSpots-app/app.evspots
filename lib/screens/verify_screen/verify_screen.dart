@@ -1,13 +1,11 @@
-import 'package:evspots/constans/shared_pref.dart';
 import 'package:evspots/screens/main_page.dart';
-import 'package:evspots/screens/signin_screen.dart';
+import 'package:evspots/screens/sigin_screen/signin_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/widgets/AppBar.dart';
-import 'package:evspots/constans/shared_pref_keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../auth/shared_pref.dart';
 
 
 class VerifyScreen extends StatefulWidget {
@@ -16,8 +14,6 @@ class VerifyScreen extends StatefulWidget {
   @override
   State<VerifyScreen> createState() => _VerifyScreenState();
 }
-
-
 
 class _VerifyScreenState extends State<VerifyScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;

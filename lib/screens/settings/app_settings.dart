@@ -1,15 +1,15 @@
-import 'package:evspots/constans/shared_pref.dart';
 import 'package:evspots/localization/app_model.dart';
-import 'package:evspots/screens/home/consumer/all_consumer.dart';
-import 'package:evspots/screens/signin_screen.dart';
+import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
+import 'package:evspots/screens/sigin_screen/signin_screen.dart';
+import 'package:evspots/auth/shared_pref.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../generated/l10n.dart';
-import '../themes/theme_model.dart';
+import '../../generated/l10n.dart';
+import '../../themes/theme_model.dart';
 
 class AppSettings extends StatefulWidget {
   const AppSettings({Key? key}) : super(key: key);
@@ -382,10 +382,3 @@ class _AppSettingsState extends State<AppSettings> {
   }
 }
 
-// Future<bool> _getValue()async*{
-//   Consumer<ChangeDropdownValue>(
-//       builder: (_, changeDropdownValue, __) {
-//         await  SharedPreference().getLanguage()?  changeDropdownValue.dropdownValueEN :  changeDropdownValue.dropdownValueAR;
-//         return null;
-//       });
-// }

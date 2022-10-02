@@ -1,11 +1,8 @@
-import 'package:evspots/screens/home_screen.dart';
-import 'package:evspots/screens/home_screen2.dart';
-import 'package:evspots/widgets/drawer.dart';
+
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import '../themes/app_color.dart';
-import '../widgets/AppBar.dart';
-import 'main_page.dart';
+import '../../themes/app_color.dart';
+import '../../widgets/AppBar.dart';
+import '../main_page.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

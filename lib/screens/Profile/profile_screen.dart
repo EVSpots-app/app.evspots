@@ -1,22 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:evspots/widgets/languages.dart';
-import 'package:evspots/widgets/open_camera/bottompicker_sheet.dart';
-import 'package:flutter/foundation.dart';
+import 'package:evspots/generated/l10n.dart';
+import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/themes/theme_model.dart';
+import 'package:evspots/widgets/Gender.dart';
 import 'package:flutter/material.dart';
-import 'package:gender_picker/source/enums.dart';
-import 'package:gender_picker/source/gender_picker.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
-import '../generated/l10n.dart';
-import '../themes/app_color.dart';
-import '../themes/theme_model.dart';
-import '../widgets/AlertDialog.dart';
 import 'package:http/http.dart' as http;
 
-File? _image;
+import '../../widgets/Picture/ProfilePicture.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -84,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             : AppColor.secColor,
                         fontFamily: 'Tajawal-Black'),
                   ),
-                  Picture1(),
+                  ProfilePicture(),
                 ],
               ),
               SizedBox(
@@ -254,197 +246,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class Picture1 extends StatefulWidget {
-   Picture1({Key? key}) : super(key: key);
-
-  @override
-  State<Picture1> createState() => _Picture1State();
-}
-
-class _Picture1State extends State<Picture1> {
-  final ImagePicker _picker = ImagePicker();
-
-
-  TextEditingController _imageController = TextEditingController();
-
-  bool uploadStatus = false;
-
-  _imageFromCamera() async {
-    final PickedFile? pickedImage =
-    await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
-    if (pickedImage == null) {
-      /**/
-      Uint8List imageBytes = await pickedImage!.readAsBytes(); //convert to bytes
-      String base64string =
-      base64.encode(imageBytes); //convert bytes to base64 constants
-      _imageController.text = base64string.toString();
-      _imageController.text = base64.encode(imageBytes).toString();
-      debugPrint(base64string);
-      /**/
-      showAlertDialog(
-          context: context,
-          title: "Error Uploading!",
-          content: "No Image was selected.");
-      return;
-    }
-    final File fileImage = File(pickedImage.path);
-
-    if (imageConstraint(fileImage))
-      setState(() {
-        _image = fileImage;
-      });
-  }
-
-  _imageFromGallery() async {
-    final PickedFile? pickedImage =
-    await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
-    if (pickedImage == null) {
-      /**/
-      Uint8List imageBytes = await pickedImage!.readAsBytes(); //convert to bytes
-      String base64string =
-      base64.encode(imageBytes); //convert bytes to base64 constants
-      _imageController.text = base64string.toString();
-      _imageController.text = base64.encode(imageBytes).toString();
-      debugPrint(base64string);
-      /**/
-      showAlertDialog(
-          context: context,
-          title: "Error Uploading!",
-          content: "No Image was selected.",
-      );
-      return;
-    }
-    final File fileImage = File(pickedImage.path);
-    if (imageConstraint(fileImage))
-      setState(() {
-        _image = fileImage;
-      });
-  }
-
-  bool imageConstraint(File image) {
-    if (!['bmp', 'jpg', 'jpeg']
-        .contains(image.path.split('.').last.toString())) {
-      showAlertDialog(
-          context: context,
-          title: "Error Uploading!",
-          content: "Image format should be jpg/jpeg/bmp.");
-      return false;
-    }
-    if (image.lengthSync() > 100000) {
-      showAlertDialog(
-          context: context,
-          title: "Error Uploading!",
-          content: "Image Size should be less than 100KB.");
-      return false;
-    }
-    return true;
-  }
-
-  // uploadImage() async {
-  //   if (_image == null) {
-  //     showAlertDialog(
-  //         context: context,
-  //         title: "Error Uploading!",
-  //         content: "No Image was selected.");
-  //     return;
-  //   }
-  //
-  //   setState(() {
-  //     uploadStatus = true;
-  //   });
-  //   var response = await http
-  //       .post(Uri.parse('https://pcc.edu.pk/ws/file_upload.php'), body: {
-  //     "image": _image!.readAsBytes().toString(),
-  //     "name": _image!.path.split('/').last.toString()
-  //   });
-  //   print('response');
-  //   if (response.statusCode != 200) {
-  //     showAlertDialog(
-  //         context: context,
-  //         title: "Error Uploading!",
-  //         content: "Server Side Error.");
-  //   } else {
-  //     var result = jsonDecode(response.body);
-  //     print(result);
-  //     showAlertDialog(
-  //         context: context, title: "Image Sent!", content: result['message']);
-  //   }
-  //   setState(() {
-  //     uploadStatus = false;
-  //   });
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    return  GestureDetector(
-      onTap: () {
-        bottomPickerSheet(
-            context, _imageFromCamera, _imageFromGallery);
-      },
-      child: Picker(),
-    );
-  }
-}
-
-class Picker extends StatelessWidget {
-  const Picker({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return  CircleAvatar(
-
-      radius: MediaQuery.of(context).size.width / 7,
-      backgroundColor: Colors.grey,
-      backgroundImage: _image != null
-          ? FileImage(_image!) as ImageProvider
-          : const AssetImage('assets/images/no-image.jpg'),
-    );
-  }
-}
-
-Widget getWidget(bool showOtherGender, bool alignVertical) {
-  return GenderPickerWithImage(
-    showOtherGender: showOtherGender,
-    verticalAlignedText: alignVertical,
-
-    // to show what's selected on app opens, but by default it's Male
-    selectedGender: Gender.Male,
-    selectedGenderTextStyle: TextStyle(
-        color: Color(0xFF8b32a8), fontWeight: FontWeight.bold,fontSize: 20),
-    unSelectedGenderTextStyle: TextStyle(
-        color: Colors.black, fontWeight: FontWeight.normal,),
-    onChanged: (Gender? gender) {
-      print(gender);
-    },
-    //Alignment between icons
-    equallyAligned: true,
-    animationDuration: Duration(milliseconds: 300),
-    isCircular: true,
-    // default : true,
-    opacityOfGradient: 0.4,
-    padding: const EdgeInsets.all(3),
-    size: 50, //default : 40
-  );
-}
 
 
 
-// Row add_radio_button(int btnValue, String title) {
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.start,
-//     children: <Widget>[
-//
-//       Radio(
-//         activeColor: Colors.green,
-//         value: btnValue,
-//         groupValue: -1,
-//         onChanged: (int? value) {  },
-//
-//       ),
-//       Text(title)
-//     ],
-//   );
-// }
+
 
 
 

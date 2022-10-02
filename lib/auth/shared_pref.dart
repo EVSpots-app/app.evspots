@@ -1,4 +1,4 @@
-import 'package:evspots/constans/shared_pref_keys.dart';
+import 'package:evspots/auth/shared_pref_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreference {

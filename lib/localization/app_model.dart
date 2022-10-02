@@ -1,4 +1,4 @@
-import 'package:evspots/constans/shared_pref.dart';
+import 'package:evspots/auth/shared_pref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scoped_model/scoped_model.dart';
 

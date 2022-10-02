@@ -1,13 +1,15 @@
-import 'package:evspots/screens/home/consumer/all_consumer.dart';
-import 'package:evspots/screens/home_screen.dart';
-import 'package:evspots/screens/home_screen2.dart';
+import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-
 import '../generated/l10n.dart';
-import '../widgets/drawer.dart';
+import '../widgets/Drawer/drawer.dart';
+import 'home_screen/home_screen.dart';
+
+
+
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-List screen = [HomeScreen(), HomeScreen2()];
+List screen = [HomeScreen(), MapScreen()];
 
 class _MainPageState extends State<MainPage> {
   @override

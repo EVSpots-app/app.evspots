@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:evspots/screens/app_settings.dart';
-import 'package:evspots/screens/home/consumer/all_consumer.dart';
-import 'package:evspots/screens/profile_screen.dart';
+import 'package:evspots/screens/Profile/profile_screen.dart';
+import 'package:evspots/screens/map_screen/map_screen.dart';
+import 'package:evspots/screens/settings/app_settings.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/ListTileWidgets.dart';
@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../generated/l10n.dart';
-import '../screens/home_screen2.dart';
-import '../screens/vehicles.dart';
+import '../../generated/l10n.dart';
+import '../../screens/consumer/settings/consumer_settings.dart';
+import '../../screens/Vehicles/vehicles.dart';
+import '../Picture/myPicture.dart';
+import 'launch_in_browser.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -86,7 +88,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               SizedBox(
                                 width: width*0.2,
                                 height: height*0.10,
-                                child: Picker(),
+                                child: MyPicture(),
                               ),
                             ],
                           ),
@@ -108,10 +110,10 @@ class _MyDrawerState extends State<MyDrawer> {
                                     : AppColor.secColor,
                               ),
                               title: S.of(context).home,
-                              onTap: (){
-                                Drawerkey.currentState!.openEndDrawer();
-                              }
-                            ),
+                                onTap: (){
+                                  Drawerkey.currentState!.openEndDrawer();
+                                }
+                                ),
                             SizedBox(
                               height: height * 0.01,
                             ),
@@ -172,7 +174,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       : AppColor.secColor,
                                 ),
                                 title:'Privacy & Police',
-                                onTap: (){_launched = _launchInBrowser(toLaunch);}
+                                onTap: (){_launched = LaunchInBrowser(toLaunch);}
                             ),
                             SizedBox(
                               height: height * 0.01,
@@ -241,7 +243,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ? 'assets/images/logo_for_dark_theme.png'
                       : 'assets/images/logo_for_light_theme.png'),
                 ),
-                  onTap: (){_launched = _launchInBrowser(toLaunch);}
+                  onTap: (){_launched = LaunchInBrowser(toLaunch);}
               ),
               FutureBuilder<PackageInfo>(
                 future: _getPackageInfo(),
@@ -267,11 +269,4 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 }
 
-Future<void> _launchInBrowser(Uri url) async {
-  if (!await launchUrl(
-    url,
-    mode: LaunchMode.externalApplication,
-  )) {
-    throw 'Could not launch $url';
-  }
-}
+

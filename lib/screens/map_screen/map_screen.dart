@@ -1,27 +1,28 @@
 import 'dart:async';
-import 'package:evspots/screens/ev_station.dart';
-import 'package:evspots/screens/filter_screen.dart';
-import 'package:evspots/screens/home/consumer/all_consumer.dart';
-import 'package:evspots/screens/profile_screen.dart';
+import 'package:evspots/generated/l10n.dart';
+import 'package:evspots/screens/consumer/home/all_consumer.dart';
 import 'package:evspots/themes/app_color.dart';
+import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/custom_map/optional_functions.dart';
 import 'package:evspots/widgets/custom_map/view/custom_map_view.dart';
+import 'package:evspots/widgets/home/map_screen/custom_scroll_view_content.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import '../generated/l10n.dart';
-import '../themes/theme_model.dart';
+import '../../../../widgets/Picture/myPicture.dart';
+import '../filter/filter_screen.dart';
+
 
 final GlobalKey<ScaffoldState> Drawerkey = GlobalKey();
 
-class HomeScreen2 extends StatefulWidget {
+class MapScreen extends StatefulWidget {
   @override
-  State<HomeScreen2> createState() => _HomeScreen2State();
+  State<MapScreen> createState() => _MapScreenState();
 }
 final TextEditingController _searchController = TextEditingController();
 final Completer<GoogleMapController> _completer = Completer();
 
-class _HomeScreen2State extends State<HomeScreen2> {
+class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +30,8 @@ class _HomeScreen2State extends State<HomeScreen2> {
       // drawer: const MyDrawer(),
       body: Stack(
         children: <Widget>[
-          CustomGoogleMap(),
-         CustomHeader(),
+          CustomMapView(),
+          CustomHeader(),
           DraggableScrollableSheet(
             initialChildSize: 0.30,
             minChildSize: 0.15,
@@ -44,15 +45,6 @@ class _HomeScreen2State extends State<HomeScreen2> {
         ],
       ),
     );
-  }
-}
-
-/// Google Map in the background
-class CustomGoogleMap extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CustomMapView();
-    // return GMap();
   }
 }
 
@@ -212,7 +204,7 @@ class CustomUserAvatar extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(right: 10,left: 10),
-            child: SizedBox(width: 30, height: 30, child: Picker()),
+            child: SizedBox(width: 30, height: 30, child: MyPicture()),
           ),
         ],
       ),
@@ -282,214 +274,6 @@ class CustomCategoryChip extends StatelessWidget {
   }
 }
 
-/// Content of the DraggableBottomSheet's child SingleChildScrollView
-class CustomScrollViewContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 12.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      margin: const EdgeInsets.all(0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: CustomInnerContent(),
-      ),
-    );
-  }
-}
 
-class CustomInnerContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const SizedBox(height: 12),
-        CustomDraggingHandle(),
-        const SizedBox(height: 16),
-        CustomExploreBerlin(),
-        const SizedBox(height: 16),
-        CustomHorizontallyScrollingRestaurants(),
-        const SizedBox(height: 24),
-        CustomFeaturedListsText(),
-        const SizedBox(height: 16),
-        CustomFeaturedItemsGrid(),
-        const SizedBox(height: 24),
-        CustomRecentPhotosText(),
-        const SizedBox(height: 16),
-        CustomRecentPhotoLarge(),
-        const SizedBox(height: 12),
-        CustomRecentPhotosSmall(),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-}
-
-class CustomDraggingHandle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 5,
-      width: 30,
-      decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
-    );
-  }
-}
-
-class CustomExploreBerlin extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const Text("Explore Berlin",
-            style: TextStyle(fontSize: 22, color: Colors.black45)),
-        const SizedBox(width: 8),
-        Container(
-          height: 24,
-          width: 24,
-          child: const Icon(Icons.arrow_forward_ios,
-              size: 12, color: Colors.black54),
-          decoration: BoxDecoration(
-              color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CustomRestaurantCategory(),
-            const SizedBox(width: 12),
-            CustomRestaurantCategory(),
-            const SizedBox(width: 12),
-            CustomRestaurantCategory(),
-            const SizedBox(width: 12),
-            CustomRestaurantCategory(),
-            const SizedBox(width: 12),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomFeaturedListsText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      //only to left align the text
-      child: Row(
-        children: <Widget>[
-          const Text("Featured Lists", style: TextStyle(fontSize: 14))
-        ],
-      ),
-    );
-  }
-}
-
-class CustomFeaturedItemsGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: GridView.count(
-        //to avoid scrolling conflict with the dragging sheet
-        physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(0),
-        crossAxisCount: 2,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        shrinkWrap: true,
-        children: <Widget>[
-          CustomFeaturedItem(),
-          CustomFeaturedItem(),
-          CustomFeaturedItem(),
-          CustomFeaturedItem(),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomRecentPhotosText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Row(
-        children: <Widget>[
-          const Text("Recent Photos", style: TextStyle(fontSize: 14)),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomRecentPhotoLarge extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: CustomFeaturedItem(),
-    );
-  }
-}
-
-class CustomRecentPhotosSmall extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CustomFeaturedItemsGrid();
-  }
-}
-
-class CustomRestaurantCategory extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey[500],
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      onTap: (){
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const EvStationInfo()),
-        );
-      },
-
-    );
-  }
-}
-
-class CustomFeaturedItem extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-        color: Colors.grey[500],
-        borderRadius: BorderRadius.circular(8),
-      ),
-    );
-  }
-}
 
 

@@ -1,9 +1,10 @@
-import 'package:evspots/screens/home/consumer/all_consumer.dart';
+import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../themes/app_color.dart';
-import '../themes/theme_model.dart';
+import '../../themes/app_color.dart';
+import '../../themes/theme_model.dart';
 
 class Vehicles extends StatefulWidget {
   const Vehicles({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:evspots/constans/shared_pref.dart';
+import 'package:evspots/auth/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class ThemeModel extends ChangeNotifier {
