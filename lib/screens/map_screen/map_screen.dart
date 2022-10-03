@@ -138,6 +138,7 @@ class CustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: S.of(context).search,
               hintStyle:  TextStyle(
+                height: 4,
                 color: themeNotifier.isDark
                     ? AppColor.bodyColor
                     : AppColor.bodyColorDark,
@@ -145,7 +146,9 @@ class CustomTextField extends StatelessWidget {
               contentPadding: const EdgeInsets.only(
                   left: 10,
                   top: 10,
-                  bottom: 10),
+                  bottom: 10,
+                  right: 10
+              ),
               fillColor: Colors.white,
               // filled: true,
               // prefixIcon: IconButton(

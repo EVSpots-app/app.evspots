@@ -1,4 +1,5 @@
 import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/favorite/favorite_screen.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../generated/l10n.dart';
 import '../widgets/Drawer/drawer.dart';
 import 'home_screen/home_screen.dart';
+import 'map_screen/enroute_screen.dart';
 
 
 
@@ -18,7 +20,7 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-List screen = [HomeScreen(), MapScreen()];
+List screen = [ MapScreen(),EnrouteScreen(),FavoriteScreen()];
 
 class _MainPageState extends State<MainPage> {
   @override
@@ -35,26 +37,28 @@ class _MainPageState extends State<MainPage> {
             changeIndex.switchIndex(i);
           },
           items: [
-            /// Home
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.home),
-              title: Text(S.of(context).home),
-              selectedColor: AppColor.secColor,
-            ),
-
             /// location
             SalomonBottomBarItem(
               icon: const Icon(Icons.location_pin),
               title: Text("Location"),
-               selectedColor: AppColor.secColor,
+              selectedColor: AppColor.secColor,
             ),
 
-            /// Search
-            // SalomonBottomBarItem(
-            //   icon: const Icon(Icons.search),
-            //   title: Text(S.of(context).search),
-            //   selectedColor: Colors.orange,
-            // ),
+            /// Home
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.navigation),
+              title: Text('ENROUTE'),
+              selectedColor: AppColor.secColor,
+            ),
+
+
+
+            /// Favorite
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.favorite),
+              title: Text("Favorite"),
+              selectedColor: AppColor.secColor,
+            ),
 
             /// Profile
             // SalomonBottomBarItem(

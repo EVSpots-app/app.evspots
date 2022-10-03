@@ -23,6 +23,7 @@ class _MyAppBarState extends State<MyAppBar> {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return AppBar(
+        centerTitle: true,
         title: Text(
           S.of(context).evspots,
           style: TextStyle(

@@ -1,10 +1,12 @@
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
+import 'package:evspots/widgets/ListTileWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/home/ev_station/amenitiesCard.dart';
 import '../../widgets/home/ev_station/connectionsCard.dart';
+import 'add_check_in.dart';
 
 class EvStationInfo extends StatefulWidget {
   const EvStationInfo({Key? key}) : super(key: key);
@@ -16,8 +18,8 @@ class EvStationInfo extends StatefulWidget {
 class _EvStationInfoState extends State<EvStationInfo> {
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
@@ -86,7 +88,7 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                 style:
                                 TextStyle(fontSize: 15, color: Colors.grey),
                               ),
-                              SizedBox(width: 120,),
+                              SizedBox(width: width*0.3,),
                               Icon(
                                 Icons.favorite_border,
                                 color: Colors.green,
@@ -159,14 +161,13 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 60,
-                                width: 60,
+                                height: height*0.073,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Image.asset('assets/images/pic1.jpg')),
                               ),
-                              const SizedBox(
-                                width: 20,
+                               SizedBox(
+                                width: width*0.04,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -207,8 +208,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  height: 80,
-                                  width: 80,
+                                  height: height*0.1,
+                                  // width: 80,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Image.asset('assets/images/pic1.jpg')),
@@ -217,8 +218,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                   width: width * 0.025,
                                 ),
                                 SizedBox(
-                                  height: 80,
-                                  width: 80,
+                                  height: height*0.1,
+
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Image.asset('assets/images/pic1.jpg')),
@@ -227,8 +228,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                   width: width * 0.025,
                                 ),
                                 SizedBox(
-                                  height: 80,
-                                  width: 80,
+                                  height: height*0.1,
+
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Image.asset('assets/images/pic1.jpg')),
@@ -248,14 +249,14 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: 60,
-                                width: 60,
+                                height: height*0.073,
+
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Image.asset('assets/images/pic1.jpg')),
                               ),
-                              const SizedBox(
-                                width: 20,
+                               SizedBox(
+                                width: width*0.04,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -292,6 +293,39 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             height: height * 0.02,
                           ),
                         ]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            height: height*0.06,
+            width: width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  child: Row(
+                    children: [
+                      Icon(Icons.accessibility_new),
+                      SizedBox(width: width*0.05,),
+                      Text('Add Check-in',style: TextStyle(fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  onTap: (){Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddCheckIn()),
+                  );},
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: Row(
+                    children: [
+                      Icon(Icons.navigation),
+                      SizedBox(width: width*0.05,),
+                      Text('Get Direction',style: TextStyle(fontWeight: FontWeight.bold),),
+                    ],
                   ),
                 ),
               ],
