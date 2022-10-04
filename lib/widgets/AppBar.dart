@@ -6,26 +6,20 @@ import 'package:provider/provider.dart';
 import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
 
-class MyAppBar extends StatefulWidget with PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+class MyAppBar extends StatelessWidget with PreferredSizeWidget {
+  final String title;
 
-  @override
-  State<MyAppBar> createState() => _MyAppBarState();
+  const MyAppBar({Key? key,required this.title,  List<Widget>?actions,}) : super(key: key);
 
-  // Size get preferredSize => throw UnimplementedError();
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return AppBar(
+        elevation: 0,
         centerTitle: true,
         title: Text(
-          S.of(context).evspots,
+          title,
           style: TextStyle(
               color: themeNotifier.isDark
                   ? AppColor.bodyColor
@@ -47,4 +41,8 @@ class _MyAppBarState extends State<MyAppBar> {
       );
     });
   }
+
+  // Size get preferredSize => throw UnimplementedError();
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

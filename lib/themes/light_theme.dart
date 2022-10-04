@@ -5,6 +5,7 @@ import 'app_color.dart';
 ThemeData lightTheme = ThemeData(
   appBarTheme: AppBarTheme(
     backgroundColor: AppColor.bodyColor,
+    // titleTextStyle: TextStyle(color: AppColor.secColor),
     iconTheme: IconThemeData(
       color: AppColor.secColor,
     ),
@@ -23,7 +24,7 @@ ThemeData lightTheme = ThemeData(
   primaryColorLight: AppColor.buttonBackgroundColor,
   textTheme: const TextTheme(
     headline1: TextStyle(
-        fontFamily: 'Pacifico',
+
       color: Colors.black,
       fontSize: 40,
       fontWeight: FontWeight.bold

@@ -2,6 +2,8 @@ import 'package:evspots/widgets/home/filter_screen/amenitiesChek_with_chekBoxs.d
 import 'package:evspots/widgets/home/filter_screen/connection_type_with_chekBoxs.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/AppBar.dart';
+
 class FilterScreen extends StatefulWidget {
   const FilterScreen({Key? key}) : super(key: key);
 
@@ -21,13 +23,9 @@ class _FilterScreenState extends State<FilterScreen> {
     var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Filter',
-          style: TextStyle(color: Colors.blueAccent),
-        ),
-        centerTitle: true,
+      appBar: MyAppBar(
+
+        title: 'Filter',
         actions: [
           TextButton(
             onPressed: () {},

@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../auth/shared_pref.dart';
+import '../../generated/l10n.dart';
 
 
 class VerifyScreen extends StatefulWidget {
@@ -48,7 +49,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const MyAppBar(),
+      appBar:  MyAppBar(
+        title: S.of(context).evspots,
+      ),
       body: Container(
         margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,

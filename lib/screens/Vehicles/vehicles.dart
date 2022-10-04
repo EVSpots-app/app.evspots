@@ -1,5 +1,6 @@
 import 'package:evspots/screens/consumer/home/all_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
+import 'package:evspots/widgets/AppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,24 +22,7 @@ class _VehiclesState extends State<Vehicles> {
       return Consumer<ChangeDropdownValue>(
           builder: (_, changeDropdownValue, __) {
         return Scaffold(
-            appBar: AppBar(
-              iconTheme: IconThemeData(
-                color: themeNotifier.isDark
-                    ? AppColor.bodyColor
-                    : AppColor.secColor,
-              ),
-              backgroundColor: themeNotifier.isDark
-                  ? AppColor.bodyColorDark
-                  : AppColor.bodyColor,
-              title: Text(
-                'Vehicles',
-                style: TextStyle(
-                    color: themeNotifier.isDark
-                        ? AppColor.bodyColor
-                        : AppColor.secColor,
-                    fontFamily: 'Tajawal-Black'),
-              ),
-            ),
+            appBar: MyAppBar(title: 'Vehicles',),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: DropdownButtonFormField(

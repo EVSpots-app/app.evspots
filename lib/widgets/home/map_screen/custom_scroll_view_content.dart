@@ -3,6 +3,8 @@
 import 'package:evspots/screens/ev_station/ev_station.dart';
 import 'package:flutter/material.dart';
 
+import '../favorite_screen/favorite_card.dart';
+
 /// Content of the DraggableBottomSheet's child SingleChildScrollView
 class CustomScrollViewContent extends StatelessWidget {
   @override
@@ -181,14 +183,10 @@ class CustomRestaurantCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey[500],
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
+      child: SizedBox(
+          height: 358,
+          width: 370,
+          child: FavoriteCard()),
       onTap: (){
         Navigator.push(
           context,

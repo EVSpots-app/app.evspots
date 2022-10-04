@@ -25,7 +25,7 @@ class _AppSettingsState extends State<AppSettings> {
 
   TextEditingController _deleteAccount = TextEditingController();
 
- @override
+  @override
   void initState() {
     super.initState();
   }
@@ -94,13 +94,15 @@ class _AppSettingsState extends State<AppSettings> {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: ListTile(
-                            trailing:
-                                value == changeDropdownValue.initialLanguageValue
-                                    ? Icon(
-                                        Icons.check,
-                                        color: AppColor.mainColor,
-                                      )
-                                    : null,
+                            trailing: value ==
+                                    changeDropdownValue.initialLanguageValue
+                                ? Icon(
+                                    Icons.check,
+                                    color: themeNotifier.isDark
+                                        ? AppColor.mainColor
+                                        : AppColor.secColor,
+                                  )
+                                : null,
                             leading:
                                 const Icon(Icons.language, color: Colors.grey),
                             title: Padding(
@@ -381,4 +383,3 @@ class _AppSettingsState extends State<AppSettings> {
     );
   }
 }
-

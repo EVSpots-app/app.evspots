@@ -3,6 +3,7 @@ import 'package:evspots/generated/l10n.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/Gender.dart';
+import 'package:evspots/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -224,23 +225,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            height: height * 0.07,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColor.mainColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              'Update',
-              style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
+        bottomNavigationBar:
+          MyButton(onTap: () {}, title: 'Update',)
       );
     });
   }

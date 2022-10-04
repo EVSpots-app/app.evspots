@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:evspots/screens/Profile/profile_screen.dart';
+import 'package:evspots/screens/favorite/favorite_screen.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/screens/settings/app_settings.dart';
 import 'package:evspots/themes/app_color.dart';
@@ -12,6 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../generated/l10n.dart';
 import '../../screens/consumer/settings/consumer_settings.dart';
 import '../../screens/Vehicles/vehicles.dart';
+import '../Images/logo_evspots.dart';
+import '../Picture/ProfilePicture.dart';
 import '../Picture/myPicture.dart';
 import 'launch_in_browser.dart';
 
@@ -145,7 +148,11 @@ class _MyDrawerState extends State<MyDrawer> {
                                 ),
                                 title:'Favorite',
                                 onTap: (){
-
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => const FavoriteScreen()),
+                                  // );
                                 }
                             ),
 
@@ -239,9 +246,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 child: SizedBox(
                   height: height * 0.06,
                   width: width*0.4,
-                  child: Image.asset(themeNotifier.isDark
-                      ? 'assets/images/logo_for_dark_theme.png'
-                      : 'assets/images/logo_for_light_theme.png'),
+                  child: LogoEVSpots(),
                 ),
                   onTap: (){_launched = LaunchInBrowser(toLaunch);}
               ),

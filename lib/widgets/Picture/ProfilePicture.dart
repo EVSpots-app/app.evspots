@@ -2,14 +2,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:evspots/widgets/open_camera/bottompicker_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'myPicture.dart';
-
 
 File? _image;
 
@@ -141,7 +137,40 @@ class _ProfilePictureState extends State<ProfilePicture> {
         bottomPickerSheet(
             context, _imageFromCamera, _imageFromGallery);
       },
-      child: MyPicture(),
+      child: MyPicture()
     );
   }
 }
+
+class MyPicture extends StatelessWidget {
+  const MyPicture({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: MediaQuery.of(context).size.width / 7,
+      backgroundColor: Colors.grey,
+      backgroundImage: _image != null
+          ? FileImage(_image!) as ImageProvider
+          : const AssetImage('assets/images/no-image.jpg'),
+    );
+  }
+}
+
+// class MyPicture2 extends StatelessWidget {
+//   const MyPicture2({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ClipRRect(
+//         borderRadius: BorderRadius.circular(12),
+//         child: SizedBox(
+//           height: 100,
+//           child: Image(
+//             image: _image != null
+//                 ? FileImage(_image!) as ImageProvider
+//                 : AssetImage('assets/images/no-image.jpg'),
+//           ),
+//         ));
+//   }
+// }

@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
             /// location
             SalomonBottomBarItem(
               icon: const Icon(Icons.location_pin),
-              title: Text("Location"),
+              title: Text("NEARBY"),
               selectedColor: AppColor.secColor,
             ),
 
@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
             /// Favorite
             SalomonBottomBarItem(
               icon: const Icon(Icons.favorite),
-              title: Text("Favorite"),
+              title: Text("FAVORITE"),
               selectedColor: AppColor.secColor,
             ),
 

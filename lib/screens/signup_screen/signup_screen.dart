@@ -1,7 +1,9 @@
-
+import 'package:evspots/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import '../../generated/l10n.dart';
 import '../../themes/app_color.dart';
 import '../../widgets/AppBar.dart';
+import '../../widgets/Drawer/launch_in_browser.dart';
 import '../main_page.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -18,42 +20,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController fullName = TextEditingController();
   TextEditingController _email = TextEditingController();
 
+  Future<void>? _launched;
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
+    final Uri toLaunch = Uri(
+        scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
     return Scaffold(
       // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(
+        title: S.of(context).evspots,
+      ),
       // drawer: MyDrawer(),
-      bottomNavigationBar: GestureDetector(
-        onTap: () {
-          Navigator.pushAndRemoveUntil<void>(
-            context,
-            MaterialPageRoute<void>(builder: (BuildContext context) => const MainPage()),
-            ModalRoute.withName('/'),
-          );
-        },
-        child: Container(
-          margin: const EdgeInsets.all(8),
-          height: height * 0.07,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColor.mainColor,
-            borderRadius: BorderRadius.circular(8),
+      bottomNavigationBar: Container(
+        height: height * 0.08,
+        child: Column(children: [
+          Text(
+            "By Continue you're agreed to our",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-          alignment: Alignment.center,
-          child: const Text(
-            'Continue',
-            style: TextStyle(fontSize: 16.0, color: Colors.black,fontWeight: FontWeight.bold),
+          SizedBox(height: height*0.005),
+          InkWell(
+            child: Text(
+              "Terms & Condition",
+              style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),
+            ),
+            onTap:(){_launched = LaunchInBrowser(toLaunch);},
           ),
-        ),
+        ]),
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
           child: Container(
             height: height,
             width: width,
@@ -72,14 +74,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: height * 0.02,
+                    height: height * 0.01,
                   ),
                   const Text(
                     'Looks like you are not registered yet ',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
                   ),
                   SizedBox(
                     height: height * 0.06,
@@ -94,11 +94,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  TextField(
-                    controller: _phone,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: TextField(
+                      controller: _phone,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -114,10 +117,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  TextField(
-                    controller: fullName,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: TextField(
+                      controller: fullName,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -133,12 +139,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  TextField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: TextField(
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    height: height * 0.04,
+                  ),
+                  MyButton(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                const MainPage()),
+                        ModalRoute.withName('/'),
+                      );
+                    },
+                    title: 'Continue',
                   ),
                 ],
               ),
