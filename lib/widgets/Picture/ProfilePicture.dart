@@ -86,13 +86,13 @@ class _ProfilePictureState extends State<ProfilePicture> {
           content: "Image format should be jpg/jpeg/bmp.");
       return false;
     }
-    if (image.lengthSync() > 100000) {
-      showAlertDialog(
-          context: context,
-          title: "Error Uploading!",
-          content: "Image Size should be less than 100KB.");
-      return false;
-    }
+    // if (image.lengthSync() > 100000) {
+    //   showAlertDialog(
+    //       context: context,
+    //       title: "Error Uploading!",
+    //       content: "Image Size should be less than 100KB.");
+    //   return false;
+    // }
     return true;
   }
 
@@ -137,7 +137,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
         bottomPickerSheet(
             context, _imageFromCamera, _imageFromGallery);
       },
-      child: MyPicture()
+      child: MyPicture2()
     );
   }
 }
@@ -157,20 +157,20 @@ class MyPicture extends StatelessWidget {
   }
 }
 
-// class MyPicture2 extends StatelessWidget {
-//   const MyPicture2({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ClipRRect(
-//         borderRadius: BorderRadius.circular(12),
-//         child: SizedBox(
-//           height: 100,
-//           child: Image(
-//             image: _image != null
-//                 ? FileImage(_image!) as ImageProvider
-//                 : AssetImage('assets/images/no-image.jpg'),
-//           ),
-//         ));
-//   }
-// }
+class MyPicture2 extends StatelessWidget {
+  const MyPicture2({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 100,
+          child: Image(
+            image: _image != null
+                ? FileImage(_image!) as ImageProvider
+                : AssetImage('assets/images/pic1.jpg'),
+          ),
+        ));
+  }
+}

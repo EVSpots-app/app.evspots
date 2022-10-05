@@ -23,18 +23,26 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "evspots": MessageLookupByLibrary.simpleMessage("نقاط شحن"),
         "exit": MessageLookupByLibrary.simpleMessage("خروج"),
+        "favorite": MessageLookupByLibrary.simpleMessage("المفضلة"),
         "helloLabel": MessageLookupByLibrary.simpleMessage("مرحبا"),
+        "helpFaqs":
+            MessageLookupByLibrary.simpleMessage("المساعدة والأسئلة الشائعة"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "likes": MessageLookupByLibrary.simpleMessage("اعجاب"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "motasemAltamimi":
             MessageLookupByLibrary.simpleMessage("معتصم التميمي"),
+        "privacyPolice": MessageLookupByLibrary.simpleMessage("الخصوصية"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "selectLanguage": MessageLookupByLibrary.simpleMessage("أختر الغة"),
-        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات")
+        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "terms": MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
+        "vehicles": MessageLookupByLibrary.simpleMessage("مركبات")
       };
 }

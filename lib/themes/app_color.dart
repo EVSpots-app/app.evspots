@@ -16,6 +16,7 @@ class AppColor {
 
   static Color buttonBackgroundColor = const Color(0xff1fd57e);
   static Color buttonBackgroundColorDark = const Color(0xff1fd57e);
+  static Color button5 = const Color(0xffECF8F6);
 }
 
 class AppFont {

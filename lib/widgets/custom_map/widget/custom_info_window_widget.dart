@@ -7,7 +7,7 @@ class CustomInfoWindowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(seconds: 5),
       curve: Curves.easeInOut,
       padding: EdgeInsets.symmetric(
           horizontal: 10, vertical: 10),
@@ -56,7 +56,7 @@ class CustomInfoWindowWidget extends StatelessWidget {
                       SizedBox(width: 10),
                       Expanded(
                         child: Image.asset(
-                          'assets/images/home/car2.png',
+                          'assets/images/EVStation2.jpg',
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -84,11 +84,11 @@ class CustomInfoWindowWidget extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   backgroundImage:
-                      AssetImage('assets/images/no-image.jpg'),
+                      AssetImage('assets/images/pic1.jpg'),
                 ),
                 Expanded(
                   child: Text(
-                    'Khaled waled ',
+                    'Motasem Altamimi ',
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

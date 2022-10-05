@@ -11,5 +11,12 @@
   "motasemAltamimi" : "Motasem Altamimi",
   "darkMode" : "Dark Mode",
   "selectLanguage" : "Select Language",
-  "likes" : "Likes"
+  "likes" : "Likes",
+  "vehicles" : "Vehicles",
+  "favorite" : "Favorite",
+  "terms" : "Terms & Condition",
+  "privacyPolice" : "Privacy & Police",
+  "helpFaqs" : "Help & FAQs",
+  "contactUs" : "contact Us",
+  "deleteAccount": "Delete Account"
 }

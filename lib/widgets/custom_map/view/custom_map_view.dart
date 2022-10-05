@@ -9,9 +9,12 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../home/map_screen/custom_scroll_view_content.dart';
 import '../widget/custom_info_window_widget.dart';
 import '../widget/map_center_marker.dart';
 import '../widget/map_location_badge.dart';
+
+final GlobalKey<ScaffoldState> ButtonSheet = GlobalKey();
 
 class CustomMapView extends StatefulWidget {
   const CustomMapView({Key? key}) : super(key: key);
@@ -32,18 +35,38 @@ class CustomMapViewState extends State<CustomMapView> {
   static const LatLng destinationLocation = LatLng(31.958936, 35.866577);
   static const LatLng lastLocation = LatLng(31.957340, 35.866797);
 
+  static const LatLng firstPin = LatLng(31.959935, 35.863575);
+  static const LatLng secPin = LatLng(31.958641, 35.863575);
+  static const LatLng th3Pin = LatLng(31.957440, 35.863610);
+  static const LatLng for4Pin = LatLng(31.956204, 35.863653);
+
+
   static const double zoom = 16.5;
 
   List<String> images = [
-    'assets/images/car.jpg',
-    'assets/images/scooter.jpg',
-    'assets/images/car.jpg',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+    'assets/icons/ev_pin_map.png',
+
+    // 'assets/icons/ev_pin_map.png',
+    // 'assets/icons/ev_pin_map.png',
+    // 'assets/images/car.jpg',
+    // 'assets/images/scooter.jpg',
+    // 'assets/images/car.jpg',
   ];
 
   final List<LatLng> _latLang = [
     sourceLocation,
     destinationLocation,
     lastLocation,
+    firstPin,
+    secPin,
+    th3Pin,
+    for4Pin
   ];
 
   static const _initialCameraPosition = CameraPosition(
@@ -82,6 +105,7 @@ class CustomMapViewState extends State<CustomMapView> {
     distance = DistanceService.findDistance(
         _latLangCenterMarker!, destinationLocation);
     return Scaffold(
+      key: ButtonSheet,
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -186,7 +210,17 @@ class CustomMapViewState extends State<CustomMapView> {
                 _latLangCenterMarker = _initialCameraPosition.target;
               },
               onTap: (position) {
-                _customInfoWindowController.hideInfoWindow!();
+                // ButtonSheet.currentState!.showBottomSheet((context) => DraggableScrollableSheet(
+                //   initialChildSize: 0.30,
+                //   minChildSize: 0.15,
+                //   builder: (BuildContext context, ScrollController scrollController) {
+                //     return SingleChildScrollView(
+                //       controller: scrollController,
+                //       child: CustomScrollViewContent(),
+                //     );
+                //   },
+                // ),);
+               _customInfoWindowController.hideInfoWindow!();
                 userBadgeSelected = false;
                 setState(() {});
               },
@@ -258,7 +292,7 @@ class CustomMapViewState extends State<CustomMapView> {
                   onPressed: () {
                     _completer.future.then((value) {
                       DefaultAssetBundle.of(context)
-                          .loadString('assets/images/home/night_style.json')
+                          .loadString('assets/images/map_theme.json')
                           .then((string) {
                         setState(() {});
                         value.setMapStyle(string);
@@ -274,7 +308,7 @@ class CustomMapViewState extends State<CustomMapView> {
                             mapStyle = 'dark';
                             DefaultAssetBundle.of(context)
                                 .loadString(
-                                    'assets/images/home/night_style.json')
+                                    'assets/images/home/map_theme.json')
                                 .then((string) {
                               value.setMapStyle(string);
                             });
@@ -455,7 +489,7 @@ class CustomMapViewState extends State<CustomMapView> {
 
   void showMarkersOnMap() async {
     for (int i = 0; i < _latLang.length; i++) {
-      final Uint8List markerIcon = await getBytesFromAssets(images[i], 100);
+      final Uint8List markerIcon = await getBytesFromAssets(images[i], 150);
       _marker.add(
         Marker(
           icon: BitmapDescriptor.fromBytes(markerIcon),

@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.only(left: 20.0,right: 20.0,top: 15,bottom: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -97,7 +97,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding:  EdgeInsets.all(8.0),
                 child:  TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
+                    border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                   ),
                 ),
               ),
@@ -114,11 +117,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // SizedBox(
               //   height: height * 0.02,
               // ),
-              const Padding(
+               Padding(
                 padding:  EdgeInsets.all(8.0),
                 child:  TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                      border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                   ),
                 ),
               ),
@@ -138,14 +144,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IntlPhoneField(
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     labelText: 'Phone Number',
                     labelStyle: TextStyle(
                       color: Colors.grey
                     ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
+                      border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                   ),
                   onChanged: (phone) {
                     print(phone.completeNumber);
@@ -168,12 +175,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // SizedBox(
               //   height: height * 0.02,
               // ),
-              const Padding(
+               Padding(
                 padding:  EdgeInsets.all(8.0),
                 child:  TextField(
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                      border: OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                   ),
                 ),
               ),
@@ -192,10 +202,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               child: ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6.0),
-                  side:  BorderSide(color: Colors.grey.shade400, width: 1.5),
-                ),
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(width: 2,color: Colors.grey.shade500)),
                 title: Text("${birthDateInString}",style: TextStyle(fontSize: 20,),),
                 trailing: Icon(Icons.calendar_today),
                   onTap: ()async{

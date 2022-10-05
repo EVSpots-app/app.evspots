@@ -11,7 +11,14 @@
   "motasemAltamimi" : "معتصم التميمي",
   "darkMode" : "الوضع الليلي",
   "selectLanguage" : "أختر الغة",
-  "likes" : "اعجاب"
+  "likes" : "اعجاب",
+  "vehicles" : "مركبات",
+  "favorite" : "المفضلة",
+  "terms" : "الشروط والأحكام",
+  "privacyPolice" : "الخصوصية",
+  "helpFaqs" : "المساعدة والأسئلة الشائعة",
+  "contactUs" : "اتصل بنا",
+  "deleteAccount" : "حذف الحساب"
 
 
 }

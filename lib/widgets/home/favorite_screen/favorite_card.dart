@@ -27,7 +27,7 @@ class FavoriteCard extends StatelessWidget {
                 borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                 child: Stack(
                   children: [
-                    Image.asset('assets/images/EVStation.jpg'),
+                    Image.asset('assets/images/EVStation2.jpg'),
                     Positioned(
                         top: 2,
                         left: 2,
@@ -121,10 +121,10 @@ class FavoriteCard extends StatelessWidget {
                               ],
                             ),
                             SizedBox(width: width*0.1,),
-                            Icon(Icons.navigation,size: width*0.08,)
+                            Icon(Icons.assistant_navigation,size: width*0.1,color: Colors.green,)
                           ],
                         ),
-                        SizedBox(height: height*0.02,)
+                        SizedBox(height: height*0.005,)
                       ],
                     ),
                   ),

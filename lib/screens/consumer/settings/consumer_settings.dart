@@ -35,8 +35,9 @@ class ChangeDropdownValue extends ChangeNotifier {
     initialLanguageValue =  language;
     notifyListeners();
   }
-  switchDropdownValue4(String? newValue3) {
+  switchDropdownValue4(String? newValue3) async{
     dropdownValue4 = newValue3!;
+    // await SharedPreference().getTheme();
     notifyListeners();
   }
 

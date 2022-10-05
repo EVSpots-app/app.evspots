@@ -11,7 +11,7 @@ class CustomScrollViewContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 12.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(24),topRight: Radius.circular(24))),
       margin: const EdgeInsets.all(0),
       child: Container(
         decoration: BoxDecoration(
@@ -184,7 +184,7 @@ class CustomRestaurantCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: SizedBox(
-          height: 358,
+          height: 290,
           width: 370,
           child: FavoriteCard()),
       onTap: (){

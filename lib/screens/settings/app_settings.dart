@@ -319,7 +319,7 @@ class _AppSettingsState extends State<AppSettings> {
                             SizedBox(width: width * 0.03),
                             Padding(
                               padding: const EdgeInsets.all(2.5),
-                              child: const Text('Delete Account',
+                              child:  Text(S.of(context).deleteAccount,
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold)),

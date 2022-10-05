@@ -127,7 +127,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Vehicles',
+                                title:S.of(context).vehicles,
                                 onTap: (){
                                   Navigator.push(
                                     context,
@@ -146,7 +146,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Favorite',
+                                title:S.of(context).favorite,
                                 onTap: (){
                                   // Navigator.push(
                                   //   context,
@@ -167,7 +167,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Terms & Condition',
+                                title:S.of(context).terms,
                                 onTap: (){}
                             ),
                             SizedBox(
@@ -180,7 +180,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Privacy & Police',
+                                title:S.of(context).privacyPolice,
                                 onTap: (){_launched = LaunchInBrowser(toLaunch);}
                             ),
                             SizedBox(
@@ -193,7 +193,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Help & FAQs',
+                                title:S.of(context).helpFaqs,
                                 onTap: (){}
                             ),
                             SizedBox(
@@ -206,7 +206,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       ? AppColor.mainColor
                                       : AppColor.secColor,
                                 ),
-                                title:'Contact Us',
+                                title:S.of(context).contactUs,
                                 onTap: (){}
                             ),
                             SizedBox(

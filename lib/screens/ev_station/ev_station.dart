@@ -1,3 +1,4 @@
+import 'package:evspots/main.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/ListTileWidgets.dart';
@@ -34,7 +35,7 @@ class _EvStationInfoState extends State<EvStationInfo> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset('assets/images/EVStation.jpg'),
+                Image.asset('assets/images/EVStation2.jpg'),
                 Container(
                   width: width,
                   decoration: BoxDecoration(
@@ -298,19 +299,23 @@ class _EvStationInfoState extends State<EvStationInfo> {
               ],
             ),
           ),
-          bottomNavigationBar: Container(
-            height: height*0.06,
-            width: width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  child: Row(
-                    children: [
-                      Icon(Icons.accessibility_new),
-                      SizedBox(width: width*0.05,),
-                      Text('Add Check-in',style: TextStyle(fontWeight: FontWeight.bold),),
-                    ],
+          bottomNavigationBar: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  child: Container(
+                    color: AppColor.button5,
+                    height: height*0.06,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.car_crash),
+                        SizedBox(width: width*0.05,),
+                        Text('Add Check-in',style: TextStyle(fontWeight: FontWeight.bold),),
+                      ],
+                    ),
                   ),
                   onTap: (){Navigator.push(
                     context,
@@ -318,18 +323,28 @@ class _EvStationInfoState extends State<EvStationInfo> {
                         builder: (context) => const AddCheckIn()),
                   );},
                 ),
-                InkWell(
+              ),
+              Expanded(
+                child: GestureDetector(
+
                   onTap: (){},
-                  child: Row(
-                    children: [
-                      Icon(Icons.navigation),
-                      SizedBox(width: width*0.05,),
-                      Text('Get Direction',style: TextStyle(fontWeight: FontWeight.bold),),
-                    ],
+                  child: Container(
+
+                    height: height*0.06,
+                    color: AppColor.mainColor,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.navigation),
+                        SizedBox(width: width*0.05,),
+                        Text('Get Direction',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

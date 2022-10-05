@@ -3,6 +3,7 @@ import 'package:evspots/screens/verify_screen/verify_screen.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -115,7 +116,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         IntlPhoneField(
                           decoration: InputDecoration(
-
                             errorText: _emailErrorMsg,
                             labelText: 'Phone Number',
                             labelStyle: TextStyle(
@@ -124,9 +124,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                   : AppColor.secColor,
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
-                            ),
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(width: 2,color: Colors.grey.shade500)),
                           ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]+')),
+                            FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                          ],
                           onChanged: (value) {
                             _phone = value.completeNumber;
                           },

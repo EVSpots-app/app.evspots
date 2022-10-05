@@ -1,5 +1,6 @@
 import 'package:evspots/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../generated/l10n.dart';
 import '../../themes/app_color.dart';
 import '../../widgets/AppBar.dart';
@@ -70,7 +71,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Text(
                     'Sign up Now',
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                   SizedBox(
@@ -97,10 +99,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8),
                     child: TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]+')),
+                        FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                      ],
                       controller: _phone,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                       ),
                     ),
                   ),
@@ -123,6 +132,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: fullName,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                       ),
                     ),
                   ),
@@ -146,6 +158,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
                       ),
                     ),
                   ),

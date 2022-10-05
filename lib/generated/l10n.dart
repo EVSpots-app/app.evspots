@@ -179,6 +179,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Vehicles`
+  String get vehicles {
+    return Intl.message(
+      'Vehicles',
+      name: 'vehicles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite`
+  String get favorite {
+    return Intl.message(
+      'Favorite',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms & Condition`
+  String get terms {
+    return Intl.message(
+      'Terms & Condition',
+      name: 'terms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy & Police`
+  String get privacyPolice {
+    return Intl.message(
+      'Privacy & Police',
+      name: 'privacyPolice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help & FAQs`
+  String get helpFaqs {
+    return Intl.message(
+      'Help & FAQs',
+      name: 'helpFaqs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `contact Us`
+  String get contactUs {
+    return Intl.message(
+      'contact Us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

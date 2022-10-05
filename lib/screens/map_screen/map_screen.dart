@@ -34,8 +34,8 @@ class _MapScreenState extends State<MapScreen> {
           CustomMapView(),
           CustomHeader(),
           DraggableScrollableSheet(
-            initialChildSize: 0.30,
-            minChildSize: 0.15,
+            initialChildSize: 0.10,
+            minChildSize: 0.10,
             builder: (BuildContext context, ScrollController scrollController) {
               return SingleChildScrollView(
                 controller: scrollController,

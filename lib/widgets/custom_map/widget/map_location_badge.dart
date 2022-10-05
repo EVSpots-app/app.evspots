@@ -48,7 +48,7 @@ class MapLocationBadge extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Khaled Waled',
+                      'Motasem Altamimi',
                       style: TextStyle(
                         fontSize: 14,
                         // fontFamily: 'PoppinsMedium',

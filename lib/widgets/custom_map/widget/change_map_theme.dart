@@ -20,7 +20,7 @@ class _ChangeMapThemeState extends State<ChangeMapTheme> {
           onTap: () {
             widget.completer.future.then((value) {
               DefaultAssetBundle.of(context)
-                  .loadString('assets/images/home/map_style.json')
+                  .loadString('assets/images/map_theme.json')
                   .then((string) {
                 setState(() {});
                 value.setMapStyle(string);
@@ -36,7 +36,7 @@ class _ChangeMapThemeState extends State<ChangeMapTheme> {
           onTap: () async {
             widget.completer.future.then((value) {
               DefaultAssetBundle.of(context)
-                  .loadString('assets/images/home/night_style.json')
+                  .loadString('assets/images/map_theme.json')
                   .then((string) {
                 setState(() {});
                 value.setMapStyle(string);

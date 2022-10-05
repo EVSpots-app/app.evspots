@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
-
+import '../../widgets/custom_button.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar:  MyAppBar(
+      appBar: MyAppBar(
         title: S.of(context).evspots,
       ),
       body: Container(
@@ -98,34 +98,29 @@ class _VerifyScreenState extends State<VerifyScreen> {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 45,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.mainColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () async {
-                      try {
-                        PhoneAuthCredential credential =
+              MyButton(
+                onTap: () async {
+                  try {
+                    PhoneAuthCredential credential =
                         PhoneAuthProvider.credential(
-                            verificationId: SignInScreen.verify, smsCode: code);
+                            verificationId: SignInScreen.verify,
+                            smsCode: code);
 
-                        // Sign the user in (or link) with the credential
-                        await auth.signInWithCredential(credential);
-                        SharedPreference().setLoggedin();
-                         Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainPage()),
-                        );
-                      } catch (e) {
-                        print("wrong otp");
-                      }
-                    },
-                    child: const Text("Verify Phone Number",style: TextStyle(
-                        fontSize: 16.0, color: Colors.black),)),
+                    // Sign the user in (or link) with the credential
+                    await auth.signInWithCredential(credential);
+                    SharedPreference().setLoggedin();
+                    Navigator.pushAndRemoveUntil<void>(
+                      context,
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              const MainPage()),
+                      ModalRoute.withName('/'),
+                    );
+                  } catch (e) {
+                    print("wrong otp");
+                  }
+                },
+                title: 'Verify Phone Number',
               ),
               Row(
                 children: [
@@ -134,12 +129,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  SignInScreen()),
+                              builder: (context) => SignInScreen()),
                         );
                       },
                       child: const Text(
                         "Edit Phone Number ?",
-                        style: TextStyle(color: Colors.grey,fontSize: 16),
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
                       ))
                 ],
               )
@@ -149,8 +144,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
       ),
     );
   }
-  // setLogin(bool value) async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   sharedPreferences.setBool(PREF_key, value);
-  // }
+// setLogin(bool value) async {
+//   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//   sharedPreferences.setBool(PREF_key, value);
+// }
 }

@@ -37,7 +37,7 @@ class _AddCheckInState extends State<AddCheckIn> {
                         children: [
                           Text(
                             'A233,World Motasem Park',
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),
                           ),
                           const Text(
                             'Business Center',
@@ -65,7 +65,7 @@ class _AddCheckInState extends State<AddCheckIn> {
                       children: [
                         Text(
                           'Share your experienc',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: height * 0.02,
@@ -87,7 +87,7 @@ class _AddCheckInState extends State<AddCheckIn> {
                           children: [
                             Text(
                               'Add Photo',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '(Optional)',
