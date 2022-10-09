@@ -1,17 +1,29 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../themes/app_color.dart';
 import '../../../themes/theme_model.dart';
 
-class FavoriteCard extends StatefulWidget {
-  const FavoriteCard({Key? key}) : super(key: key);
+class FavoriteCardWidgets extends StatelessWidget {
+  final AssetImage image;
+  final String titleText;
+  final String locationText;
+  // final String connections;
+  final String numConnections;
+  // final String amenities;
+  final List<Widget> amenities;
 
-  @override
-  State<FavoriteCard> createState() => _FavoriteCardState();
-}
+  FavoriteCardWidgets({Key? key,
+    required this.image,
+    required this.titleText,
+    required this.locationText,
+    // required this.connections,
+    required this.numConnections,
+    // required this.amenities,
+    required this.amenities,
+  }) : super(key: key);
 
-class _FavoriteCardState extends State<FavoriteCard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -34,7 +46,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                     topLeft: Radius.circular(15)),
                 child: Stack(
                   children: [
-                    Image(image: AssetImage('assets/images/EVStation2.jpg')),
+                    Image(image: image),
                     Positioned(
                         top: 2,
                         left: 2,
@@ -102,13 +114,13 @@ class _FavoriteCardState extends State<FavoriteCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Business Center',
+                          titleText,
                           style: TextStyle(
                               fontSize: width * 0.07,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'A522 , New York New York',
+                          locationText,
                           style: TextStyle(
                               fontSize: width * 0.04,
                               color: Colors.grey,
@@ -126,14 +138,14 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Connections',
+                                  "Connections",
                                   style: TextStyle(
                                       fontSize: width * 0.04,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  '8 Point',
+                                  numConnections,
                                   style: TextStyle(
                                       fontSize: width * 0.05,
                                       fontWeight: FontWeight.bold),
@@ -148,19 +160,20 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Amenities',
+                                  "Amenities",
                                   style: TextStyle(
                                       fontSize: width * 0.04,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.home_filled),
-                                    Icon(Icons.home_filled),
-                                    Icon(Icons.home_filled),
-                                    Icon(Icons.home_filled),
-                                  ],
+                                SizedBox(
+                                  width: width*0.25,
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: this.amenities,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -175,7 +188,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           ],
                         ),
                         SizedBox(
-                          height: height * 0.005,
+                          height: height * 0.008,
                         )
                       ],
                     ),
@@ -187,14 +200,3 @@ class _FavoriteCardState extends State<FavoriteCard> {
     );
   }
 }
-
-class ChangeFavoriteValue extends ChangeNotifier {
-  bool favorite = false;
-
-  switchFavoriteValue(value) {
-    favorite != value;
-    notifyListeners();
-  }
-}
-
-

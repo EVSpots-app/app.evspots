@@ -178,10 +178,7 @@ class _AppSettingsState extends State<AppSettings> {
                       }).toList(),
                     ),
                     SizedBox(height: height * 0.015),
-                    const Text(
-                      '-------------------------------------------------------------------------------------------',
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    const Divider(thickness: 2),
                     // DropdownButton(
                     //   dropdownColor: Colors.white,
                     //   style: const TextStyle(

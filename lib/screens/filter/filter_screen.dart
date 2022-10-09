@@ -51,21 +51,27 @@ class _FilterScreenState extends State<FilterScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ConnectionType(),
-                  ConnectionType(),
-                  ConnectionType(),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ConnectionType(),
+                    ConnectionType(),
+                    ConnectionType(),
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ConnectionType(),
-                  ConnectionType(),
-                  ConnectionType(),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ConnectionType(),
+                    ConnectionType(),
+                    ConnectionType(),
+                  ],
+                ),
               ),
               SizedBox(
                 height: height*0.03,
@@ -146,21 +152,29 @@ class _FilterScreenState extends State<FilterScreen> {
               SizedBox(
                 height: height*0.03,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const AmenitiesChek(),
-                  const AmenitiesChek(),
-                  const AmenitiesChek(),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const AmenitiesChek(),
-                  const AmenitiesChek(),
-                  const AmenitiesChek(),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                    const AmenitiesChek(),
+                  ],
+                ),
               ),
             ],
           ),

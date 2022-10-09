@@ -105,7 +105,7 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
               Row(
                 children: <Widget>[
                   CustomIconAvatar(),
-                  CustomTextField(),
+                  CustomTextField(hint: S.of(context).search,),
                   CustomUserAvatar(),
                 ],
               ),
@@ -118,6 +118,8 @@ class _CustomSearchContainerState extends State<CustomSearchContainer> {
 }
 
 class CustomTextField extends StatelessWidget {
+  final String  hint;
+  const CustomTextField({Key? key, required this.hint,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(
@@ -137,17 +139,15 @@ class CustomTextField extends StatelessWidget {
               fontSize: 14,
             ),
             decoration: InputDecoration(
-              hintText: S.of(context).search,
+              hintText: this.hint,
               hintStyle:  TextStyle(
-                height: 4,
+                height: 2.5,
                 color: themeNotifier.isDark
                     ? AppColor.bodyColor
                     : AppColor.bodyColorDark,
               ),
               contentPadding: const EdgeInsets.only(
                   left: 10,
-                  top: 10,
-                  bottom: 10,
                   right: 10
               ),
               fillColor: Colors.white,

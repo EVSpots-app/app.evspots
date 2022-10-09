@@ -20,6 +20,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,

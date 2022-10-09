@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String initValue="Select your Birth Date";
   bool isDateSelected= false;
   DateTime? birthDate; // instance of DateTime
-  String? birthDateInString ='Write your birth date';
+  String? birthDateInString ='MM/DD/YYYY';
 
   @override
   Widget build(BuildContext context) {

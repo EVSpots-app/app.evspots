@@ -4,6 +4,7 @@ import 'package:evspots/screens/ev_station/ev_station.dart';
 import 'package:flutter/material.dart';
 
 import '../favorite_screen/favorite_card.dart';
+import '../favorite_screen/favorite_card_widgets.dart';
 
 /// Content of the DraggableBottomSheet's child SingleChildScrollView
 class CustomScrollViewContent extends StatelessWidget {
@@ -94,14 +95,57 @@ class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CustomRestaurantCategory(),
+            SizedBox(
+              height: 310,
+              width: 370,
+              child: FavoriteCardWidgets(
+                image: AssetImage('assets/images/manaseer.jpg'),
+                titleText: 'Manaseer efill',
+                locationText: ' Amman. 11110. Jordan Amman ',
+                numConnections: '5 Point',
+                amenities: [
+                  Icon(Icons.shopping_cart,),
+                  Icon(Icons.store,),
+                  Icon(Icons.storefront_rounded,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                ],
+              ),
+            ),
             const SizedBox(width: 12),
             CustomRestaurantCategory(),
             const SizedBox(width: 12),
-            CustomRestaurantCategory(),
+            //CustomRestaurantCategory(),
+            // const SizedBox(width: 12),
+            // CustomRestaurantCategory(),
             const SizedBox(width: 12),
             CustomRestaurantCategory(),
             const SizedBox(width: 12),
+            SizedBox(
+              height: 310,
+              width: 370,
+              child: FavoriteCardWidgets(
+                image: AssetImage('assets/images/manaseer.jpg'),
+                titleText: 'Manaseer efill',
+                locationText: ' Amman. 11110. Jordan Amman ',
+                numConnections: '5 Point',
+                amenities: [
+                  Icon(Icons.shopping_cart,),
+                  Icon(Icons.store,),
+                  Icon(Icons.storefront_rounded,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                  Icon(Icons.payments,),
+                ],
+              ),
+            ),
           ],
         ),
       ),

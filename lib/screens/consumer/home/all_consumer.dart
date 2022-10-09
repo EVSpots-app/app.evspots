@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 /// in Main Page Change Routing Page
 class ChangeRoutingPage extends ChangeNotifier {
   int currentIndex = 0;
-
   switchIndex(int i) {
     currentIndex = i;
     notifyListeners();

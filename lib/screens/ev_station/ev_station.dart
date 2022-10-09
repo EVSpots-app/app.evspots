@@ -55,8 +55,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      right: 18,
-                      left: 18,
+                      right: 15,
+                      left: 15,
                     ),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -89,7 +89,7 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                 style:
                                 TextStyle(fontSize: 15, color: Colors.grey),
                               ),
-                              SizedBox(width: width*0.3,),
+                              SizedBox(width: width*0.25,),
                               Icon(
                                 Icons.favorite_border,
                                 color: Colors.green,

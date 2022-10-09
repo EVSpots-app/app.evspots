@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/widgets/custom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../generated/l10n.dart';
@@ -6,6 +8,7 @@ import '../../themes/app_color.dart';
 import '../../widgets/AppBar.dart';
 import '../../widgets/Drawer/launch_in_browser.dart';
 import '../main_page.dart';
+import 'model/user_data_model.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -99,10 +102,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8),
                     child: TextField(
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]+')),
-                        FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-                      ],
+                      // inputFormatters: [
+                      //   FilteringTextInputFormatter.allow(RegExp(r'[0-9+]+')),
+                      //   FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                      // ],
                       controller: _phone,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -168,17 +171,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height * 0.04,
                   ),
                   MyButton(
-                    onTap: () {
+                    onTap: () async{
+                      try {
+                        final auth = FirebaseAuth
+                            .instance; // create new instance from auth
+                        var result = await auth.createUserWithEmailAndPassword(
+                          email: _email.text,
+                          password: _phone.text,
+                        );
+
+                        if(result.user!= null){
+                          MyUser user=MyUser(email: _email.text, phone: _phone.text);
+                          if(fullName.text.isNotEmpty)
+                            user.fullName=fullName.text;
+                          var collection = FirebaseFirestore.instance.collection('users1');
+                          collection.add(user.toJson());
+
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                       Navigator.pushAndRemoveUntil<void>(
                         context,
                         MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                const MainPage()),
+                            const MainPage()),
                         ModalRoute.withName('/'),
                       );
                     },
                     title: 'Continue',
                   ),
+                  // MyButton(
+                  //   onTap: () {
+                  //     Navigator.pushAndRemoveUntil<void>(
+                  //       context,
+                  //       MaterialPageRoute<void>(
+                  //           builder: (BuildContext context) =>
+                  //               const MainPage()),
+                  //       ModalRoute.withName('/'),
+                  //     );
+                  //   },
+                  //   title: 'Continue',
+                  // ),
                 ],
               ),
             ),

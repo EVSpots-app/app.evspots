@@ -8,6 +8,7 @@ import 'package:pinput/pinput.dart';
 import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/custom_button.dart';
+import '../signup_screen/signup_screen.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({Key? key}) : super(key: key);
@@ -99,23 +100,39 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 height: 20,
               ),
               MyButton(
-                onTap: () async {
+                onTap: ()  async {
                   try {
                     PhoneAuthCredential credential =
                         PhoneAuthProvider.credential(
                             verificationId: SignInScreen.verify,
-                            smsCode: code);
+                            smsCode: code
+                        );
 
                     // Sign the user in (or link) with the credential
-                    await auth.signInWithCredential(credential);
-                    SharedPreference().setLoggedin();
-                    Navigator.pushAndRemoveUntil<void>(
-                      context,
-                      MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const MainPage()),
-                      ModalRoute.withName('/'),
-                    );
+                    UserCredential result  = UserCredential as UserCredential;
+                    // await auth.signInWithCredential(credential);
+
+                    if(result.credential != null)  {
+                      await auth.signInWithCredential(credential);
+                      SharedPreference().setLoggedin();
+                      Navigator.pushAndRemoveUntil<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                            const MainPage()),
+                        ModalRoute.withName('/'),
+                      );
+                    } else{
+                      print('please signUp Now');
+                      // Navigator.pushAndRemoveUntil<void>(
+                      //   context,
+                      //   MaterialPageRoute<void>(
+                      //       builder: (BuildContext context) =>
+                      //        SignUpScreen()),
+                      //   ModalRoute.withName('/'),
+                      // );
+                    }
+
                   } catch (e) {
                     print("wrong otp");
                   }
