@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evspots/screens/verify_screen/verify_screen.dart';
 import 'package:evspots/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../../themes/app_color.dart';
 import '../../widgets/AppBar.dart';
 import '../../widgets/Drawer/launch_in_browser.dart';
 import '../main_page.dart';
+import '../sigin_screen/signin_screen.dart';
 import 'model/user_data_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,14 +27,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _email = TextEditingController();
 
   Future<void>? _launched;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    isLogin =true;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
+    // FirebaseAuth.instance.currentUser?.phoneNumber;
     final Uri toLaunch = Uri(
         scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
+    var code = "";
     return Scaffold(
       // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -172,25 +184,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   MyButton(
                     onTap: () async{
-                      try {
-                        final auth = FirebaseAuth
-                            .instance; // create new instance from auth
-                        var result = await auth.createUserWithEmailAndPassword(
-                          email: _email.text,
-                          password: _phone.text,
-                        );
+                      // try {
+                      //   final auth = FirebaseAuth
+                      //       .instance; // create new instance from auth
+                      //   var result = await auth.createUserWithEmailAndPassword(
+                      //     email: _email.text,
+                      //     password: _phone.text,
+                      //   );
+                      //
+                      //   if(result.user!= null){
+                      //     MyUser user=MyUser(email: _email.text, phone: _phone.text);
+                      //     if(fullName.text.isNotEmpty)
+                      //       user.fullName=fullName.text;
+                      //     var collection = FirebaseFirestore.instance.collection('users');
+                      //     collection.add(user.toJson());
+                      //
+                      //   }
+                      // } catch (e) {
+                      //   print(e);
+                      // }
 
-                        if(result.user!= null){
-                          MyUser user=MyUser(email: _email.text, phone: _phone.text);
-                          if(fullName.text.isNotEmpty)
-                            user.fullName=fullName.text;
-                          var collection = FirebaseFirestore.instance.collection('users1');
-                          collection.add(user.toJson());
 
-                        }
-                      } catch (e) {
-                        print(e);
-                      }
+                     // Sign the user in (or link) with the credential
+                     //  PhoneAuthCredential credential =
+                     //  PhoneAuthProvider.credential(
+                     //      verificationId: SignInScreen.verify,
+                     //      smsCode: code
+                     //  );
+                     //  UserCredential result  =
+                     //  await auth.signInWithCredential(credential);
+                     //
                       Navigator.pushAndRemoveUntil<void>(
                         context,
                         MaterialPageRoute<void>(
@@ -201,18 +224,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     title: 'Continue',
                   ),
-                  // MyButton(
-                  //   onTap: () {
-                  //     Navigator.pushAndRemoveUntil<void>(
-                  //       context,
-                  //       MaterialPageRoute<void>(
-                  //           builder: (BuildContext context) =>
-                  //               const MainPage()),
-                  //       ModalRoute.withName('/'),
-                  //     );
-                  //   },
-                  //   title: 'Continue',
-                  // ),
                 ],
               ),
             ),

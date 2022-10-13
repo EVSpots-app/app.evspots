@@ -1,8 +1,8 @@
 class MyUser {
-  String email;
-  String? fullName;
-  String? id;
   String phone;
+  String? fullName;
+  String email;
+  // String? id;
 
   MyUser({required this.email, required this.phone});
 

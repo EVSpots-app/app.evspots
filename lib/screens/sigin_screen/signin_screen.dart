@@ -14,6 +14,9 @@ import '../../widgets/AppBar.dart';
 import '../../widgets/Images/logo_evspots.dart';
 import '../../widgets/custom_button.dart';
 
+TextEditingController countryController = TextEditingController();
+var phone = "";
+
 class SignInScreen extends StatefulWidget {
   static String verify = "";
 
@@ -26,9 +29,9 @@ class _SignInScreenState extends State<SignInScreen> {
     // place your code
   }
 
-  TextEditingController countryController = TextEditingController();
+
   String _emailErrorMsg = '';
-  var _phone = "";
+
 
   @override
   void initState() {
@@ -132,13 +135,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             FilteringTextInputFormatter.deny(RegExp(r'^0+')),
                           ],
                           onChanged: (value) {
-                            _phone = value.completeNumber;
+                            phone = value.completeNumber;
                           },
                           // onChanged: (phone) {
                           //   print(phone.completeNumber);
                           // },
                           onCountryChanged: (country) {
-                            _phone = country.name;
+                            phone = country.name;
                           },
                         ),
                         SizedBox(
@@ -147,9 +150,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         MyButton(
                           onTap: () async {
                             if (_isValid()) {
-                              print(countryController.text + _phone);
+                              print(countryController.text + phone);
                               await FirebaseAuth.instance.verifyPhoneNumber(
-                                phoneNumber: countryController.text + _phone,
+                                phoneNumber: countryController.text + phone,
                                 verificationCompleted:
                                     (PhoneAuthCredential credential) {},
                                 verificationFailed: (FirebaseAuthException e) {
@@ -206,7 +209,7 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       _emailErrorMsg = '';
     });
-    if (_phone.isEmpty) {
+    if (phone.isEmpty) {
       setState(() {
         _emailErrorMsg = 'Enter your number';
       });

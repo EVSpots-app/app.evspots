@@ -1,6 +1,7 @@
 import 'package:evspots/screens/consumer/home/all_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
 import 'package:evspots/auth/splash_screen.dart';
+import 'package:evspots/screens/signup_screen/test.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

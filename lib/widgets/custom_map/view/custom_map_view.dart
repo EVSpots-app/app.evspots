@@ -308,14 +308,14 @@ class CustomMapViewState extends State<CustomMapView> {
                             mapStyle = 'dark';
                             DefaultAssetBundle.of(context)
                                 .loadString(
-                                    'assets/images/home/map_theme.json')
+                                    'assets/images/map_theme.json')
                                 .then((string) {
                               value.setMapStyle(string);
                             });
                           } else {
                             mapStyle = '';
                             DefaultAssetBundle.of(context)
-                                .loadString('assets/images/home/map_style.json')
+                                .loadString('assets/images/map_style.json')
                                 .then((string) {
                               value.setMapStyle(string);
                             });

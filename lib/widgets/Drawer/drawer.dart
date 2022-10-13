@@ -231,7 +231,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             ),
                             Consumer<ChangeDropdownValue>(
                             builder: (_, changeDropdownValue, __) {
-                              changeDropdownValue.setInitialLanguageValue();
+                              changeDropdownValue.setInitialLanguageValue() ?? "English";
                               return SizedBox();
                             }
                             ),

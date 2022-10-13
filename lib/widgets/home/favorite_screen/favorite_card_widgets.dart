@@ -29,6 +29,7 @@ class FavoriteCardWidgets extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Card(
+      color: Colors.transparent,
       margin: EdgeInsets.only(
           left: width * 0.04, right: width * 0.04, top: 10, bottom: 10),
       shape: RoundedRectangleBorder(

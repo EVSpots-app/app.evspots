@@ -47,7 +47,7 @@ class _AddCheckInState extends State<AddCheckIn> {
                         ],
                       ),
                       SizedBox(
-                          height: height * 0.16,
+                          height: height * 0.14,
                           child:
                               Image.asset('assets/images/ev_addCheck-in.png')),
                     ],

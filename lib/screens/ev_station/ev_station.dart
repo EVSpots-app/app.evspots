@@ -138,12 +138,12 @@ class _EvStationInfoState extends State<EvStationInfo> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AmenitiesCard(),
-                                AmenitiesCard(),
-                                AmenitiesCard(),
-                                AmenitiesCard(),
-                                AmenitiesCard(),
-                                AmenitiesCard(),
+                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
+                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
+                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
+                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
+                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
+
                               ],
                             ),
                           ),

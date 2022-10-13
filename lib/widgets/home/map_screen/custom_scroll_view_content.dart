@@ -88,6 +88,8 @@ class CustomExploreBerlin extends StatelessWidget {
 class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: SingleChildScrollView(
@@ -96,8 +98,8 @@ class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 310,
-              width: 370,
+              height: height*0.41,
+              width: width,
               child: FavoriteCardWidgets(
                 image: AssetImage('assets/images/manaseer.jpg'),
                 titleText: 'Manaseer efill',
@@ -224,12 +226,15 @@ class CustomRecentPhotosSmall extends StatelessWidget {
 }
 
 class CustomRestaurantCategory extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return InkWell(
       child: SizedBox(
-          height: 290,
-          width: 370,
+          height: height*0.385,
+          width: width,
           child: FavoriteCard()),
       onTap: (){
         Navigator.push(

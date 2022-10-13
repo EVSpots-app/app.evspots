@@ -1,5 +1,6 @@
 import 'package:evspots/widgets/home/filter_screen/amenitiesChek_with_chekBoxs.dart';
 import 'package:evspots/widgets/home/filter_screen/connection_type_with_chekBoxs.dart';
+import 'package:evspots/widgets/home/filter_screen/speeds_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/AppBar.dart';
@@ -12,10 +13,6 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  bool value1 = false;
-  bool value2 = false;
-  bool value3 = false;
-  bool value4 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,62 +80,10 @@ class _FilterScreenState extends State<FilterScreen> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
-              ListTile(
-                leading: Checkbox(
-                  value: this.value1,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      this.value1 = value!;
-                    });
-                  },
-                ),
-                title: const Text('fast (1511w)'
-                  ,style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),),
-              ),
-              ListTile(
-                leading: Checkbox(
-                  value: this.value2,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      this.value2 = value!;
-                    });
-                  },
-                ),
-                title: const Text('fast (1511w)'
-                  ,style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),),
-              ),
-              ListTile(
-                leading: Checkbox(
-                  value: this.value3,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      this.value3 = value!;
-                    });
-                  },
-                ),
-                title: const Text('fast (1511w)'
-                  ,style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),),
-              ),
-              ListTile(
-                leading: Checkbox(
-                  value: this.value4,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      this.value4 = value!;
-                    });
-                  },
-                ),
-                title: const Text('fast (1511w)'
-                  ,style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),),
-              ),
+              SpeedsWidget(name: 'fast (1511w)',),
+              SpeedsWidget(name: 'fast (1622w)',),
+              SpeedsWidget(name: 'fast (1320w)',),
+              SpeedsWidget(name: 'fast (1950w)',),
               SizedBox(
                 height: height*0.03,
               ),

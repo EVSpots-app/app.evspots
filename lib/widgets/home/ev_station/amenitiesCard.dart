@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AmenitiesCard extends StatelessWidget {
-  const AmenitiesCard({Key? key}) : super(key: key);
+class AmenitiesCardWidgets extends StatelessWidget {
+
+  final String text;
+  final IconData icon;
+
+  const AmenitiesCardWidgets({Key? key, required this.text, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +17,19 @@ class AmenitiesCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(2.0),
           child: Stack(
-            children: const [
+            children:  [
               Positioned(
                   top: 20,
                   left: 20,
                   child: Icon(
-                    Icons.fastfood,
+                    icon,
                     size: 50,
                   )),
               Positioned(
                   bottom: 2,
                   left: 30,
                   child: Text(
-                    'Food',
+                    text,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,color: Colors.grey),
                   )),

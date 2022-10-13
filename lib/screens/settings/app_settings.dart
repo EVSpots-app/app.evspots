@@ -179,28 +179,6 @@ class _AppSettingsState extends State<AppSettings> {
                     ),
                     SizedBox(height: height * 0.015),
                     const Divider(thickness: 2),
-                    // DropdownButton(
-                    //   dropdownColor: Colors.white,
-                    //   style: const TextStyle(
-                    //     color: Colors.black,
-                    //     backgroundColor: Colors.white,
-                    //   ),
-                    //   value: changeDropdownValue.dropdownValue3,
-                    //   items: [
-                    //     DropdownMenuItem(child: Text('English'), value: 'en',
-                    //       onTap: ()=> AppModel.shared.changeLanguageToEn('en'),
-                    //     ),
-                    //     DropdownMenuItem(child: Text('العربية'), value: 'ar',
-                    //       onTap: ()=> AppModel.shared.changeLanguageToAr('ar'),
-                    //     ),
-                    //   ],
-                    //   onChanged: (String? newValue2) {
-                    //     // newValue2 == changeDropdownValue.dropdownValue3
-                    //     //     ? AppModel.shared.changeLanguage('en')
-                    //     //     : AppModel.shared.changeLanguage('ar');
-                    //     changeDropdownValue.switchDropdownValue3(newValue2);
-                    //   },
-                    // ),
                     SizedBox(height: height * 0.015),
                     GestureDetector(
                       onTap: () async {
