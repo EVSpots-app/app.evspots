@@ -4,12 +4,12 @@ import 'package:evspots/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../generated/l10n.dart';
-import '../../themes/app_color.dart';
 import '../../widgets/AppBar.dart';
 import '../../widgets/Drawer/launch_in_browser.dart';
-import '../main_page.dart';
 import '../sigin_screen/signin_screen.dart';
+import '../user_info/user_info.dart';
 import 'model/user_data_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -18,13 +18,17 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  void _callBackFunction(String name, String dialCode, String flag) {
-    // place your code
-  }
+  // void _callBackFunction(String name, String dialCode, String flag) {
+  //   // place your code
+  // }
 
   TextEditingController _phone = TextEditingController();
   TextEditingController fullName = TextEditingController();
   TextEditingController _email = TextEditingController();
+
+  String _emailErrorMsg = '';
+  String _phoneErrorMsg = '';
+  // String _fullNameErrorMsg = '';
 
   Future<void>? _launched;
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -32,9 +36,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
-    isLogin =true;
+    isLogin = true;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // FirebaseAuth.instance.currentUser?.phoneNumber;
     final Uri toLaunch = Uri(
         scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
-    var code = "";
+    // var code = "";
     return Scaffold(
       // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -59,13 +62,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             "By Continue you're agreed to our",
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: height*0.005),
+          SizedBox(height: height * 0.005),
           InkWell(
             child: Text(
               "Terms & Condition",
-              style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
             ),
-            onTap:(){_launched = LaunchInBrowser(toLaunch);},
+            onTap: () {
+              _launched = LaunchInBrowser(toLaunch);
+            },
           ),
         ]),
       ),
@@ -85,10 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const Text(
                     'Sign up Now',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold
-                    ),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: height * 0.01,
@@ -112,20 +115,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height * 0.02,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8),
-                    child: TextField(
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(RegExp(r'[0-9+]+')),
-                      //   FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-                      // ],
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: IntlPhoneField(
                       controller: _phone,
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
-                      ),
+                          errorText: _phoneErrorMsg,
+                          labelText: 'Phone Number',
+                          // labelStyle: TextStyle(
+                          //   color: themeNotifier.isDark
+                          //       ? AppColor.bodyColor
+                          //       : AppColor.secColor,
+                          // ),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.grey.shade500))),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]+')),
+                        FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                      ],
+                      onChanged: (value) {
+                        phone = value.completeNumber;
+                      },
+                      // onChanged: (phone) {
+                      //   print(phone.completeNumber);
+                      // },
+                      onCountryChanged: (country) {
+                        phone = country.name;
+                      },
                     ),
                   ),
                   SizedBox(
@@ -146,11 +164,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: TextField(
                       controller: fullName,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
-                      ),
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.grey.shade500))),
                     ),
                   ),
                   SizedBox(
@@ -172,55 +190,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        errorText: _emailErrorMsg,
+                          border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(width: 2,color: Colors.grey.shade500))
-                      ),
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.grey.shade500))),
                     ),
                   ),
                   SizedBox(
                     height: height * 0.04,
                   ),
                   MyButton(
-                    onTap: () async{
-                      // try {
-                      //   final auth = FirebaseAuth
-                      //       .instance; // create new instance from auth
-                      //   var result = await auth.createUserWithEmailAndPassword(
-                      //     email: _email.text,
-                      //     password: _phone.text,
-                      //   );
-                      //
-                      //   if(result.user!= null){
-                      //     MyUser user=MyUser(email: _email.text, phone: _phone.text);
-                      //     if(fullName.text.isNotEmpty)
-                      //       user.fullName=fullName.text;
-                      //     var collection = FirebaseFirestore.instance.collection('users');
-                      //     collection.add(user.toJson());
-                      //
-                      //   }
-                      // } catch (e) {
-                      //   print(e);
-                      // }
+                    onTap: () async {
+                      if(_isValid()){
+                        try {
+                          // MyUser2 user2 =MyUser2(email: email, phone: phone, firstName: firstName, lastName: lastName, birthDate: birthDate)
+                          MyUser user = MyUser(
+                              email: _email.text,
+                              phone: countryController.text + phone);
+                          if (fullName.text.isNotEmpty)
+                            user.fullName = fullName.text;
+                          var collection =
+                          FirebaseFirestore.instance.collection('users');
+                          collection.add(user.toJson());
 
-
-                     // Sign the user in (or link) with the credential
-                     //  PhoneAuthCredential credential =
-                     //  PhoneAuthProvider.credential(
-                     //      verificationId: SignInScreen.verify,
-                     //      smsCode: code
-                     //  );
-                     //  UserCredential result  =
-                     //  await auth.signInWithCredential(credential);
-                     //
-                      Navigator.pushAndRemoveUntil<void>(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                            const MainPage()),
-                        ModalRoute.withName('/'),
-                      );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  UserInfoScreen()),
+                          );
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      }
                     },
                     title: 'Continue',
                   ),
@@ -231,5 +233,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+  bool _isValid() {
+    setState(() {
+      _phoneErrorMsg = '';
+      _emailErrorMsg = '';
+
+    });
+    if (_email.text.isEmpty) {
+      setState(() {
+        _emailErrorMsg = 'Email is required';
+      });
+      return false;
+    }
+    // if (!_email.text.isEmail()) {
+    //   setState(() {
+    //     _emailErrorMsg = 'Email is badly format';
+    //   });
+    //   return false;
+    // }
+    if (_phone.text.isEmpty) {
+      setState(() {
+        _phoneErrorMsg = 'phone is required';
+      });
+      return false;
+    }
+
+    setState(() {
+      _phoneErrorMsg = '';
+      _emailErrorMsg = '';
+    });
+    return true;
   }
 }

@@ -27,6 +27,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
 
   _imageFromCamera() async {
     final PickedFile? pickedImage =
+    // ignore: deprecated_member_use
     await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
     if (pickedImage == null) {
       /**/
@@ -53,6 +54,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
 
   _imageFromGallery() async {
     final PickedFile? pickedImage =
+    // ignore: deprecated_member_use
     await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
     if (pickedImage == null) {
       /**/

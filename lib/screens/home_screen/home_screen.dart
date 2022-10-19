@@ -16,20 +16,13 @@ final List<String> imgList = [
   'https://www.kbb.com/wp-content/uploads/2021/11/Hyundai-SEVEN-concept-front-three-quarter.jpg?w=763'
 ];
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-// final GlobalKey<ScaffoldState> _key = GlobalKey();
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    // var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
         // key: key1,

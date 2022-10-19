@@ -2,16 +2,10 @@ import 'package:evspots/widgets/AppBar.dart';
 import 'package:evspots/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../themes/app_color.dart';
 
-class AddCheckIn extends StatefulWidget {
+class AddCheckIn extends StatelessWidget {
   const AddCheckIn({Key? key}) : super(key: key);
 
-  @override
-  State<AddCheckIn> createState() => _AddCheckInState();
-}
-
-class _AddCheckInState extends State<AddCheckIn> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

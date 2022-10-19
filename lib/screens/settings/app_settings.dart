@@ -1,39 +1,24 @@
 import 'package:evspots/localization/app_model.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
-import 'package:evspots/screens/sigin_screen/signin_screen.dart';
-import 'package:evspots/auth/shared_pref.dart';
 import 'package:evspots/themes/app_color.dart';
-import 'package:evspots/widgets/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
+// import 'package:share_plus/share_plus.dart';
 import '../../generated/l10n.dart';
 import '../../themes/theme_model.dart';
 
-class AppSettings extends StatefulWidget {
+class AppSettings extends StatelessWidget {
   const AppSettings({Key? key}) : super(key: key);
 
-  @override
-  State<AppSettings> createState() => _AppSettingsState();
-}
-
-class _AppSettingsState extends State<AppSettings> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
-  }
-
-  TextEditingController _deleteAccount = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
 
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
@@ -180,129 +165,129 @@ class _AppSettingsState extends State<AppSettings> {
                     SizedBox(height: height * 0.015),
                     const Divider(thickness: 2),
                     SizedBox(height: height * 0.015),
-                    GestureDetector(
-                      onTap: () async {
-                        await showAlertDialog(
-                            context: context,
-                            title: 'LogOut',
-                            content: 'Are you sure ?',
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  SharedPreference().deletePrefs();
-                                  Navigator.pushAndRemoveUntil<void>(
-                                    context,
-                                    MaterialPageRoute<void>(
-                                        builder: (BuildContext context) =>
-                                            SignInScreen()),
-                                    ModalRoute.withName('/'),
-                                  );
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Continue'),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Cancel'),
-                                ),
-                              ),
-                            ]);
-                      },
-                      child: Container(
-                        width: width,
-                        height: height * 0.06,
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(Icons.logout),
-                            SizedBox(
-                              width: width * 0.03,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4.0),
-                              child: Text(S.of(context).logout,
-                                  style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-
-                            // const Icon(Icons.logout),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: height * 0.015),
-                    GestureDetector(
-                      onTap: () async {
-                        await showAlertDialog(
-                            context: context,
-                            title: 'Delete Account',
-                            content:
-                                'Are you sure ? \nWrite "delete" if you sure ',
-                            actions: [
-                              TextField(
-                                controller: _deleteAccount,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  _deleteAccount.text.toLowerCase() == 'delete'
-                                      ? Navigator.pushAndRemoveUntil<void>(
-                                          context,
-                                          MaterialPageRoute<void>(
-                                              builder: (BuildContext context) =>
-                                                  SignInScreen()),
-                                          ModalRoute.withName('/'),
-                                        )
-                                      : Navigator.pop(context);
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Continue'),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Cancel'),
-                                ),
-                              ),
-                            ]);
-                      },
-                      child: Container(
-                        width: width,
-                        height: height * 0.06,
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.remove_circle,
-                              color: Colors.redAccent,
-                            ),
-                            SizedBox(width: width * 0.03),
-                            Padding(
-                              padding: const EdgeInsets.all(2.5),
-                              child:  Text(S.of(context).deleteAccount,
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () async {
+                    //     await showAlertDialog(
+                    //         context: context,
+                    //         title: 'LogOut',
+                    //         content: 'Are you sure ?',
+                    //         actions: [
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               SharedPreference().deletePrefs();
+                    //               Navigator.pushAndRemoveUntil<void>(
+                    //                 context,
+                    //                 MaterialPageRoute<void>(
+                    //                     builder: (BuildContext context) =>
+                    //                         SignInScreen()),
+                    //                 ModalRoute.withName('/'),
+                    //               );
+                    //             },
+                    //             child: const Padding(
+                    //               padding: EdgeInsets.all(8.0),
+                    //               child: Text('Continue'),
+                    //             ),
+                    //           ),
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               Navigator.pop(context);
+                    //             },
+                    //             child: const Padding(
+                    //               padding: EdgeInsets.all(8.0),
+                    //               child: Text('Cancel'),
+                    //             ),
+                    //           ),
+                    //         ]);
+                    //   },
+                    //   child: Container(
+                    //     width: width,
+                    //     height: height * 0.06,
+                    //     color: Colors.transparent,
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.start,
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         Icon(Icons.logout),
+                    //         SizedBox(
+                    //           width: width * 0.03,
+                    //         ),
+                    //         Padding(
+                    //           padding: const EdgeInsets.only(top: 4.0),
+                    //           child: Text(S.of(context).logout,
+                    //               style: const TextStyle(
+                    //                   fontSize: 22,
+                    //                   fontWeight: FontWeight.bold)),
+                    //         ),
+                    //
+                    //         // const Icon(Icons.logout),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(height: height * 0.015),
+                    // GestureDetector(
+                    //   onTap: () async {
+                    //     await showAlertDialog(
+                    //         context: context,
+                    //         title: 'Delete Account',
+                    //         content:
+                    //             'Are you sure ? \nWrite "delete" if you sure ',
+                    //         actions: [
+                    //           TextField(
+                    //             controller: _deleteAccount,
+                    //           ),
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               _deleteAccount.text.toLowerCase() == 'delete'
+                    //                   ? Navigator.pushAndRemoveUntil<void>(
+                    //                       context,
+                    //                       MaterialPageRoute<void>(
+                    //                           builder: (BuildContext context) =>
+                    //                               SignInScreen()),
+                    //                       ModalRoute.withName('/'),
+                    //                     )
+                    //                   : Navigator.pop(context);
+                    //             },
+                    //             child: const Padding(
+                    //               padding: EdgeInsets.all(8.0),
+                    //               child: Text('Continue'),
+                    //             ),
+                    //           ),
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               Navigator.pop(context);
+                    //             },
+                    //             child: const Padding(
+                    //               padding: EdgeInsets.all(8.0),
+                    //               child: Text('Cancel'),
+                    //             ),
+                    //           ),
+                    //         ]);
+                    //   },
+                    //   child: Container(
+                    //     width: width,
+                    //     height: height * 0.06,
+                    //     color: Colors.transparent,
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.start,
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         const Icon(
+                    //           Icons.remove_circle,
+                    //           color: Colors.redAccent,
+                    //         ),
+                    //         SizedBox(width: width * 0.03),
+                    //         Padding(
+                    //           padding: const EdgeInsets.all(2.5),
+                    //           child:  Text(S.of(context).deleteAccount,
+                    //               style: TextStyle(
+                    //                   fontSize: 22,
+                    //                   fontWeight: FontWeight.bold)),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 FutureBuilder<PackageInfo>(
@@ -339,22 +324,5 @@ class _AppSettingsState extends State<AppSettings> {
         );
       });
     });
-  }
-
-  void _onShare(BuildContext context) async {
-    // A builder is used to retrieve the context immediately
-    // surrounding the ElevatedButton.
-    //
-    // The context's `findRenderObject` returns the first
-    // RenderObject in its descendent tree when it's not
-    // a RenderObjectWidget. The ElevatedButton's RenderObject
-    // has its position and size after it's built.
-    final box = context.findRenderObject() as RenderBox?;
-
-    await Share.share(
-      'EVSpots App',
-      subject: "Link App",
-      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-    );
   }
 }

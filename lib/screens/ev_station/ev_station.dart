@@ -1,22 +1,15 @@
-import 'package:evspots/main.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
-import 'package:evspots/widgets/ListTileWidgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/home/ev_station/amenitiesCard.dart';
 import '../../widgets/home/ev_station/connectionsCard.dart';
-import 'add_check_in.dart';
+import '../add_check_in/add_check_in.dart';
 
-class EvStationInfo extends StatefulWidget {
+class EvStationInfo extends StatelessWidget {
   const EvStationInfo({Key? key}) : super(key: key);
 
-  @override
-  State<EvStationInfo> createState() => _EvStationInfoState();
-}
-
-class _EvStationInfoState extends State<EvStationInfo> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -26,7 +19,6 @@ class _EvStationInfoState extends State<EvStationInfo> {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-
             backgroundColor: Colors.transparent,
           ),
           body: SingleChildScrollView(
@@ -69,7 +61,10 @@ class _EvStationInfoState extends State<EvStationInfo> {
                           ),
                           const Text(
                             'A522 , New York New York',
-                            style: TextStyle(fontSize: 15,color: Colors.grey,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
                           ),
                           // SizedBox(height: height*0.01,),
                           Row(
@@ -79,17 +74,19 @@ class _EvStationInfoState extends State<EvStationInfo> {
                               TextButton(
                                 child: Text(
                                   'Open .',
-                                  style:
-                                  TextStyle(fontSize: 20, color: Colors.green),
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.green),
                                 ),
                                 onPressed: () {},
                               ),
                               Text(
                                 '\n08:00 am - 20:00 pm',
                                 style:
-                                TextStyle(fontSize: 15, color: Colors.grey),
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               ),
-                              SizedBox(width: width*0.25,),
+                              SizedBox(
+                                width: width * 0.25,
+                              ),
                               Icon(
                                 Icons.favorite_border,
                                 color: Colors.green,
@@ -109,7 +106,7 @@ class _EvStationInfoState extends State<EvStationInfo> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children:const [
+                            children: const [
                               ConnectionsCard(),
                               ConnectionsCard(),
                             ],
@@ -119,7 +116,7 @@ class _EvStationInfoState extends State<EvStationInfo> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const[
+                            children: const [
                               ConnectionsCard(),
                               ConnectionsCard(),
                             ],
@@ -130,7 +127,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
 
                           const Text(
                             'Amenities ',
-                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -138,12 +136,26 @@ class _EvStationInfoState extends State<EvStationInfo> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
-                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
-                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
-                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
-                                AmenitiesCardWidgets(text: 'Food', icon: Icons.fastfood,),
-
+                                AmenitiesCardWidgets(
+                                  text: 'Food',
+                                  icon: Icons.fastfood,
+                                ),
+                                AmenitiesCardWidgets(
+                                  text: 'Food',
+                                  icon: Icons.fastfood,
+                                ),
+                                AmenitiesCardWidgets(
+                                  text: 'Food',
+                                  icon: Icons.fastfood,
+                                ),
+                                AmenitiesCardWidgets(
+                                  text: 'Food',
+                                  icon: Icons.fastfood,
+                                ),
+                                AmenitiesCardWidgets(
+                                  text: 'Food',
+                                  icon: Icons.fastfood,
+                                ),
                               ],
                             ),
                           ),
@@ -152,7 +164,8 @@ class _EvStationInfoState extends State<EvStationInfo> {
                           ),
                           const Text(
                             'Recent Check-ins ',
-                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: height * 0.02,
@@ -162,22 +175,24 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: height*0.073,
+                                height: height * 0.073,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
-                                    child: Image.asset('assets/images/pic1.jpg')),
+                                    child:
+                                        Image.asset('assets/images/pic1.jpg')),
                               ),
-                               SizedBox(
-                                width: width*0.04,
+                              SizedBox(
+                                width: width * 0.04,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const[
+                                children: const [
                                   Text(
                                     'Motasem Altamimi',
                                     style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'Tesla Model X',
@@ -186,11 +201,13 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: width*0.08,),
+                              SizedBox(
+                                width: width * 0.08,
+                              ),
                               Text(
                                 '\n27 sep',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -209,31 +226,32 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  height: height*0.1,
+                                  height: height * 0.1,
                                   // width: 80,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
-                                      child: Image.asset('assets/images/pic1.jpg')),
+                                      child: Image.asset(
+                                          'assets/images/pic1.jpg')),
                                 ),
                                 SizedBox(
                                   width: width * 0.025,
                                 ),
                                 SizedBox(
-                                  height: height*0.1,
-
+                                  height: height * 0.1,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
-                                      child: Image.asset('assets/images/pic1.jpg')),
+                                      child: Image.asset(
+                                          'assets/images/pic1.jpg')),
                                 ),
                                 SizedBox(
                                   width: width * 0.025,
                                 ),
                                 SizedBox(
-                                  height: height*0.1,
-
+                                  height: height * 0.1,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
-                                      child: Image.asset('assets/images/pic1.jpg')),
+                                      child: Image.asset(
+                                          'assets/images/pic1.jpg')),
                                 ),
                               ],
                             ),
@@ -250,23 +268,24 @@ class _EvStationInfoState extends State<EvStationInfo> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                height: height*0.073,
-
+                                height: height * 0.073,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
-                                    child: Image.asset('assets/images/pic1.jpg')),
+                                    child:
+                                        Image.asset('assets/images/pic1.jpg')),
                               ),
-                               SizedBox(
-                                width: width*0.04,
+                              SizedBox(
+                                width: width * 0.04,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const[
+                                children: const [
                                   Text(
                                     'Motasem Altamimi',
                                     style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'Tesla Model X',
@@ -275,11 +294,13 @@ class _EvStationInfoState extends State<EvStationInfo> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: width*0.08,),
+                              SizedBox(
+                                width: width * 0.08,
+                              ),
                               Text(
                                 '\n27 sep',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -306,39 +327,57 @@ class _EvStationInfoState extends State<EvStationInfo> {
                 child: GestureDetector(
                   child: Container(
                     color: AppColor.button5,
-                    height: height*0.06,
+                    height: height * 0.06,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.car_crash),
-                        SizedBox(width: width*0.05,),
-                        Text('Add Check-in',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Icon(
+                          Icons.car_crash,
+                          color: AppColor.secColor,
+                        ),
+                        SizedBox(
+                          width: width * 0.05,
+                        ),
+                        Text(
+                          'Add Check-in',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.secColor),
+                        ),
                       ],
                     ),
                   ),
-                  onTap: (){Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddCheckIn()),
-                  );},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddCheckIn()),
+                    );
+                  },
                 ),
               ),
               Expanded(
                 child: GestureDetector(
-
-                  onTap: (){},
+                  onTap: () {},
                   child: Container(
-
-                    height: height*0.06,
-                    color: AppColor.mainColor,
+                    height: height * 0.06,
+                    color: themeNotifier.isDark
+                        ? AppColor.secColor
+                        : AppColor.mainColor,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(Icons.navigation),
-                        SizedBox(width: width*0.05,),
-                        Text('Get Direction',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                        SizedBox(
+                          width: width * 0.05,
+                        ),
+                        Text(
+                          'Get Direction',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17),
+                        ),
                       ],
                     ),
                   ),
@@ -351,8 +390,3 @@ class _EvStationInfoState extends State<EvStationInfo> {
     );
   }
 }
-
-
-
-
-

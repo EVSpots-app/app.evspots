@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../widgets/AppBar.dart';
-import '../../widgets/Drawer/drawer.dart';
 import '../../widgets/Images/logo_evspots.dart';
 import '../../widgets/custom_map/view/custom_map_view.dart';
 import '../../widgets/custom_map/widget/custom_text_felid_enroute.dart';
@@ -9,14 +6,9 @@ import '../filter/filter_screen.dart';
 import 'map_screen.dart';
 
 
-class EnrouteScreen extends StatefulWidget {
+class EnrouteScreen extends StatelessWidget {
   const EnrouteScreen({Key? key}) : super(key: key);
 
-  @override
-  State<EnrouteScreen> createState() => _EnrouteScreenState();
-}
-
-class _EnrouteScreenState extends State<EnrouteScreen> {
   @override
   Widget build(BuildContext context) {
 

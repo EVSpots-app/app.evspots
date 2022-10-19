@@ -1,20 +1,12 @@
-import 'package:evspots/screens/consumer/home/all_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
 import 'package:evspots/widgets/AppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../themes/app_color.dart';
 import '../../themes/theme_model.dart';
 
-class Vehicles extends StatefulWidget {
+class Vehicles extends StatelessWidget {
   const Vehicles({Key? key}) : super(key: key);
 
-  @override
-  _VehiclesState createState() => _VehiclesState();
-}
-
-class _VehiclesState extends State<Vehicles> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(

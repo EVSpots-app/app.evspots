@@ -154,21 +154,24 @@ class FavoriteCardWidgets extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              width: width * 0.1,
+                              width: width * 0.03,
                             ),
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Amenities",
-                                  style: TextStyle(
-                                      fontSize: width * 0.04,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.bold),
+                                Padding(
+                                  padding:  EdgeInsets.only(left: width*0.08),
+                                  child: Text(
+                                    "Amenities",
+                                    style: TextStyle(
+                                        fontSize: width * 0.04,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 SizedBox(
-                                  width: width*0.25,
+                                  width: width*0.35,
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
@@ -179,7 +182,7 @@ class FavoriteCardWidgets extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              width: width * 0.1,
+                              width: width * 0.07,
                             ),
                             Icon(
                               Icons.assistant_navigation,

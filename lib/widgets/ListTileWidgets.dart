@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:evspots/screens/settings/app_settings.dart';
 import 'package:flutter/material.dart';
 
 class ListTileWidgets extends StatelessWidget {

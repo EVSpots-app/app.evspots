@@ -2,6 +2,7 @@
     package="app.evspots">
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />

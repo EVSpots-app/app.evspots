@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,11 +46,23 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAk9gbAimjshbGAHWT9aaXZIWxVo3Ncp6o',
+    appId: '1:1049520392597:web:31e446153ca3a3f6054e9c',
+    messagingSenderId: '1049520392597',
+    projectId: 'evspots-app',
+    authDomain: 'evspots-app.firebaseapp.com',
+    databaseURL: 'https://evspots-app-default-rtdb.firebaseio.com',
+    storageBucket: 'evspots-app.appspot.com',
+    measurementId: 'G-4P1VQ93317',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAnT4iva6nwhpMH334T0wZM-1BpCakXMUk',
     appId: '1:1049520392597:android:4ff2fa7c10575afd054e9c',
     messagingSenderId: '1049520392597',
     projectId: 'evspots-app',
+    databaseURL: 'https://evspots-app-default-rtdb.firebaseio.com',
     storageBucket: 'evspots-app.appspot.com',
   );
 
@@ -62,7 +71,9 @@ class DefaultFirebaseOptions {
     appId: '1:1049520392597:ios:9ba65a7d9fc558dc054e9c',
     messagingSenderId: '1049520392597',
     projectId: 'evspots-app',
+    databaseURL: 'https://evspots-app-default-rtdb.firebaseio.com',
     storageBucket: 'evspots-app.appspot.com',
+    androidClientId: '1049520392597-ru2om2pii9ni26o4j0rotlm69q5jrvo7.apps.googleusercontent.com',
     iosClientId: '1049520392597-9538o7glkskk9ch6kgtha4q288nlvn7e.apps.googleusercontent.com',
     iosBundleId: 'app.evspots',
   );

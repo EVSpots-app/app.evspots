@@ -3,7 +3,6 @@ import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/sigin_screen/signin_screen.dart';
 import 'package:evspots/auth/shared_pref.dart';
 import 'package:evspots/themes/theme_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

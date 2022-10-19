@@ -1,7 +1,9 @@
-import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
+import 'package:evspots/screens/consumer/home/home_consumer.dart';
+import 'package:evspots/screens/consumer/profile/birth_date_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
 import 'package:evspots/auth/splash_screen.dart';
-import 'package:evspots/screens/signup_screen/test.dart';
+import 'package:evspots/screens/consumer/user_info_consumer/user_info_consumer.dart';
 import 'package:evspots/themes/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +22,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
@@ -46,11 +46,15 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
-        ChangeNotifierProvider<ChangeRoutingPage>(create: (_) => ChangeRoutingPage()),
-       // ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
+        ChangeNotifierProvider<ChangeRoutingPage>(
+            create: (_) => ChangeRoutingPage()),
+        // ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
         ChangeNotifierProvider<ChangeTime>(create: (_) => ChangeTime()),
         ChangeNotifierProvider<ChangeDropdownValue>(
             create: (_) => ChangeDropdownValue()),
+        ChangeNotifierProvider<AdminMode>(create: (_) => AdminMode()),
+        ChangeNotifierProvider<UserInfoConsumer>(create: (_) => UserInfoConsumer()),
+        ChangeNotifierProvider<BirthDate>(create: (_) => BirthDate()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),
@@ -58,7 +62,7 @@ class App extends StatelessWidget {
           builder: (context, ThemeModel themeNotifier, child) {
             return ScopedModelDescendant<AppModel>(
                 builder: (context, widget, model) {
-                  AppModel.shared.setInitialLanguageValue();
+              AppModel.shared.setInitialLanguageValue();
               return MaterialApp(
                 home: SplashScreen(),
                 // themeMode: ThemeMode.system,

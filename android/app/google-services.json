@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1049520392597",
+    "firebase_url": "https://evspots-app-default-rtdb.firebaseio.com",
     "project_id": "evspots-app",
     "storage_bucket": "evspots-app.appspot.com"
   },

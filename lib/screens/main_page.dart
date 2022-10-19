@@ -1,14 +1,12 @@
-import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/consumer/home/home_consumer.dart';
 import 'package:evspots/screens/favorite/favorite_screen.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import '../generated/l10n.dart';
 import '../themes/theme_model.dart';
 import '../widgets/Drawer/drawer.dart';
-import 'home_screen/home_screen.dart';
 import 'map_screen/enroute_screen.dart';
 
 class MainPage extends StatefulWidget {

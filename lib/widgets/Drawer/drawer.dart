@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:evspots/screens/Profile/profile_screen.dart';
-import 'package:evspots/screens/favorite/favorite_screen.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/screens/settings/app_settings.dart';
 import 'package:evspots/themes/app_color.dart';
@@ -9,13 +8,14 @@ import 'package:evspots/widgets/ListTileWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
 import '../../screens/consumer/settings/consumer_settings.dart';
 import '../../screens/Vehicles/vehicles.dart';
+import '../../screens/sigin_screen/signin_screen.dart';
+import '../AlertDialog.dart';
 import '../Images/logo_evspots.dart';
 import '../Picture/ProfilePicture.dart';
-import '../Picture/myPicture.dart';
 import 'launch_in_browser.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -31,6 +31,7 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
   Future<void>? _launched;
+  TextEditingController _deleteAccount = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         )),
                   ),
                   SizedBox(
-                    height: height * 0.65,
+                    height: height * 0.55,
                     child: SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
                       child: Padding(
@@ -241,6 +242,134 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25,right: 25),
+                child: GestureDetector(
+                  onTap: () async {
+                    await showAlertDialog(
+                        context: context,
+                        title: 'LogOut',
+                        content: 'Are you sure ?',
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              SharedPreference().deletePrefs();
+                              Navigator.pushAndRemoveUntil<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        SignInScreen()),
+                                ModalRoute.withName('/'),
+                              );
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Continue'),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Cancel'),
+                            ),
+                          ),
+                        ]);
+                  },
+                  child: Container(
+                    width: width,
+                    height: height * 0.06,
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(
+                          width: width * 0.03,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text(S.of(context).logout,
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+
+                        // const Icon(Icons.logout),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25,right: 25),
+                child: GestureDetector(
+                  onTap: () async {
+                    await showAlertDialog(
+                        context: context,
+                        title: 'Delete Account',
+                        content:
+                        'Are you sure ? \nWrite "delete" if you sure ',
+                        actions: [
+                          TextField(
+                            controller: _deleteAccount,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              _deleteAccount.text.toLowerCase() == 'delete'
+                                  ? Navigator.pushAndRemoveUntil<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        SignInScreen()),
+                                ModalRoute.withName('/'),
+                              )
+                                  : Navigator.pop(context);
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Continue'),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Cancel'),
+                            ),
+                          ),
+                        ]);
+                  },
+                  child: Container(
+                    width: width,
+                    height: height * 0.06,
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.remove_circle,
+                          color: Colors.redAccent,
+                        ),
+                        SizedBox(width: width * 0.03),
+                        Padding(
+                          padding: const EdgeInsets.all(2.5),
+                          child:  Text(S.of(context).deleteAccount,
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               InkWell(
                 child: SizedBox(

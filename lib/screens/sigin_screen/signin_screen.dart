@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
 import 'package:evspots/screens/signup_screen/signup_screen.dart';
 import 'package:evspots/screens/verify_screen/verify_screen.dart';
 import 'package:evspots/themes/theme_model.dart';
@@ -6,11 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../generated/l10n.dart';
 import '../../themes/app_color.dart';
-
-import '../../widgets/AppBar.dart';
 import '../../widgets/Images/logo_evspots.dart';
 import '../../widgets/custom_button.dart';
 
@@ -25,13 +23,12 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  void _callBackFunction(String name, String dialCode, String flag) {
-    // place your code
-  }
+  // void _callBackFunction(String name, String dialCode, String flag) {
+  //   // place your code
+  // }
 
-
-  String _emailErrorMsg = '';
-
+  String _phoneErrorMsg = '';
+  // bool checkUser = false;
 
   @override
   void initState() {
@@ -52,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
           elevation: 0,
           centerTitle: true,
           title: SizedBox(
-              height: MediaQuery.of(context).size.height*0.05,
+              height: MediaQuery.of(context).size.height * 0.05,
               child: LogoEVSpots()),
         ),
         // drawer: MyDrawer(),
@@ -71,7 +68,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: height * 0.03,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -79,8 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         const Text(
                           'Hi Motasem,',
                           style: TextStyle(
-                              fontSize: 20,
-
+                            fontSize: 20,
                           ),
                         ),
                         SizedBox(
@@ -89,9 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         const Text(
                           'Sign in Now',
                           style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 28, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: height * 0.05,
@@ -114,12 +108,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   //   height: height * 0.01,
                   // ),
                   Container(
-                    padding: const EdgeInsets.only(left: 20,right: 20),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Column(
                       children: [
                         IntlPhoneField(
                           decoration: InputDecoration(
-                            errorText: _emailErrorMsg,
+                            errorText: _phoneErrorMsg,
                             labelText: 'Phone Number',
                             labelStyle: TextStyle(
                               color: themeNotifier.isDark
@@ -128,10 +122,12 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(width: 2,color: Colors.grey.shade500)),
+                                borderSide: BorderSide(
+                                    width: 2, color: Colors.grey.shade500)),
                           ),
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]+')),
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9]+')),
                             FilteringTextInputFormatter.deny(RegExp(r'^0+')),
                           ],
                           onChanged: (value) {
@@ -151,41 +147,109 @@ class _SignInScreenState extends State<SignInScreen> {
                           onTap: () async {
                             if (_isValid()) {
                               print(countryController.text + phone);
-                              await FirebaseAuth.instance.verifyPhoneNumber(
-                                phoneNumber: countryController.text + phone,
-                                verificationCompleted:
-                                    (PhoneAuthCredential credential) {},
-                                verificationFailed: (FirebaseAuthException e) {
-                                  print(e.toString());
-                                },
-                                codeSent: (String verificationId,
-                                    int? resendToken) async {
-                                  SignInScreen.verify = verificationId;
 
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const VerifyScreen()),
-                                  );
-                                  print(verificationId);
-                                },
-                                codeAutoRetrievalTimeout:
-                                    (String verificationId) {
-                                  print('time out');
-                                },
-                              );
+                              var user = FirebaseFirestore.instance
+                                  .collection('users');
+                              user.get().then((value) {
+                                value.docs.forEach((element) async {
+                                 var  checkUser = await element
+                                      .data()
+                                      .containsValue(
+                                          countryController.text + phone);
+                                  if (checkUser) {
+                                    print("yes");
+                                    await FirebaseAuth.instance
+                                        .verifyPhoneNumber(
+                                      phoneNumber:
+                                          countryController.text + phone,
+                                      verificationCompleted:
+                                          (PhoneAuthCredential credential) {},
+                                      verificationFailed:
+                                          (FirebaseAuthException e) {
+                                        print(e.toString());
+                                      },
+                                      codeSent: (String verificationId,
+                                          int? resendToken) async {
+                                        SignInScreen.verify = verificationId;
+
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                   VerifyScreen()),
+                                        );
+                                        print(verificationId);
+                                      },
+                                      timeout: const Duration(seconds: 100),
+                                      codeAutoRetrievalTimeout:
+                                          (String verificationId) {
+                                        print('time out');
+                                      },
+                                    );
+                                  }
+                                  // else if(!checkUser){
+                                  //    CircularProgressIndicator();
+                                  // }
+                                  else {
+                                    print("no");
+                                     // CircularProgressIndicator();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUpScreen()),
+                                    );
+                                  }
+                                });
+                              });
                             }
                           },
                           title: 'Send the code',
                         ),
 
-                        MyButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignUpScreen()));
+                        // MyButton(
+                        //   onTap: () {
+                        //     Navigator.of(context).push(MaterialPageRoute(
+                        //         builder: (context) => SignUpScreen()));
+                        //   },
+                        //   title: 'Sign Up',
+                        // ),
+                        Consumer<AdminMode>(
+                          builder: (_, consumer, __) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    consumer.changeIsAdmin(false);
+                                  },
+                                  child: Text(
+                                    'Admin Role',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: consumer.isAdmin
+                                            ? Colors.amber
+                                            : Colors.transparent),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: width * 0.05,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    consumer.changeIsAdmin(true);
+                                  },
+                                  child: Text(
+                                    'User Role',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: consumer.isAdmin
+                                            ? Colors.transparent
+                                            : Colors.amber),
+                                  ),
+                                ),
+                              ],
+                            );
                           },
-                          title: 'Sign Up',
                         ),
 
                         // FloatingActionButton(
@@ -207,16 +271,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool _isValid() {
     setState(() {
-      _emailErrorMsg = '';
+      _phoneErrorMsg = '';
     });
     if (phone.isEmpty) {
       setState(() {
-        _emailErrorMsg = 'Enter your number';
+        _phoneErrorMsg = 'Enter your number';
       });
       return false;
     }
     setState(() {
-      _emailErrorMsg = '';
+      _phoneErrorMsg = '';
     });
     return true;
   }

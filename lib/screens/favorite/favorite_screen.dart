@@ -5,14 +5,9 @@ import '../../widgets/home/favorite_screen/favorite_card_widgets.dart';
 import '../filter/filter_screen.dart';
 import '../map_screen/map_screen.dart';
 
-class FavoriteScreen extends StatefulWidget {
+class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
 
-  @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
-}
-
-class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

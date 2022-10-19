@@ -9,10 +9,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../home/map_screen/custom_scroll_view_content.dart';
 import '../widget/custom_info_window_widget.dart';
 import '../widget/map_center_marker.dart';
-import '../widget/map_location_badge.dart';
 
 final GlobalKey<ScaffoldState> ButtonSheet = GlobalKey();
 
@@ -29,7 +27,7 @@ class CustomMapViewState extends State<CustomMapView> {
       CustomInfoWindowController();
   bool userBadgeSelected = false;
 
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
 
   static const LatLng sourceLocation = LatLng(31.957940, 35.865360);
   static const LatLng destinationLocation = LatLng(31.958936, 35.866577);

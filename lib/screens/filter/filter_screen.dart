@@ -5,19 +5,13 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/AppBar.dart';
 
-class FilterScreen extends StatefulWidget {
+class FilterScreen extends StatelessWidget {
   const FilterScreen({Key? key}) : super(key: key);
 
   @override
-  State<FilterScreen> createState() => _FilterScreenState();
-}
-
-class _FilterScreenState extends State<FilterScreen> {
-
-  @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    // var width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: MyAppBar(

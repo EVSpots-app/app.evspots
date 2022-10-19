@@ -1,6 +1,5 @@
 import 'package:evspots/screens/main_page.dart';
 import 'package:evspots/screens/sigin_screen/signin_screen.dart';
-import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/widgets/AppBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +7,12 @@ import 'package:pinput/pinput.dart';
 import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/custom_button.dart';
-import '../signup_screen/signup_screen.dart';
 
 bool isLogin = false;
 
-class VerifyScreen extends StatefulWidget {
-  const VerifyScreen({Key? key}) : super(key: key);
+class VerifyScreen extends StatelessWidget {
+   VerifyScreen({Key? key}) : super(key: key);
 
-  @override
-  State<VerifyScreen> createState() => _VerifyScreenState();
-}
-
-class _VerifyScreenState extends State<VerifyScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -102,15 +95,12 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 height: 20,
               ),
               MyButton(
-                onTap: ()  async {
+                onTap: () async {
                   try {
                     PhoneAuthCredential credential =
-                    PhoneAuthProvider.credential(
-                        verificationId: SignInScreen.verify,
-                        smsCode: code);
+                        PhoneAuthProvider.credential(
+                            verificationId: SignInScreen.verify, smsCode: code);
 
-                    //Sign the user in (or link) with the credential
-                     UserCredential result =
                     await auth.signInWithCredential(credential);
                     SharedPreference().setLoggedin();
                     Navigator.pushAndRemoveUntil<void>(
@@ -120,30 +110,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           const MainPage()),
                       ModalRoute.withName('/'),
                     );
-
-
-                    // if(isLogin) {
-                    //   print('sign in');
-                    //   await auth.signInWithCredential(credential);
-                    //   SharedPreference().setLoggedin();
-                    //   Navigator.pushAndRemoveUntil<void>(
-                    //     context,
-                    //     MaterialPageRoute<void>(
-                    //         builder: (BuildContext context) =>
-                    //         const MainPage()),
-                    //     ModalRoute.withName('/'),
-                    //   );
-                    // } else{
-                    //   print('please signUp Now');
-                    //   Navigator.pushAndRemoveUntil<void>(
-                    //     context,
-                    //     MaterialPageRoute<void>(
-                    //         builder: (BuildContext context) =>
-                    //          SignUpScreen()),
-                    //     ModalRoute.withName('/'),
-                    //   );
-                    // }
-
                   } catch (e) {
                     print("wrong otp");
                   }
@@ -172,8 +138,4 @@ class _VerifyScreenState extends State<VerifyScreen> {
       ),
     );
   }
-// setLogin(bool value) async {
-//   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-//   sharedPreferences.setBool(PREF_key, value);
-// }
 }

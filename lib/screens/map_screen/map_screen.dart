@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:evspots/generated/l10n.dart';
-import 'package:evspots/screens/consumer/home/all_consumer.dart';
+import 'package:evspots/screens/consumer/home/home_consumer.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/custom_map/optional_functions.dart';
@@ -9,21 +9,13 @@ import 'package:evspots/widgets/home/map_screen/custom_scroll_view_content.dart'
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../../../widgets/Picture/myPicture.dart';
 import '../../widgets/Picture/ProfilePicture.dart';
 import '../filter/filter_screen.dart';
 
 
 final GlobalKey<ScaffoldState> Drawerkey = GlobalKey();
 
-class MapScreen extends StatefulWidget {
-  @override
-  State<MapScreen> createState() => _MapScreenState();
-}
-final TextEditingController _searchController = TextEditingController();
-final Completer<GoogleMapController> _completer = Completer();
-
-class _MapScreenState extends State<MapScreen> {
+class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +40,8 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 }
+final TextEditingController _searchController = TextEditingController();
+final Completer<GoogleMapController> _completer = Completer();
 
 /// Search text field plus the horizontally scrolling categories below the text field
 class CustomHeader extends StatelessWidget {
