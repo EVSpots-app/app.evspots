@@ -18,9 +18,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // void _callBackFunction(String name, String dialCode, String flag) {
-  //   // place your code
-  // }
+  void _callBackFunction(String name, String dialCode, String flag) {
+    // place your code
+  }
 
   TextEditingController _phone = TextEditingController();
   TextEditingController fullName = TextEditingController();
@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // FirebaseAuth.instance.currentUser?.phoneNumber;
     final Uri toLaunch = Uri(
         scheme: 'https', host: 'en.wikipedia.org', path: 'wiki/Private_police');
-    // var code = "";
+    var code = "";
     return Scaffold(
       // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -67,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Text(
               "Terms & Condition",
               style:
-                  TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+              TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
             ),
             onTap: () {
               _launched = LaunchInBrowser(toLaunch);
@@ -190,7 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        errorText: _emailErrorMsg,
+                          errorText: _emailErrorMsg,
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),

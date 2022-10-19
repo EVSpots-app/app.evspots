@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
 import 'package:evspots/screens/signup_screen/signup_screen.dart';
+import 'package:evspots/screens/user_info/user_info.dart';
 import 'package:evspots/screens/verify_screen/verify_screen.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +17,6 @@ import '../../widgets/custom_button.dart';
 
 TextEditingController countryController = TextEditingController();
 var phone = "";
-
 class SignInScreen extends StatefulWidget {
   static String verify = "";
 
@@ -28,7 +30,7 @@ class _SignInScreenState extends State<SignInScreen> {
   // }
 
   String _phoneErrorMsg = '';
-  // bool checkUser = false;
+  bool checkUser = false ;
 
   @override
   void initState() {
@@ -151,55 +153,37 @@ class _SignInScreenState extends State<SignInScreen> {
                               var user = FirebaseFirestore.instance
                                   .collection('users');
                               user.get().then((value) {
-                                value.docs.forEach((element) async {
-                                 var  checkUser = await element
-                                      .data()
-                                      .containsValue(
-                                          countryController.text + phone);
-                                  if (checkUser) {
-                                    print("yes");
-                                    await FirebaseAuth.instance
-                                        .verifyPhoneNumber(
-                                      phoneNumber:
-                                          countryController.text + phone,
-                                      verificationCompleted:
-                                          (PhoneAuthCredential credential) {},
-                                      verificationFailed:
-                                          (FirebaseAuthException e) {
-                                        print(e.toString());
-                                      },
-                                      codeSent: (String verificationId,
-                                          int? resendToken) async {
-                                        SignInScreen.verify = verificationId;
 
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                   VerifyScreen()),
-                                        );
-                                        print(verificationId);
-                                      },
-                                      timeout: const Duration(seconds: 100),
-                                      codeAutoRetrievalTimeout:
-                                          (String verificationId) {
-                                        print('time out');
-                                      },
-                                    );
+                                for ( var object in value.docs) {
+                                  print(object.data());
+                                  if(object.data().containsValue(
+                                      countryController.text + phone))
+                                  {
+                                    print("yes");
+                                    checkUser = true;
+                                    // setState(() {
+                                    //   checkUser = true;
+                                    // });
+
+                                    break;
                                   }
-                                  // else if(!checkUser){
-                                  //    CircularProgressIndicator();
-                                  // }
-                                  else {
-                                    print("no");
-                                     // CircularProgressIndicator();
+                                }
+
+                                if (checkUser == true)
+                                  {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SignUpScreen()),
+                                          builder: (context) => UserInfoScreen()),
                                     );
-                                  }
-                                });
+                                  }else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpScreen()),
+                                  );
+                                }
+
                               });
                             }
                           },

@@ -6,20 +6,29 @@ import 'package:evspots/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
+import '../../auth/shared_pref.dart';
 import '../../widgets/Picture/ProfilePicture.dart';
 import '../consumer/profile/birth_date_consumer.dart';
 import '../consumer/user_info_consumer/user_info_consumer.dart';
 import '../signup_screen/model/user_data_model.dart';
 
 // ignore: must_be_immutable
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   // TextEditingController _phone = TextEditingController();
-  // TextEditingController _fullName = TextEditingController();
-  // TextEditingController _email = TextEditingController();
   TextEditingController myBirthDate = TextEditingController();
 
   // String initValue="Select your Birth Date";
+  @override
+  void initState() {
+    SharedPreference().getData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -60,7 +69,6 @@ class ProfileScreen extends StatelessWidget {
                   print('${snapshot.error}');
                 } else  {
                   MyUser user = snapshot.data!;
-
                   return SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(left: 20.0,right: 20.0,top: 15,bottom: 15),
@@ -242,6 +250,7 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   );
+
                 }
                 return Center(child: CircularProgressIndicator());
               }),

@@ -41,16 +41,16 @@ class _TestFireStoreState extends State<TestFireStore> {
   }
 
   Future addData() async {
-    final doc = FirebaseFirestore.instance.collection('users1').doc('test');
+    final doc = FirebaseFirestore.instance.collection('users1');
 
     final Map<String, dynamic> map = {
       "username": "motasem",
-      "age": "22",
+      "age": "25",
       "phone": "0787933934",
-      "email": "motasem@gmail.com"
+      "email": "motasem5@gmail.com"
     };
 
-    await doc.set(map);
+    await doc.doc("xy2BCugKVRqFrZxGstC4").update(map);
 
     print('done');
 
@@ -81,7 +81,7 @@ class _TestFireStoreState extends State<TestFireStore> {
             child: Text('Add'),
             onPressed: () async {
               print('before');
-              await getData();
+              await addData();
               print('after');
             },
           ),

@@ -12,6 +12,7 @@ import '../verify_screen/verify_screen.dart';
 
 // ignore: must_be_immutable
 class UserInfoScreen extends StatefulWidget {
+  // final id;
   UserInfoScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,10 +21,9 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   CollectionReference userRef = FirebaseFirestore.instance.collection('users');
-
-  TextEditingController _phone = TextEditingController();
-  TextEditingController _fullName = TextEditingController();
-  TextEditingController _email = TextEditingController();
+   TextEditingController _phone = TextEditingController();
+  TextEditingController _email= TextEditingController();
+  TextEditingController _fullName= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +47,28 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               return FutureBuilder(
                 future: consumer.getData(),
                 builder: ((context, snapshot) {
+
+                 // _phone = TextEditingController(text: user.phone);
+                 // _fullName = TextEditingController(/*text: user.fullName*/);
+                 // _email = TextEditingController(text: user.email);
+
                   if (!snapshot.hasData) {
                     return CircularProgressIndicator();
                   } else if (snapshot.hasError) {
                     print('${snapshot.error}');
                   } else  {
                     MyUser user = snapshot.data!;
-
-                    _phone.addListener(() {
-                        _phone.text = user.phone;
-                    });
-                    _email.addListener(() {
-                      _email.text = user.email;
-                    });
-                    _fullName.addListener(() {
-                      setState(() {
-                        _fullName.text = user.fullName!;
-                      });
-                    });
-
+                    // _phone.addListener(() {
+                    //     _phone.text = user.phone;
+                    // });
+                    // _email.addListener(() {
+                    //   _email.text = user.email;
+                    // });
+                    // _fullName.addListener(() {
+                    //   setState(() {
+                    //     _fullName.text = user.fullName;
+                    //   });
+                    // });
                     return SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
                       padding:
@@ -91,14 +94,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                               controller:_fullName,
-                              onChanged: (value){
-                                 setState(() {
-                                   _fullName.text = value;
-                                 });
-                              },
+                              controller:_fullName,
+                              // onChanged: (value){
+                              //    setState(() {
+                              //      user.fullName = value;
+                              //    });
+                              // },
                               decoration: InputDecoration(
-                                hintText: user.fullName,
+                               hintText: user.fullName,
                                   border: OutlineInputBorder(),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
@@ -123,7 +126,12 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                               controller: _phone,
+                              controller: _phone,
+                              // onChanged: (value){
+                              //   setState(() {
+                              //     user.phone = value;
+                              //   });
+                              // },
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                  hintText: user.phone,
@@ -151,9 +159,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
                             controller: _email,
+                            //   onChanged: (value){
+                            //     setState(() {
+                            //       user.email = value;
+                            //     });
+                            //   },
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                hintText: user.email,
+                               hintText: user.email,
                                   border: OutlineInputBorder(),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
@@ -176,6 +189,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           bottomNavigationBar: MyButton(
             onTap: () async {
               try {
+
+                // MyUser user = MyUser(
+                //     email: _email.text,
+                //     phone: countryController.text + phone);
+                // if (_fullName.text.isNotEmpty)
+                //   user.fullName = _fullName.text;
+                // var collection =
+                // FirebaseFirestore.instance.collection('users');
+                // collection.doc(widget.id).update(user.toJson());
+                // collection.add(user.toJson());
 
                 await FirebaseAuth.instance
                     .verifyPhoneNumber(
