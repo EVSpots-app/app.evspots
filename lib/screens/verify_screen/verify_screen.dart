@@ -1,19 +1,23 @@
-import 'package:evspots/screens/main_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/sigin_screen/signin_screen.dart';
-import 'package:evspots/widgets/AppBar.dart';
+import 'package:evspots/widgets/AppBar/AppBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/CustomButton/custom_button.dart';
+import '../signup_screen/signup_screen.dart';
+import '../user_info/user_info.dart';
 
 bool isLogin = false;
 
+// ignore: must_be_immutable
 class VerifyScreen extends StatelessWidget {
    VerifyScreen({Key? key}) : super(key: key);
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+
+   bool checkUser = false ;
 
   @override
   Widget build(BuildContext context) {
@@ -96,20 +100,62 @@ class VerifyScreen extends StatelessWidget {
               ),
               MyButton(
                 onTap: () async {
+
                   try {
                     PhoneAuthCredential credential =
                         PhoneAuthProvider.credential(
                             verificationId: SignInScreen.verify, smsCode: code);
 
-                    await auth.signInWithCredential(credential);
-                    SharedPreference().setLoggedin();
-                    Navigator.pushAndRemoveUntil<void>(
-                      context,
-                      MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                          const MainPage()),
-                      ModalRoute.withName('/'),
-                    );
+                   await auth.signInWithCredential(credential);
+
+                    // Check user in FireStore.
+                    var user = FirebaseFirestore.instance
+                        .collection('users');
+                    user.get().then((value)  {
+                      for ( var object in value.docs) {
+                        print(object.data());
+
+                        if(object.data().containsValue(
+                            countryController.text + phone))
+                       {
+
+                          // value.docs.where((element)
+                          //  {
+                          //    if(element.data().containsValue(countryController.text + phone)){
+                          //      ID  = element.id;
+                          //      print(element.id);
+                          //      print("*************");
+                          //      print("yes");
+                          //    }else{
+                          //      print("no");
+                          //    }
+                          //    return ID;
+                          //  });
+
+                          print("yes");
+                          checkUser = true;
+                          // setState(() {
+                          //   checkUser = true;
+                          // });
+                          break;
+                        }
+                      }
+
+                      if (checkUser == true)
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserInfoScreen()),
+                        );
+                      }else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()),
+                        );
+                      }
+                    }); // End Check user in FireStore.
                   } catch (e) {
                     print("wrong otp");
                   }

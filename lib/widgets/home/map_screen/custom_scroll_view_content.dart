@@ -1,10 +1,7 @@
-
-
 import 'package:evspots/screens/ev_station/ev_station.dart';
 import 'package:flutter/material.dart';
 
 import '../favorite_screen/favorite_card.dart';
-import '../favorite_screen/favorite_card_widgets.dart';
 
 /// Content of the DraggableBottomSheet's child SingleChildScrollView
 class CustomScrollViewContent extends StatelessWidget {
@@ -12,7 +9,9 @@ class CustomScrollViewContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 12.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(24),topRight: Radius.circular(24))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24), topRight: Radius.circular(24))),
       margin: const EdgeInsets.all(0),
       child: Container(
         decoration: BoxDecoration(
@@ -88,8 +87,8 @@ class CustomExploreBerlin extends StatelessWidget {
 class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: SingleChildScrollView(
@@ -97,56 +96,11 @@ class CustomHorizontallyScrollingRestaurants extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              height: height*0.41,
-              width: width,
-              child: FavoriteCardWidgets(
-                image: AssetImage('assets/images/manaseer.jpg'),
-                titleText: 'Manaseer efill',
-                locationText: ' Amman. 11110. Jordan Amman ',
-                numConnections: '5 Point',
-                amenities: [
-                  Icon(Icons.shopping_cart,),
-                  Icon(Icons.store,),
-                  Icon(Icons.storefront_rounded,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                ],
-              ),
-            ),
-            const SizedBox(width: 12),
-            CustomRestaurantCategory(),
-            //CustomRestaurantCategory(),
-            // const SizedBox(width: 12),
-            // CustomRestaurantCategory(),
             const SizedBox(width: 12),
             CustomRestaurantCategory(),
             const SizedBox(width: 12),
-            SizedBox(
-              height: 310,
-              width: 370,
-              child: FavoriteCardWidgets(
-                image: AssetImage('assets/images/manaseer.jpg'),
-                titleText: 'Manaseer efill',
-                locationText: ' Amman. 11110. Jordan Amman ',
-                numConnections: '5 Point',
-                amenities: [
-                  Icon(Icons.shopping_cart,),
-                  Icon(Icons.store,),
-                  Icon(Icons.storefront_rounded,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                  Icon(Icons.payments,),
-                ],
-              ),
-            ),
+            CustomRestaurantCategory(),
+
             const SizedBox(width: 12),
           ],
         ),
@@ -226,23 +180,19 @@ class CustomRecentPhotosSmall extends StatelessWidget {
 }
 
 class CustomRestaurantCategory extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return InkWell(
-      child: SizedBox(
-          height: height*0.385,
-          width: width,
-          child: FavoriteCard()),
-      onTap: (){
+      child:
+          SizedBox(height: height * 0.385, width: width, child: FavoriteCard()),
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const EvStationInfo()),
         );
       },
-
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../themes/theme_model.dart';
 import '../widgets/Drawer/drawer.dart';
-import 'map_screen/enroute_screen.dart';
+import 'enroute_screen/enroute_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

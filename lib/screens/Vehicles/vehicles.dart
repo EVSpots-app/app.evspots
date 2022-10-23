@@ -1,5 +1,5 @@
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
-import 'package:evspots/widgets/AppBar.dart';
+import 'package:evspots/widgets/AppBar/AppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../themes/theme_model.dart';

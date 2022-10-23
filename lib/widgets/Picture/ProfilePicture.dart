@@ -2,7 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:evspots/widgets/AlertDialog.dart';
+import 'package:evspots/widgets/AlertDialog/AlertDialog.dart';
 import 'package:evspots/widgets/open_camera/bottompicker_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

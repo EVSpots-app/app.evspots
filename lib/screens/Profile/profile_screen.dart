@@ -1,8 +1,8 @@
 import 'package:evspots/generated/l10n.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
-import 'package:evspots/widgets/Gender.dart';
-import 'package:evspots/widgets/custom_button.dart';
+import 'package:evspots/widgets/Gender/Gender.dart';
+import 'package:evspots/widgets/CustomButton/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';

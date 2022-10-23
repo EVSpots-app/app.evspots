@@ -1,4 +1,5 @@
 import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
+import 'package:evspots/screens/consumer/favorite_consumer/favorite_consumer.dart';
 import 'package:evspots/screens/consumer/home/home_consumer.dart';
 import 'package:evspots/screens/consumer/profile/birth_date_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
@@ -48,13 +49,13 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
         ChangeNotifierProvider<ChangeRoutingPage>(
             create: (_) => ChangeRoutingPage()),
-        // ChangeNotifierProvider<RadioVal>(create: (_) => RadioVal()),
         ChangeNotifierProvider<ChangeTime>(create: (_) => ChangeTime()),
         ChangeNotifierProvider<ChangeDropdownValue>(
             create: (_) => ChangeDropdownValue()),
         ChangeNotifierProvider<AdminMode>(create: (_) => AdminMode()),
         ChangeNotifierProvider<UserInfoConsumer>(create: (_) => UserInfoConsumer()),
         ChangeNotifierProvider<BirthDate>(create: (_) => BirthDate()),
+        ChangeNotifierProvider<FavoriteConsumer>(create: (_) => FavoriteConsumer()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),

@@ -3,7 +3,7 @@ import '../../widgets/Images/logo_evspots.dart';
 import '../../widgets/custom_map/view/custom_map_view.dart';
 import '../../widgets/custom_map/widget/custom_text_felid_enroute.dart';
 import '../filter/filter_screen.dart';
-import 'map_screen.dart';
+import '../map_screen/map_screen.dart';
 
 
 class EnrouteScreen extends StatelessWidget {

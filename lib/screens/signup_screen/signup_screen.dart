@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/verify_screen/verify_screen.dart';
-import 'package:evspots/widgets/custom_button.dart';
+import 'package:evspots/widgets/CustomButton/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import '../../auth/shared_pref.dart';
 import '../../generated/l10n.dart';
-import '../../widgets/AppBar.dart';
+import '../../widgets/AppBar/AppBar.dart';
 import '../../widgets/Drawer/launch_in_browser.dart';
+import '../main_page.dart';
 import '../sigin_screen/signin_screen.dart';
-import '../user_info/user_info.dart';
 import 'model/user_data_model.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   String _emailErrorMsg = '';
   String _phoneErrorMsg = '';
+
   // String _fullNameErrorMsg = '';
 
   Future<void>? _launched;
@@ -67,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Text(
               "Terms & Condition",
               style:
-              TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                  TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
             ),
             onTap: () {
               _launched = LaunchInBrowser(toLaunch);
@@ -203,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   MyButton(
                     onTap: () async {
-                      if(_isValid()){
+                      if (_isValid()) {
                         try {
                           // MyUser2 user2 =MyUser2(email: email, phone: phone, firstName: firstName, lastName: lastName, birthDate: birthDate)
                           MyUser user = MyUser(
@@ -212,12 +214,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (fullName.text.isNotEmpty)
                             user.fullName = fullName.text;
                           var collection =
-                          FirebaseFirestore.instance.collection('users');
+                              FirebaseFirestore.instance.collection('users');
                           collection.add(user.toJson());
 
-                          Navigator.push(
+                          SharedPreference().setLoggedin();
+                          Navigator.pushAndRemoveUntil<void>(
                             context,
-                            MaterialPageRoute(builder: (context) =>  UserInfoScreen()),
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const MainPage()),
+                            ModalRoute.withName('/'),
                           );
                         } catch (e) {
                           print(e.toString());
@@ -234,11 +240,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
   bool _isValid() {
     setState(() {
       _phoneErrorMsg = '';
       _emailErrorMsg = '';
-
     });
     if (_email.text.isEmpty) {
       setState(() {

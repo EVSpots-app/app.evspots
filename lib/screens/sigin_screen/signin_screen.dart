@@ -1,9 +1,4 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
-import 'package:evspots/screens/signup_screen/signup_screen.dart';
-import 'package:evspots/screens/user_info/user_info.dart';
 import 'package:evspots/screens/verify_screen/verify_screen.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,10 +8,11 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import '../../themes/app_color.dart';
 import '../../widgets/Images/logo_evspots.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/CustomButton/custom_button.dart';
 
 TextEditingController countryController = TextEditingController();
 var phone = "";
+
 class SignInScreen extends StatefulWidget {
   static String verify = "";
 
@@ -30,7 +26,6 @@ class _SignInScreenState extends State<SignInScreen> {
   // }
 
   String _phoneErrorMsg = '';
-  bool checkUser = false ;
 
   @override
   void initState() {
@@ -150,41 +145,36 @@ class _SignInScreenState extends State<SignInScreen> {
                             if (_isValid()) {
                               print(countryController.text + phone);
 
-                              var user = FirebaseFirestore.instance
-                                  .collection('users');
-                              user.get().then((value) {
+                              // Send OTP
+                              try {
+                                await FirebaseAuth.instance.verifyPhoneNumber(
+                                  phoneNumber: countryController.text + phone,
+                                  verificationCompleted:
+                                      (PhoneAuthCredential credential) {},
+                                  verificationFailed:
+                                      (FirebaseAuthException e) {
+                                    print(e.toString());
+                                  },
+                                  codeSent: (String verificationId,
+                                      int? resendToken) async {
+                                    SignInScreen.verify = verificationId;
 
-                                for ( var object in value.docs) {
-                                  print(object.data());
-                                  if(object.data().containsValue(
-                                      countryController.text + phone))
-                                  {
-                                    print("yes");
-                                    checkUser = true;
-                                    // setState(() {
-                                    //   checkUser = true;
-                                    // });
-
-                                    break;
-                                  }
-                                }
-
-                                if (checkUser == true)
-                                  {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => UserInfoScreen()),
+                                          builder: (context) => VerifyScreen()),
                                     );
-                                  }else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUpScreen()),
-                                  );
-                                }
-
-                              });
+                                    print(verificationId);
+                                  },
+                                  timeout: const Duration(seconds: 100),
+                                  codeAutoRetrievalTimeout:
+                                      (String verificationId) {
+                                    print('time out');
+                                  },
+                                );
+                              } catch (e) {
+                                print(e.toString());
+                              } // End Send OTP
                             }
                           },
                           title: 'Send the code',

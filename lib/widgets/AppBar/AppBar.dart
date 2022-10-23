@@ -3,7 +3,7 @@ import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../themes/theme_model.dart';
+import '../../themes/theme_model.dart';
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;

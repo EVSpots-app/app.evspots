@@ -1,5 +1,5 @@
-import 'package:evspots/widgets/AppBar.dart';
-import 'package:evspots/widgets/custom_button.dart';
+import 'package:evspots/widgets/AppBar/AppBar.dart';
+import 'package:evspots/widgets/CustomButton/custom_button.dart';
 import 'package:flutter/material.dart';
 
 

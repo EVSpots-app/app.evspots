@@ -40,7 +40,7 @@ class SharedPreference {
 
   getLanguage() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool(SharedPrefKeys.isEnglish);
+    return sharedPreferences.getBool(SharedPrefKeys.isEnglish) ?? true;
   }
 
   deletePrefs() async {

@@ -3,7 +3,7 @@ import 'package:evspots/widgets/home/filter_screen/connection_type_with_chekBoxs
 import 'package:evspots/widgets/home/filter_screen/speeds_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/AppBar.dart';
+import '../../widgets/AppBar/AppBar.dart';
 
 class FilterScreen extends StatelessWidget {
   const FilterScreen({Key? key}) : super(key: key);

@@ -6,13 +6,14 @@ import '../../../themes/app_color.dart';
 import '../../../themes/theme_model.dart';
 
 class FavoriteCardWidgets extends StatelessWidget {
-  final AssetImage image;
+  final NetworkImage image;
   final String titleText;
   final String locationText;
   // final String connections;
   final String numConnections;
   // final String amenities;
   final List<Widget> amenities;
+
 
   FavoriteCardWidgets({Key? key,
     required this.image,

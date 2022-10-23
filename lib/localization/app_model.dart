@@ -12,8 +12,9 @@ class AppModel extends Model {
 
   Future setInitialLanguageValue()async{
     bool x ;
-    x = await SharedPreference().getLanguage();
+    x = await SharedPreference().getLanguage() ;
     _appLocale = x ? Locale('en') : Locale('ar');
+
   }
 
   // void changeLanguage(String language) {
