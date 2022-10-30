@@ -1,11 +1,15 @@
 
+import 'package:evspots/screens/consumer/map/info_consumer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomInfoWindowWidget extends StatelessWidget {
-  const CustomInfoWindowWidget({Key? key}) : super(key: key);
+  String name;
+  CustomInfoWindowWidget({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<InfoConsumer>(context, listen: false).names;
     return AnimatedContainer(
       duration: const Duration(seconds: 5),
       curve: Curves.easeInOut,
@@ -88,7 +92,7 @@ class CustomInfoWindowWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Motasem Altamimi ',
+                    name,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

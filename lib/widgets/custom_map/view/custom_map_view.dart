@@ -481,6 +481,8 @@ class CustomMapViewState extends State<CustomMapView> {
         Provider.of<InfoConsumer>(context, listen: false).markers;
     List<String> images =
         Provider.of<InfoConsumer>(context, listen: false).images;
+    List<String> name =
+        Provider.of<InfoConsumer>(context, listen: false).names;
 
     for (int i = 0; i < _latLang.length; i++) {
       final Uint8List markerIcon = await getBytesFromAssets(images[i], 150);
@@ -492,9 +494,11 @@ class CustomMapViewState extends State<CustomMapView> {
           position: _latLang[i],
           // position: test(),
           onTap: () {
+            print("name[i]");
+            print(name[i]);
             userBadgeSelected = true;
             _customInfoWindowController.addInfoWindow!(
-              const CustomInfoWindowWidget(),
+              CustomInfoWindowWidget(name: name[i]),
               _latLang[i],
             );
             setState(() {});

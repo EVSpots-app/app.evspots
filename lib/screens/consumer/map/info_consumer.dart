@@ -9,6 +9,7 @@ class InfoConsumer extends ChangeNotifier {
   List<InfoMap> listOfPin = [];
   List<LatLng> markers = [];
   List<String> images = [];
+  List<String> names = [];
 
   Future<List<InfoMap>> getData() async {
     listOfPin.clear();
@@ -19,6 +20,7 @@ class InfoConsumer extends ChangeNotifier {
     });
     getMarkers();
     getImage();
+    getName();
     // print('llllllllllllllllllll');
     // print(listOfPin.length);
     // print(markers.length);
@@ -35,6 +37,12 @@ class InfoConsumer extends ChangeNotifier {
     images.clear();
     for (InfoMap value in listOfPin) {
       images.add('assets/icons/ev_pin_map.png');
+    }
+  }
+  getName() {
+    names.clear();
+    for (InfoMap value in listOfPin) {
+      names.add(value.name);
     }
   }
 }
