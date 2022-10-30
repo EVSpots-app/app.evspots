@@ -24,7 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   TextEditingController _phone = TextEditingController();
-  TextEditingController fullName = TextEditingController();
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
 
   String _emailErrorMsg = '';
@@ -152,7 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: height * 0.04,
                   ),
                   const Text(
-                    'Full Name ',
+                    'First Name ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
@@ -164,7 +165,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8),
                     child: TextField(
-                      controller: fullName,
+                      controller: _firstName,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                  width: 2, color: Colors.grey.shade500))),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.04,
+                  ),
+                  const Text(
+                    'Last Name ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: TextField(
+                      controller: _lastName,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
@@ -210,14 +236,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           // MyUser2 user2 =MyUser2(email: email, phone: phone, firstName: firstName, lastName: lastName, birthDate: birthDate)
                           MyUser user = MyUser(
                               email: _email.text,
-                              phone: countryController.text + phone);
-                          if (fullName.text.isNotEmpty)
-                            user.fullName = fullName.text;
+                              phone: countryController.text + phone, firstName:_firstName.text );
+                          if (_lastName.text.isNotEmpty)
+                            user.lastName = _lastName.text;
                           var collection =
                               FirebaseFirestore.instance.collection('users');
                           collection.add(user.toJson());
 
                           SharedPreference().setLoggedin();
+                          SharedPreference().setUserData(user);
                           Navigator.pushAndRemoveUntil<void>(
                             context,
                             MaterialPageRoute<void>(

@@ -3,6 +3,7 @@ import 'package:evspots/themes/theme_model.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../widgets/AppBar/AppBar.dart';
 import '../../widgets/home/ev_station/amenitiesCard.dart';
 import '../../widgets/home/ev_station/connectionsCard.dart';
 import '../add_check_in/add_check_in.dart';
@@ -17,10 +18,9 @@ class EvStationInfo extends StatelessWidget {
     return Consumer<ThemeModel>(
       builder: (context, ThemeModel themeNotifier, child) {
         return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-          ),
+          appBar: MyAppBar(
+          title: 'EV Station',
+        ),
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(

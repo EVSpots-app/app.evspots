@@ -1,12 +1,15 @@
+import 'package:evspots/auth/shared_pref.dart';
 import 'package:evspots/screens/consumer/home/home_consumer.dart';
 import 'package:evspots/screens/favorite/favorite_screen.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
+import 'package:evspots/screens/sigin_screen/signin_screen.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../themes/theme_model.dart';
 import '../widgets/Drawer/drawer.dart';
+import 'consumer/user_info_consumer/user_info_consumer.dart';
 import 'enroute_screen/enroute_screen.dart';
 
 class MainPage extends StatefulWidget {
@@ -21,6 +24,7 @@ List screen = [MapScreen(), EnrouteScreen(), FavoriteScreen()];
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserInfoConsumer>(context, listen: false).getDocsId(phone: countryController.text + phone);
     return Scaffold(
       key: Drawerkey,
       drawer: MyDrawer(),

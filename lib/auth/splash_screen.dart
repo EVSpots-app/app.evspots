@@ -5,6 +5,7 @@ import 'package:evspots/auth/shared_pref.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screens/consumer/map/info_consumer.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -25,13 +26,15 @@ class _SplashScreenState extends State<SplashScreen> {
           : Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => SignInScreen()));
     });
+
+    Provider.of<InfoConsumer>(context,listen: false).getData();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
           child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 25.0,right: 25.0),
         child: Consumer<ThemeModel>(
             builder: (context, ThemeModel themeNotifier, child) {
           return Image.asset(themeNotifier.isDark

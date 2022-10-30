@@ -1,15 +1,20 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/Profile/profile_screen.dart';
+import 'package:evspots/screens/consumer/user_info_consumer/user_info_consumer.dart';
 import 'package:evspots/screens/map_screen/map_screen.dart';
 import 'package:evspots/screens/settings/app_settings.dart';
+import 'package:evspots/screens/signup_screen/model/user_data_model.dart';
 import 'package:evspots/themes/app_color.dart';
 import 'package:evspots/themes/theme_model.dart';
 import 'package:evspots/widgets/ListTileWidgets/ListTileWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../auth/shared_pref.dart';
+import '../../auth/shared_pref_keys.dart';
 import '../../generated/l10n.dart';
 import '../../screens/consumer/settings/consumer_settings.dart';
 import '../../screens/Vehicles/vehicles.dart';
@@ -19,29 +24,20 @@ import '../Images/logo_evspots.dart';
 import '../Picture/ProfilePicture.dart';
 import 'launch_in_browser.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class MyDrawer extends StatelessWidget {
+   MyDrawer({Key? key}) : super(key: key);
 
-  @override
-  State<MyDrawer> createState() => _MyDrawerState();
-}
-
-class _MyDrawerState extends State<MyDrawer> {
   Future<PackageInfo> _getPackageInfo() {
     return PackageInfo.fromPlatform();
   }
 
   Future<void>? _launched;
+
   TextEditingController _deleteAccount = TextEditingController();
-  var ID2;
-  @override
-  void initState() {
-    getData(phone: countryController.text + phone);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    var ID = Provider.of<UserInfoConsumer>(context, listen: false).IdDoc;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -80,15 +76,35 @@ class _MyDrawerState extends State<MyDrawer> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Motasem\nAltamimi',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontFamily: 'Tajawal-Black',
-                                    color: themeNotifier.isDark
-                                        ? AppColor.textColorDark
-                                        : AppColor.textColor),
-                              ),
+                            Consumer<UserInfoConsumer>(builder: (__,consumer,_){
+                                return FutureBuilder(
+                                    future: consumer.getUserDataWithSharedPref(),
+                                    builder: ((context, snapshot) {
+                                      if(!snapshot.hasData){
+                                        return CircularProgressIndicator();
+                                      }
+                                      else if(snapshot.hasError){
+                                        print(snapshot.error);
+                                      }
+                                      else if(snapshot.hasData){
+                                        // MyUser user = snapshot.data!;
+                                        // setData1('${user.firstName}');
+                                        return Text(
+                                          '${consumer.x2!['fname']}\n${consumer.x2!['lname']}',
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontFamily: 'Tajawal-Black',
+                                              color: themeNotifier.isDark
+                                                  ? AppColor.textColorDark
+                                                  : AppColor.textColor),
+                                        );
+
+                                      }
+                                    return CircularProgressIndicator();
+                                    }
+                                ));
+                              },),
+
 
                               // SizedBox(
                               //   width: width * 0.25,
@@ -324,7 +340,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                                              var collection =
                                              FirebaseFirestore.instance.collection('users');
-                                             collection.doc(ID2).delete();
+                                             collection.doc(ID).delete();
                                              SharedPreference().deletePrefs();
                                              Navigator.pushAndRemoveUntil<void>(
                                                context,
@@ -425,21 +441,6 @@ class _MyDrawerState extends State<MyDrawer> {
         );
       }),
     );
-  }
-  getData({required String phone}) async {
-    var user = FirebaseFirestore.instance.collection('users');
-    user.get().then((value) {
-      value.docs.forEach((element) {
-        if(element.data().containsValue(phone)){
-          ID2 = element.id;
-          print(element.id);
-          print("yes");
-        }else{
-          print("no");
-        }
-        return ID2;
-      });
-    });
   }
 }
 

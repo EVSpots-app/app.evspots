@@ -12,7 +12,6 @@ import '../sigin_screen/signin_screen.dart';
 
 // ignore: must_be_immutable
 class UserInfoScreen extends StatefulWidget {
-
   UserInfoScreen({Key? key}) : super(key: key);
 
   @override
@@ -21,17 +20,15 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   CollectionReference userRef = FirebaseFirestore.instance.collection('users');
-   TextEditingController _phone = TextEditingController();
-  TextEditingController _email= TextEditingController();
-  TextEditingController _fullName= TextEditingController();
- var ID;
- @override
-  void initState() {
-   getData(phone: countryController.text + phone);
-    super.initState();
-  }
+  TextEditingController _phone = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserInfoConsumer>(context, listen: false).getDocsId(phone: countryController.text + phone);
+    var ID= Provider.of<UserInfoConsumer>(context, listen: false).IdDoc;
     double height = MediaQuery.of(context).size.height;
     // var width = MediaQuery.of(context).size.width;
     return Consumer<ThemeModel>(
@@ -52,69 +49,85 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               return FutureBuilder(
                 future: consumer.getData(),
                 builder: ((context, snapshot) {
-
-                 // _phone = TextEditingController(text: user.phone);
-                 // _fullName = TextEditingController(/*text: user.fullName*/);
-                 // _email = TextEditingController(text: user.email);
-
                   if (!snapshot.hasData) {
                     return CircularProgressIndicator();
                   } else if (snapshot.hasError) {
                     print('${snapshot.error}');
-                  } else  {
+                  } else {
                     MyUser user = snapshot.data!;
-                    // _phone.addListener(() {
-                    //     _phone.text = user.phone;
-                    // });
-                    // _email.addListener(() {
-                    //   _email.text = user.email;
-                    // });
-                    // _fullName.addListener(() {
-                    //   setState(() {
-                    //     _fullName.text = user.fullName;
-                    //   });
-                    // });
+
+                    _firstName.text = _firstName.text.isEmpty
+                        ? user.firstName
+                        : _firstName.text;
+                    _lastName.text = _lastName.text.isEmpty
+                        ? user.lastName!
+                        : _lastName.text;
+                    _email.text =
+                        _email.text.isEmpty ? user.email : _email.text;
+                    _phone.text =
+                        _phone.text.isEmpty ? user.phone : _phone.text;
+
                     return SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
-                      padding:
-                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 15, bottom: 15),
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 15, bottom: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Check you data ...",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                          Text(
+                            "Check you data ...",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(
                             height: height * 0.04,
                           ),
                           const Text(
-                            'Full Name ',
+                            'First Name ',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          // SizedBox(
-                          //   height: height * 0.02,
-                          // ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                              controller:_fullName,
-                              // onChanged: (value){
-                              //    setState(() {
-                              //      user.fullName = value;
-                              //    });
-                              // },
+                              controller: _firstName,
                               decoration: InputDecoration(
-                               hintText: user.fullName,
+                                  // hintText: user.firstName,
                                   border: OutlineInputBorder(),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                      borderSide:
-                                      BorderSide(width: 2, color: Colors.grey.shade500))),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: Colors.grey.shade500))),
                             ),
                           ),
-
+                          SizedBox(
+                            height: height * 0.04,
+                          ),
+                          const Text(
+                            'Last Name ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: _lastName,
+                              decoration: InputDecoration(
+                                  //hintText: user.lastName,
+                                  border: OutlineInputBorder(),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: Colors.grey.shade500))),
+                            ),
+                          ),
                           SizedBox(
                             height: height * 0.04,
                           ),
@@ -125,26 +138,19 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                               fontSize: 18,
                             ),
                           ),
-                          // SizedBox(
-                          //   height: height * 0.02,
-                          // ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _phone,
-                              // onChanged: (value){
-                              //   setState(() {
-                              //     user.phone = value;
-                              //   });
-                              // },
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                 hintText: user.phone,
+                                  // hintText: user.phone,
                                   border: OutlineInputBorder(),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                      borderSide:
-                                      BorderSide(width: 2, color: Colors.grey.shade500))),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: Colors.grey.shade500))),
                             ),
                           ),
                           SizedBox(
@@ -157,26 +163,19 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                               fontSize: 18,
                             ),
                           ),
-                          // SizedBox(
-                          //   height: height * 0.02,
-                          // ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                            controller: _email,
-                            //   onChanged: (value){
-                            //     setState(() {
-                            //       user.email = value;
-                            //     });
-                            //   },
+                              controller: _email,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                               hintText: user.email,
+                                  // hintText: user.email,
                                   border: OutlineInputBorder(),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                      borderSide:
-                                      BorderSide(width: 2, color: Colors.grey.shade500))),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: Colors.grey.shade500))),
                             ),
                           ),
                           SizedBox(
@@ -193,46 +192,25 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           ),
           bottomNavigationBar: MyButton(
             onTap: () async {
+              MyUser user = MyUser(
+                  email: _email.text,
+                  phone: countryController.text + phone,
+                  firstName: _firstName.text,);
+              if (_lastName.text.isNotEmpty) user.lastName = _lastName.text;
+              var collection = FirebaseFirestore.instance.collection('users');
+              collection.doc(ID).update(user.toJson());
 
-
-                MyUser user = MyUser(
-                    email: _email.text,
-                    phone: countryController.text + phone);
-                if (_fullName.text.isNotEmpty)
-                  user.fullName = _fullName.text;
-                var collection =
-                FirebaseFirestore.instance.collection('users');
-                collection.doc(ID).update(user.toJson());
-
-               // collection.add(user.toJson());
-
+              SharedPreference().setUserData(user);
               SharedPreference().setLoggedin();
               Navigator.pushAndRemoveUntil<void>(
                 context,
                 MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>
-                    const MainPage()),
+                    builder: (BuildContext context) => const MainPage()),
                 ModalRoute.withName('/'),
               );
-
             },
             title: 'Update',
           ));
-    });
-  }
-  getData({required String phone}) async {
-    var user = FirebaseFirestore.instance.collection('users');
-    user.get().then((value) {
-      value.docs.forEach((element) {
-        if(element.data().containsValue(phone)){
-          ID = element.id;
-          print(element.id);
-          print("yes");
-        }else{
-          print("no");
-        }
-        return ID;
-      });
     });
   }
 }

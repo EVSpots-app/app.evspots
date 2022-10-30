@@ -60,9 +60,21 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset('assets/images/ev.jpeg'),
                   SizedBox(
                     height: height * 0.03,
+                  ),
+              Center(
+                child: SizedBox(
+                  height: height*0.25,
+                  // width: width*0.5,
+                  child: Image.asset(themeNotifier.isDark
+                  ? 'assets/images/icon_for_dark_theme.png'
+                      : 'assets/images/icon_for_light_theme.png'),
+                ),
+              ),
+                  // Image.asset('assets/images/ev.jpeg'),
+                  SizedBox(
+                    height: height * 0.08,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
@@ -70,14 +82,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Hi Motasem,',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
+                        // const Text(
+                        //   'Hi Motasem,',
+                        //   style: TextStyle(
+                        //     fontSize: 20,
+                        //   ),
+                        // ),
                         SizedBox(
-                          height: height * 0.01,
+                          height: height * 0.02,
                         ),
                         const Text(
                           'Sign in Now',
@@ -105,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   //   height: height * 0.01,
                   // ),
                   Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    padding: const EdgeInsets.only(left: 25, right: 25),
                     child: Column(
                       children: [
                         IntlPhoneField(
@@ -187,44 +199,44 @@ class _SignInScreenState extends State<SignInScreen> {
                         //   },
                         //   title: 'Sign Up',
                         // ),
-                        Consumer<AdminMode>(
-                          builder: (_, consumer, __) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    consumer.changeIsAdmin(false);
-                                  },
-                                  child: Text(
-                                    'Admin Role',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: consumer.isAdmin
-                                            ? Colors.amber
-                                            : Colors.transparent),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: width * 0.05,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    consumer.changeIsAdmin(true);
-                                  },
-                                  child: Text(
-                                    'User Role',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: consumer.isAdmin
-                                            ? Colors.transparent
-                                            : Colors.amber),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        // Consumer<AdminMode>(
+                        //   builder: (_, consumer, __) {
+                        //     return Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         GestureDetector(
+                        //           onTap: () {
+                        //             consumer.changeIsAdmin(false);
+                        //           },
+                        //           child: Text(
+                        //             'Admin Role',
+                        //             style: TextStyle(
+                        //                 fontSize: 15,
+                        //                 color: consumer.isAdmin
+                        //                     ? Colors.amber
+                        //                     : Colors.transparent),
+                        //           ),
+                        //         ),
+                        //         SizedBox(
+                        //           width: width * 0.05,
+                        //         ),
+                        //         GestureDetector(
+                        //           onTap: () {
+                        //             consumer.changeIsAdmin(true);
+                        //           },
+                        //           child: Text(
+                        //             'User Role',
+                        //             style: TextStyle(
+                        //                 fontSize: 15,
+                        //                 color: consumer.isAdmin
+                        //                     ? Colors.transparent
+                        //                     : Colors.amber),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // ),
 
                         // FloatingActionButton(
                         //     child: const Icon(Icons.arrow_back_ios),

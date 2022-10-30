@@ -1,6 +1,7 @@
 import 'package:evspots/screens/consumer/admin_role/admin_consumer.dart';
 import 'package:evspots/screens/consumer/favorite_consumer/favorite_consumer.dart';
 import 'package:evspots/screens/consumer/home/home_consumer.dart';
+import 'package:evspots/screens/consumer/map/info_consumer.dart';
 import 'package:evspots/screens/consumer/profile/birth_date_consumer.dart';
 import 'package:evspots/screens/consumer/settings/consumer_settings.dart';
 import 'package:evspots/auth/splash_screen.dart';
@@ -56,6 +57,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<UserInfoConsumer>(create: (_) => UserInfoConsumer()),
         ChangeNotifierProvider<BirthDate>(create: (_) => BirthDate()),
         ChangeNotifierProvider<FavoriteConsumer>(create: (_) => FavoriteConsumer()),
+        ChangeNotifierProvider<InfoConsumer>(create: (_) => InfoConsumer()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),

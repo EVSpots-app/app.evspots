@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:evspots/widgets/custom_map/optional_functions.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,9 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import '../../../screens/consumer/map/info_consumer.dart';
+import '../../../screens/map_screen/model/map_info_model.dart';
 import '../widget/custom_info_window_widget.dart';
 import '../widget/map_center_marker.dart';
 
@@ -33,39 +37,28 @@ class CustomMapViewState extends State<CustomMapView> {
   static const LatLng destinationLocation = LatLng(31.958936, 35.866577);
   static const LatLng lastLocation = LatLng(31.957340, 35.866797);
 
-  static const LatLng firstPin = LatLng(31.959935, 35.863575);
-  static const LatLng secPin = LatLng(31.958641, 35.863575);
-  static const LatLng th3Pin = LatLng(31.957440, 35.863610);
-  static const LatLng for4Pin = LatLng(31.956204, 35.863653);
-
-
   static const double zoom = 16.5;
 
-  List<String> images = [
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
-    'assets/icons/ev_pin_map.png',
+  // List<String> images = [
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  //   'assets/icons/ev_pin_map.png',
+  // ];
 
-    // 'assets/icons/ev_pin_map.png',
-    // 'assets/icons/ev_pin_map.png',
-    // 'assets/images/car.jpg',
-    // 'assets/images/scooter.jpg',
-    // 'assets/images/car.jpg',
-  ];
-
-  final List<LatLng> _latLang = [
-    sourceLocation,
-    destinationLocation,
-    lastLocation,
-    firstPin,
-    secPin,
-    th3Pin,
-    for4Pin
-  ];
+  // final List<LatLng> _latLang = [
+  //   sourceLocation,
+  //   destinationLocation,
+  //   lastLocation,
+  //   firstPin,
+  //   secPin,
+  //   th3Pin,
+  //   for4Pin
+  // ];
 
   static const _initialCameraPosition = CameraPosition(
     target: sourceLocation,
@@ -218,12 +211,12 @@ class CustomMapViewState extends State<CustomMapView> {
                 //     );
                 //   },
                 // ),);
-               _customInfoWindowController.hideInfoWindow!();
+                _customInfoWindowController.hideInfoWindow!();
                 userBadgeSelected = false;
                 setState(() {});
               },
               onCameraMove: (position) {
-                print(_latLang.length);
+                // print(_latLang.length);
                 // if (_marker.length == _latLang.length) {
                 //   _marker.insert(
                 //     _marker.length,
@@ -278,9 +271,8 @@ class CustomMapViewState extends State<CustomMapView> {
                 width: 40,
                 child: FloatingActionButton(
                   heroTag: 'theme',
-                  backgroundColor: mapStyle.isEmpty
-                      ? Colors.blueGrey
-                      : Colors.grey,
+                  backgroundColor:
+                      mapStyle.isEmpty ? Colors.blueGrey : Colors.grey,
                   foregroundColor:
                       mapStyle.isEmpty ? Colors.black : Colors.white,
                   child: Icon(
@@ -305,8 +297,7 @@ class CustomMapViewState extends State<CustomMapView> {
                           if (mapStyle.isEmpty) {
                             mapStyle = 'dark';
                             DefaultAssetBundle.of(context)
-                                .loadString(
-                                    'assets/images/map_theme.json')
+                                .loadString('assets/images/map_theme.json')
                                 .then((string) {
                               value.setMapStyle(string);
                             });
@@ -486,6 +477,11 @@ class CustomMapViewState extends State<CustomMapView> {
   final List<Marker> _marker = [];
 
   void showMarkersOnMap() async {
+    List<LatLng> _latLang =
+        Provider.of<InfoConsumer>(context, listen: false).markers;
+    List<String> images =
+        Provider.of<InfoConsumer>(context, listen: false).images;
+
     for (int i = 0; i < _latLang.length; i++) {
       final Uint8List markerIcon = await getBytesFromAssets(images[i], 150);
       _marker.add(
@@ -494,6 +490,7 @@ class CustomMapViewState extends State<CustomMapView> {
           // icon: BitmapDescriptor.defaultMarker,
           markerId: MarkerId(i.toString()),
           position: _latLang[i],
+          // position: test(),
           onTap: () {
             userBadgeSelected = true;
             _customInfoWindowController.addInfoWindow!(

@@ -171,7 +171,7 @@ class MyPicture2 extends StatelessWidget {
           child: Image(
             image: _image != null
                 ? FileImage(_image!) as ImageProvider
-                : AssetImage('assets/images/pic1.jpg'),
+                : AssetImage('assets/images/no-image.jpg'),
           ),
         ));
   }

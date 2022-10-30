@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:evspots/auth/shared_pref_keys.dart';
+import 'package:evspots/screens/signup_screen/model/user_data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../screens/consumer/user_info_consumer/user_info_consumer.dart';
 
 class SharedPreference {
 
@@ -23,15 +28,34 @@ class SharedPreference {
     return sharedPreferences.getBool(SharedPrefKeys.isLoggedIn) ?? false;
   }
 
-  setData() async {
+  /* -- User Data  -- */
+  setUserData(MyUser user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(SharedPrefKeys.isData, true);
+    Map data = {
+      "fname":user.firstName,
+      "lname":user.lastName,
+      "email":user.email,
+      "phone":user.phone,
+
+    };
+    String x = jsonEncode(data);
+    prefs.setString(SharedPrefKeys.userData, x);
   }
 
-  getData() async {
+  getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool(SharedPrefKeys.isData) ?? false;
+    return sharedPreferences.getString(SharedPrefKeys.userData) ?? '';
   }
+
+  // setDocId(String id) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString(SharedPrefKeys.docID,id);
+  // }
+  //
+  // getDocId() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   return sharedPreferences.getString(SharedPrefKeys.docID) ?? '';
+  // }
 
   setLanguage({required bool isEnglish}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

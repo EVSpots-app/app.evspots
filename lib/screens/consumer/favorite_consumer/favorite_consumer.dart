@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evspots/screens/favorite/model/favoite_model.dart';
 import 'package:flutter/material.dart';
 
-
 class FavoriteConsumer extends ChangeNotifier {
   var collection = FirebaseFirestore.instance.collection('favorite');
-   List<myFavorite> listOfUsers = [];
+  List<myFavorite> listOfUsers = [];
 
   Future<List<myFavorite>> getData() async {
     listOfUsers.clear();
@@ -17,6 +16,4 @@ class FavoriteConsumer extends ChangeNotifier {
 
     return listOfUsers;
   }
-
-
 }

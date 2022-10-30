@@ -1,31 +1,34 @@
+import '../../../auth/shared_pref.dart';
+
 class MyUser {
   String phone;
-  String? fullName;
+  String? lastName;
+  String firstName;
   String email;
-  // String? id;
 
-  MyUser({required this.email, required this.phone});
+  MyUser({required this.email, required this.phone, required this.firstName});
 
   factory MyUser.fromJson(Map<String, dynamic> json) {
     MyUser user = MyUser(
       email: json["email"] ?? '',
       phone: json["phone"] ?? '',
+      firstName: json["firstName"] ?? '',
     );
-    if (json['fullName'] != null) {
-      user.fullName = json['fullName'];
+    if (json['lastName'] != null) {
+      user.lastName = json['lastName'];
     }
     return user;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['fullName'] = fullName;
+    data['lastName'] = lastName;
+    data['firstName'] = firstName;
     data['email'] = email;
     data['phone'] = phone;
     return data;
   }
 }
-
 
 class MyUser2 {
   String phone;
@@ -35,7 +38,12 @@ class MyUser2 {
   String birthDate;
   String? gender;
 
-  MyUser2({required this.email, required this.phone,required this.firstName,required this.lastName,required this.birthDate});
+  MyUser2(
+      {required this.email,
+      required this.phone,
+      required this.firstName,
+      required this.lastName,
+      required this.birthDate});
 
   factory MyUser2.fromJson(Map<String, dynamic> json) {
     MyUser2 user = MyUser2(
@@ -44,7 +52,6 @@ class MyUser2 {
       firstName: json["firstName"] ?? '',
       lastName: json["lastName"] ?? '',
       birthDate: json["birthDate"] ?? '',
-
     );
     if (json['gender'] != null) {
       user.gender = json['gender'];
